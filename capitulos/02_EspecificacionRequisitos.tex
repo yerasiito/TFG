@@ -1,0 +1,88 @@
+\chapter{Especificacion de Requisitos}
+
+\section{Descripción general del sistema}
+El sistema consistirá en un entorno completo que permita a cualquier tipo de usuario reproducir sus experimentos de Machine Learning de forma simple e intuitiva, pudiendo adaptar la información mostrada a las necesidades del usuario. Este entorno permitirá la gestión eficiente de configuraciones y archivos, así como la ejecución de experimentos en un contexto MLOps, alineado con buenas prácticas para minimizar la acumulación de deuda técnica y asegurar un ciclo de vida continuo y escalable.
+
+\section{Requisitos del sistema}
+Una vez descrito el objetivo de este proyecto, se ha realizado un análisis de las necesidades del sistema a desarrollar en base a la petición del cliente (tutor). Los requisitos se dividen en dos categorías principales: funcionales y no funcionales.
+
+\subsection{Requisitos funcionales}
+\begin{itemize}
+    \item \textbf{RF1 - Carga de archivos YAML o YML}:
+          \begin{itemize}
+              \item El framework debe permitir al usuario cargar un archivo YAML que contiene los datos de configuración con los que se desea ejecutar el experimento.
+          \end{itemize}
+    \item \textbf{RF2 - Ejecución de comandos}
+          \begin{itemize}
+              \item El framework debe preparar y montar todo lo necesario para ejecutar Snapper y otros comandos desde la interfaz web.
+              \item La web debe mostrar la salida y los logs producidos al ejecutar cualquier comando, incluyendo Snapper.
+          \end{itemize}
+    \item \textbf{RF3 - Interfaz web adaptable}
+          \begin{itemize}
+              \item La interfaz debe permitir a los usuarios adaptar la visualización de los parámetros y la salida de los experimentos según sus necesidades y nivel de experiencia.
+              \item La interfaz debe incluir opciones para modificar configuraciones en tiempo real antes de la ejecución del experimento.
+          \end{itemize}
+    \item \textbf{RF4 - Gestión de experimentos reproducibles}
+          \begin{itemize}
+              \item El framework debe facilitar la reproducción exacta de experimentos, asegurando la trazabilidad y el seguimiento de cada versión de configuración y de sus resultados.
+              \item El framework debe permitir guardar configuraciones previas para su reutilización en experimentos futuros.
+          \end{itemize}
+    \item \textbf{RF5 - Resolución de deuda técnica existente}
+          \begin{itemize}
+              \item El framework debe ser refactorizado para mejorar su calidad, eliminando duplicación y reduciendo la complejidad.
+              \item Se deben resolver y actualizar las dependencias actuales para evitar riesgos de seguridad y tener acceso a nuevas funcionalidades.
+              \item Debe implementarse una serie de tests automatizados para garantizar que los problemas resueltos no reaparezcan y que el framework se mantenga estable durante el desarrollo futuro.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Requisitos No Funcionales}
+\begin{itemize}
+    \item \textbf{RNF1 - Escalabilidad}
+          \begin{itemize}
+              \item El framework debe ser capaz de manejar múltiples solicitudes de ejecución de Snapper de manera concurrente.
+          \end{itemize}
+    \item \textbf{RNF2 - Usabilidad}
+          \begin{itemize}
+              \item La interfaz de usuario debe ser intuitiva y fácil de usar, facilitando la carga de archivos, la edición de configuraciones y la visualización de los parámetros del YAML.
+              \item La interfaz debe contar con documentación para que usuarios nuevos puedan familiarizarse rápidamente con sus funcionalidades.
+          \end{itemize}
+    \item \textbf{RNF3 - Rendimiento}
+          \begin{itemize}
+              \item El framework debe ejecutar los comandos de forma rápida, optimizando los tiempos de carga y ejecución de los experimentos.
+          \end{itemize}
+    \item \textbf{RNF4 - Trazabilidad}
+          \begin{itemize}
+              \item Cada ejecución debe guardar un trazo detallado de cada acción, archivo y salida generada, de modo que el usuario pueda realizar un seguimiento y análisis de los experimentos realizados.
+          \end{itemize}
+    \item \textbf{RNF5 - Compatibilidad con estándares MLOps}
+          \begin{itemize}
+              \item El framework debe cumplir con las buenas prácticas de MLOps, facilitando la integración y el despliegue continuos de modelos de machine learning.
+              \item La arquitectura del framework debe permitir la integración de herramientas de monitoreo y validación automática de experimentos, alineándose con un ciclo de vida de modelos reproducible y escalable.
+          \end{itemize}
+    \item \textbf{RNF6 - Prevención de deuda técnica futura}
+          \begin{itemize}
+              \item El framework debe seguir prácticas de desarrollo de software que minimicen la acumulación de deuda técnica, como revisiones de código regulares, refactorización continua y cobertura de pruebas.
+              \item Se deben establecer mecanismos para identificar y abordar potenciales problemas técnicos antes de que se conviertan en deuda técnica significativa, como análisis estático del código y herramientas de monitoreo de calidad.
+          \end{itemize}
+\end{itemize}
+
+\section{Validación de Requisitos}
+
+La validación de los requisitos del sistema constituye un proceso clave para asegurar que el sistema desarrollado cumple con las expectativas y necesidades definidas al inicio del proyecto. Tanto los requisitos funcionales como los no funcionales se someterán a métodos específicos de validación para garantizar su cumplimiento efectivo y su alineación con los objetivos del proyecto.
+
+\subsection{Validación de Requisitos Funcionales}
+Para los requisitos funcionales, la validación se realizará mediante pruebas de funcionalidad que evalúen cada componente y su comportamiento dentro del sistema. Este proceso asegurará que todas las funcionalidades, desde la carga de archivos YAML hasta la ejecución y el monitoreo de comandos, se desempeñen de acuerdo con las especificaciones. Las pruebas de funcionalidad incluyen:
+\begin{itemize}
+    \item \textbf{Pruebas de unidad}: cada módulo será evaluado de forma independiente para confirmar que cumple con su función específica. Estas pruebas serán automatizadas siempre que sea posible para asegurar la cobertura integral de los requisitos.
+    \item \textbf{Pruebas de integración}: se comprobará que los distintos componentes del sistema interactúan correctamente entre sí, especialmente en los flujos críticos de carga de archivos y ejecución de comandos.
+    \item \textbf{Pruebas de aceptación del usuario}: se realizarán pruebas finales para asegurar que las funcionalidades cumplen con las expectativas del usuario y con los objetivos planteados en el diseño del sistema.
+\end{itemize}
+
+\subsection{Validación de Requisitos No Funcionales} Para los requisitos no funcionales, se emplearán pruebas específicas que permitan verificar el cumplimiento de aspectos como escalabilidad, rendimiento y usabilidad del sistema. Estas pruebas incluirán:
+\begin{itemize}
+    \item \textbf{Evaluación de usabilidad}: mediante pruebas de usuario, se verificará que la interfaz sea intuitiva y facilite la interacción, permitiendo que tanto usuarios nuevos como avanzados se familiaricen rápidamente con las funcionalidades del sistema.
+    \item \textbf{Revisión de prácticas de desarrollo para prevención de deuda técnica}: dado que el proyecto es de código abierto, la comunidad de GitHub desempeñará un papel clave en la revisión de las prácticas de desarrollo. A través de revisiones de código colaborativas y la implementación de buenas prácticas, la comunidad contribuirá a minimizar la acumulación de deuda técnica, asegurando la mantenibilidad y escalabilidad futura del sistema.
+    \item \textbf{Monitoreo de la trazabilidad y reproducibilidad de los experimentos}: se verificarán los registros generados para asegurar que cada ejecución es fácilmente rastreable y que los experimentos pueden reproducirse en condiciones idénticas.
+\end{itemize}
+
+La combinación de estas estrategias de validación garantiza que el sistema desarrollado cumpla no solo con las funcionalidades específicas requeridas, sino también con los estándares de calidad, rendimiento y usabilidad esperados, apoyando la sostenibilidad del proyecto a largo plazo.
