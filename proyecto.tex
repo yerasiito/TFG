@@ -62,14 +62,11 @@ Telecomunicación\xspace}
 \usepackage{url}
 \usepackage{colortbl,longtable}
 \usepackage[stable]{footmisc}
-\usepackage{index}
 \usepackage[acronym]{glossaries}
 
-\makeindex
 \makeglossaries
 
 % Definición de comandos que me son tiles:
-\renewcommand{\indexname}{Índice alfabético}
 \renewcommand{\glossaryname}{Glosario}
 
 \pagestyle{fancy}
@@ -140,7 +137,6 @@ Telecomunicación\xspace}
 \setlength{\parindent}{10pt}
 
 \input{capitulos/01_Introduccion}
-\index{Indice}
 
 %
 \input{capitulos/02_EspecificacionRequisitos}
@@ -171,7 +167,6 @@ Telecomunicación\xspace}
 \addcontentsline{toc}{chapter}{Glosario}
 \printglossary[type=\acronymtype]
 \printglossary
-\printindex
 \chapter*{}
 \thispagestyle{empty}
 
