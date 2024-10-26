@@ -1,5 +1,5 @@
 \documentclass[a4paper,11pt]{book}
-%\documentclass[a4paper,twoside,11pt,titlepage]{book}
+\usepackage[a4paper, top=4cm, left=2cm, bottom=4cm, footskip=1.5cm]{geometry} % Adjust margins here
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -11,14 +11,17 @@
 
 \decimalpoint
 \usepackage{dcolumn}
+\usepackage{etoolbox}
 \newcolumntype{.}{D{.}{\esperiod}{-1}}
 \makeatletter
 \addto\shorthandsspanish{\let\esperiod\es@period@code}
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-2\baselineskip}}{}{}
 \makeatother
 
 \RequirePackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{afterpage}
 
 \usepackage{longtable}
@@ -76,9 +79,7 @@ Telecomunicación\xspace}
 \fancyhead[RO,LE]{\textbf{\thepage}}
 \renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
 \renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
-
-\setlength{\headheight}{1.5\headheight}
-
+\setlength{\headheight}{2.5\headheight}
 % minimizar fragmentado de listados
 \lstnewenvironment{listing}[1][]
    {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
