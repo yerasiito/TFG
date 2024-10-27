@@ -1,0 +1,137 @@
+\chapter{Analisis}
+
+\section{Análisis de la Deuda Técnica}
+
+La deuda técnica es un concepto central en el desarrollo de software moderno, y entender sus causas, efectos y métodos de resolución resulta fundamental para la gestión eficaz de cualquier proyecto de software. En este capítulo se explora en profundidad el concepto de deuda técnica, su origen, indicadores, y métodos tanto de resolución como de prevención.
+
+\subsection{¿Qué es la Deuda Técnica?}
+
+El concepto de deuda técnica fue introducido en la década de 1990 por Ward Cunningham, uno de los autores del Manifiesto Ágil, para describir los compromisos técnicos que se adquieren cuando un equipo prioriza la entrega rápida de una funcionalidad o producto sobre una implementación ideal. En lugar de abordar las tareas necesarias para un código limpio y sostenible, como la refactorización y la optimización, los equipos pueden optar por soluciones rápidas que simplifiquen la entrega a corto plazo. Este tipo de decisiones, aunque a menudo inevitables, acumulan una \say{deuda} en el sistema que deberá \say{pagarse} en algún momento mediante el esfuerzo de corregir o mejorar el código.
+
+Cunningham explicó la deuda técnica utilizando una analogía financiera, argumentando que las soluciones rápidas son como un préstamo que el equipo toma contra la calidad del código. Al igual que los intereses de un préstamo, las consecuencias de estos atajos se acumulan con el tiempo, haciendo que el código sea más difícil de mantener y aumentar su complejidad. Su célebre frase ilustra bien esta idea: \say{Si no hacemos que nuestro programa se alinee con lo que entendemos que es la manera adecuada de pensar sobre nuestros objetos financieros, seguiremos tropezando con esa inconsistencia, lo que es como pagar intereses en un préstamo}\cite{introtodebt}.
+
+Desde entonces, el término se ha popularizado y ampliado en la industria, evolucionando para abarcar una amplia variedad de situaciones en las que la calidad del software se ve comprometida en favor de la velocidad. En un sistema de software, la deuda técnica puede manifestarse en diversas áreas: código duplicado, arquitectura deficiente, falta de pruebas, documentación insuficiente, entre otros. Todos estos son \say{costos} que el equipo deberá enfrentar eventualmente si desea mantener una base de código estable y escalable.
+
+Otros expertos en el campo, como Martin Fowler y el Software Engineering Institute, han desarrollado modelos para clasificar la deuda técnica en diferentes tipos y niveles, lo cual ayuda a los equipos a identificar y gestionar esta deuda de manera efectiva. La deuda técnica se reconoce ahora como un fenómeno inevitable en la mayoría de los proyectos de software, y su adecuada gestión es fundamental para el mantenimiento de la calidad y la sostenibilidad del software a largo plazo.
+
+\subsection{Causas de la Deuda Técnica}
+Existen diversas razones por las cuales puede generarse deuda técnica en un proyecto, y muchas veces no se debe únicamente a decisiones erróneas. Las principales causas incluyen:
+\begin{itemize}
+    \item \textbf{Plazos de Entrega Ajustados}: La presión por entregar rápidamente una funcionalidad o producto puede llevar a los equipos a adoptar atajos y soluciones rápidas, dejando de lado prácticas recomendadas de diseño y desarrollo.
+    \item \textbf{Falta de Conocimiento o Experiencia}: Los desarrolladores, especialmente aquellos menos experimentados, pueden no estar al tanto de las buenas prácticas, lo que conlleva a decisiones técnicas que generan deuda. Esto es común en proyectos que evolucionan sin revisiones de código o mentoría adecuada.
+    \item \textbf{Cambios en los Requisitos} La evolución de los requisitos puede hacer que decisiones técnicas previas se vuelvan obsoletas o no adecuadas. Este tipo de deuda se genera cuando el sistema debe adaptarse a nuevas funcionalidades o cambios en la arquitectura sin una refactorización previa.
+    \item \textbf{Falta de Refactorización} La ausencia de una práctica regular de refactorización puede llevar a que el sistema acumule deuda técnica a medida que el código se vuelve menos limpio y más difícil de modificar.
+\end{itemize}
+
+\subsection{Indicadores de Deuda Técnica en un Proyecto}
+La deuda técnica puede manifestarse en un proyecto de diferentes maneras. A continuación, se listan algunos de los principales signos de deuda técnica:
+
+\begin{itemize}
+    \item \textbf{Código duplicado}: la presencia de fragmentos de código repetidos puede indicar una falta de estructura y planificación en la arquitectura.
+    \item \textbf{Baja cobertura de pruebas}: un sistema sin pruebas suficientes suele ser más frágil, costoso de mantener y difícil de modificar sin introducir errores.
+    \item \textbf{Alta complejidad ciclomática}: funciones o métodos que contienen múltiples bifurcaciones y niveles de anidación incrementan la dificultad de comprensión y modificación del código.
+    \item \textbf{Falta de documentación}: sin una documentación clara y completa, el código se vuelve difícil de entender y mantener, especialmente para nuevos desarrolladores en el equipo.
+    \item \textbf{Desacople inadecuado}: dependencias mal estructuradas entre componentes del sistema que dificultan su modificación y evolución.
+\end{itemize}
+
+\subsection{Clasificación de la Deuda Técnica}
+
+Existen diferentes enfoques para clasificar la deuda técnica en los proyectos de software. Cada clasificación proporciona una perspectiva única sobre el tipo de deuda que puede acumularse y sobre cómo gestionarla. A continuación, se exploran dos enfoques reconocidos: los tipos de deuda técnica identificados por el Software Engineering Institute y el Cuadrante de la Deuda Técnica de Martin Fowler.
+
+\subsubsection{Tipos de Deuda Técnica según el Software Engineering Institute}
+Según el documento publicado por el Software Engineering Institute titulado \say{Towards an Ontology of Terms on Technical Debt \cite{debtontology}}, existen trece tipos distintos de deuda técnica, cada uno asociado con indicadores clave que permiten su identificación en un proyecto. A continuación, se presenta una descripción de cada tipo de deuda técnica, con ejemplos ilustrativos.
+\begin{itemize}
+    \item \textbf{Architecture Debt}: Se refiere a problemas o limitaciones en la estructura general del sistema. Ejemplo: un sistema que utiliza una arquitectura monolítica enfrenta dificultades para escalar o actualizarse, generando costos adicionales cuando es necesario realizar cambios significativos.
+
+    \item \textbf{Build Debt}: Implica la falta de optimización en el proceso de compilación o construcción de software. Ejemplo: tiempos de compilación excesivos que ralentizan el flujo de trabajo de los desarrolladores y aumentan el tiempo necesario para pruebas y despliegue.
+
+    \item \textbf{Code Debt}: Hace referencia a la mala calidad del código en términos de legibilidad y mantenimiento. Ejemplo: código altamente duplicado o con complejidad innecesaria que hace difícil la realización de cambios sin introducir errores.
+
+    \item \textbf{Defect Debt}: Incluye errores conocidos en el sistema que aún no han sido corregidos. Ejemplo: defectos menores en el código que no afectan directamente la funcionalidad principal, pero que acumulados pueden hacer que el sistema sea más frágil y difícil de mantener.
+
+    \item \textbf{Design Debt}: Se genera cuando las decisiones de diseño no se alinean con los objetivos de largo plazo del sistema. Ejemplo: una interfaz de usuario que no sigue patrones de diseño modernos puede afectar la experiencia de usuario y requerir rediseño en fases futuras.
+
+    \item \textbf{Documentation Debt}: Surge cuando la documentación está incompleta, desactualizada o es inexistente. Ejemplo: módulos de código críticos sin documentación detallada, lo que dificulta que nuevos desarrolladores comprendan y mantengan el sistema.
+
+    \item \textbf{Infrastructure Debt}: Se refiere a problemas en la infraestructura de hardware o software en la que se basa el sistema. Ejemplo: servidores obsoletos o configuraciones de red que limitan la escalabilidad del sistema y necesitan ser actualizados.
+
+    \item \textbf{People Debt}: Relacionado con la falta de habilidades, conocimiento o experiencia en el equipo de desarrollo. Ejemplo: un equipo que carece de experiencia en buenas prácticas de seguridad de software, lo que aumenta el riesgo de vulnerabilidades en el sistema.
+
+    \item \textbf{Process Debt}: Ocurre cuando los procesos de desarrollo son ineficientes o no están bien definidos. Ejemplo: un flujo de trabajo sin revisiones de código formalizadas, lo que facilita la introducción de errores y de prácticas de desarrollo deficientes.
+
+    \item \textbf{Requirement Debt}: Surge cuando los requisitos iniciales no se definen claramente o cambian sin una adecuada gestión. Ejemplo: funcionalidades que se agregan sin una evaluación de impacto, lo que puede generar inconsistencias o problemas de compatibilidad.
+
+    \item \textbf{Service Debt}: Involucra problemas en los servicios externos o en las dependencias del sistema. Ejemplo: una aplicación que depende de un servicio de terceros que no ofrece disponibilidad continua, afectando la confiabilidad del sistema.
+
+    \item \textbf{Test Automation Debt}: Corresponde a la falta de automatización de pruebas en el sistema. Ejemplo: la ausencia de pruebas automatizadas, que dificulta el despliegue continuo y aumenta el tiempo necesario para verificar que el sistema funcione correctamente.
+
+    \item \textbf{Test Debt}: Se refiere a la falta de cobertura de pruebas para validar el comportamiento del sistema. Ejemplo: módulos críticos sin pruebas unitarias o de integración, lo cual incrementa el riesgo de que cambios futuros generen errores no detectados.
+\end{itemize}
+
+\subsubsection{Cuadrante de la Deuda Técnica de Martin Fowler}
+
+Martin Fowler propuso otra forma de clasificar la deuda técnica mediante el \say{Cuadrante de la Deuda Técnica}, el cual se basa en dos dimensiones: la intención de la deuda (deliberada o inadvertida) y la forma en que esta se gestiona (imprudente o prudente).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imagenes/techDebtQuadrant.png}
+    \caption{Technical Debt Quadrant by Martin Fowler}
+\end{figure}
+
+Este modelo permite a los equipos de desarrollo comprender mejor la naturaleza de la deuda técnica y el enfoque adecuado para gestionarla. Las cuatro categorías de deuda técnica en este modelo son:
+\begin{itemize}
+    \item \textbf{Reckless-Deliberate (Imprudente y Deliberada)}: La deuda técnica se asume de manera consciente pero sin considerar las consecuencias a largo plazo. Ejemplo: omitir el diseño para ahorrar tiempo, diciendo: \say{No tenemos tiempo para el diseño}. Aunque permite avanzar rápidamente, esta decisión puede llevar a problemas de mantenimiento importantes.
+
+    \item \textbf{Prudent-Deliberate (Prudente y Deliberada)}: La deuda técnica se asume de manera consciente y planificada, con la intención de abordarla en el futuro. Ejemplo: \say{Debemos lanzar ahora y lidiar con las consecuencias}, donde se prioriza el tiempo de entrega con la intención de refactorizar luego.
+
+    \item \textbf{Reckless-Inadvertent (Imprudente e Inadvertida)}: La deuda técnica se incurre sin intención ni conocimiento, y de forma imprudente. Esto ocurre cuando el equipo carece de experiencia o conocimiento técnico. Ejemplo: un desarrollador que desconoce conceptos básicos de diseño, como la capa de abstracción, y toma decisiones que complican el sistema.
+
+    \item \textbf{Prudent-Inadvertent (Prudente e Inadvertida)}: La deuda técnica ocurre sin que el equipo lo note inicialmente, pero es reconocida y abordada después. Ejemplo: \say{Ahora sabemos cómo deberíamos haberlo hecho}, donde el equipo identifica una mejor forma de resolver el problema después de implementar la solución inicial.
+\end{itemize}
+
+Este modelo ayuda a los equipos a tomar decisiones informadas sobre cómo gestionar la deuda técnica. Las deudas imprudentes, tanto deliberadas como inadvertidas, son generalmente críticas y deben priorizarse, mientras que las deudas prudentes pueden ser gestionadas con una planificación a largo plazo.
+
+\subsubsection{Conclusión}
+
+Ambos enfoques de clasificación de deuda técnica proporcionan a los equipos una perspectiva amplia para entender y gestionar los distintos tipos de deuda. Los trece tipos de deuda técnica permiten una identificación precisa de problemas específicos en el sistema, mientras que el Cuadrante de Fowler proporciona un marco para evaluar la intencionalidad y gestión de la deuda, facilitando la toma de decisiones sobre su resolución. Juntos, estos modelos permiten una gestión integral de la deuda técnica, ayudando a los equipos a mantener la calidad y sostenibilidad del software a lo largo del tiempo.
+
+\subsection{Ejemplos de Deuda Técnica}
+
+Para ilustrar la deuda técnica en el desarrollo de software, a continuación se presentan algunos ejemplos comunes, tanto en términos generales como en organizaciones que han enfrentado problemas significativos debido a la deuda técnica.
+
+\subsubsection{Ejemplos Comunes de Deuda Técnica}
+
+\begin{itemize}
+    \item \textbf{Código legacy sin documentación}: A menudo, el código escrito hace muchos años carece de documentación y pruebas, lo que dificulta su modificación.
+    \item \textbf{Sistemas monolíticos}: Proyectos antiguos suelen estar organizados de forma monolítica, lo que incrementa la complejidad al realizar cambios o al escalar funcionalidades.
+    \item \textbf{Parches rápidos}: La aplicación de \say{parches} temporales para corregir errores críticos puede resolver problemas a corto plazo, pero si no se revisan, se convierten en problemas mayores.
+\end{itemize}
+
+\subsubsection{Ejemplos de empresas u organizaciones que han sufrido Deuda Técnica}
+
+\begin{itemize}
+    \item \textbf{Twitter}: Ha enfrentado problemas de escalabilidad y rendimiento debido a la deuda técnica acumulada en sus sistemas iniciales.
+    \item \textbf{NASA}: En algunos proyectos espaciales, la deuda técnica ha sido un problema debido a las limitaciones de hardware y a la evolución de los sistemas operativos y software con el tiempo. \item \textbf{Microsoft}: En varias versiones de Windows, Microsoft ha lidiado con la deuda técnica para garantizar la compatibilidad con software y hardware antiguos.
+\end{itemize}
+
+\subsection{Resolución de la Deuda Técnica}
+La resolución de la deuda técnica requiere un esfuerzo consciente y constante. Algunas de las estrategias más efectivas para abordar la deuda técnica incluyen:
+
+\begin{itemize}
+    \item \textbf{Refactorización}: La refactorización es una técnica que permite mejorar el diseño y la estructura del código sin cambiar su funcionalidad. Mediante la refactorización, es posible reducir la complejidad, mejorar la legibilidad y eliminar duplicación de código.
+    \item \textbf{Implementación de Pruebas Automatizadas}: Agregar pruebas automatizadas asegura que los cambios en el código no introduzcan errores inesperados. Además, facilita futuras refactorizaciones, ya que permite comprobar que las modificaciones no alteren el comportamiento esperado del sistema.
+    \item \textbf{Auditoría y Monitoreo Constantes}: Realizar revisiones periódicas del código y monitorear la calidad del software permite identificar áreas problemáticas antes de que se conviertan en deuda técnica acumulada. En proyectos de código abierto, la comunidad puede desempeñar un rol importante al revisar y sugerir mejoras.
+    \item \textbf{Priorización de Deuda Técnica}: No toda la deuda técnica necesita resolverse de inmediato. Establecer una lista priorizada de deuda técnica permite que los equipos se enfoquen en aquellas áreas que impactan más en la eficiencia y escalabilidad del sistema.
+\end{itemize}
+
+\subsection{Estrategias para evitar futura Deuda Técnica}
+Evitar la deuda técnica a futuro es tan importante como resolver la ya existente. Algunas estrategias útiles incluyen:
+
+\begin{itemize}
+    \item Adoptar prácticas de desarrollo ágil: al trabajar de manera iterativa, se reducen los riesgos de deuda técnica mediante la mejora continua del código. \item Mantener una cobertura de pruebas adecuada: un sistema con buena cobertura de pruebas es más resistente a la acumulación de deuda técnica, ya que los errores se detectan y corrigen rápidamente.
+    \item Realizar revisiones de código: la revisión de código por parte de la comunidad de GitHub permite que el proyecto se mantenga alineado con buenas prácticas y estándares de calidad.
+    \item Documentación clara y accesible: la documentación, tanto del código como de los procesos, asegura que cualquier desarrollador pueda entender el sistema y realizar cambios sin introducir deuda técnica.
+\end{itemize}
+
+\section{Análisis de la deuda técnica en SnapperML}
+Identificar la deuda de snapper.
