@@ -1,127 +1,6 @@
-\documentclass[a4paper,11pt]{book}
-\usepackage[a4paper, top=4cm, left=2cm, bottom=4cm, footskip=1.5cm]{geometry} % Adjust margins here
-\usepackage{listings}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{imakeidx}
-\usepackage{indentfirst}
-\usepackage{dirtytalk}
+%!TEX root = proyecto.tex
+\input{preamble}
 
-\decimalpoint
-\usepackage{dcolumn}
-\usepackage{etoolbox}
-\newcolumntype{.}{D{.}{\esperiod}{-1}}
-\makeatletter
-\addto\shorthandsspanish{\let\esperiod\es@period@code}
-\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-2\baselineskip}}{}{}
-\makeatother
-
-\RequirePackage{verbatim}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{afterpage}
-
-\usepackage{longtable}
-
-\usepackage[pdfborder={0 0 0}]{hyperref} %referencia
-
-% ********************************************************************
-% Re-usable information
-% ********************************************************************
-\newcommand{\myTitle}{Gestión de Deuda Técnica y Diseño de Interfaz en Framework MLOps (SnapperML)\xspace}
-\newcommand{\myDegree}{Grado en Ingeniería Informática\xspace}
-\newcommand{\myName}{Yeray López Ramírez (alumno)\xspace}
-\newcommand{\myProf}{Alberto Guillén Perales (tutor)\xspace}
-\newcommand{\myFaculty}{Escuela Técnica Superior de Ingenierías Informática y de
-Telecomunicación\xspace}
-\newcommand{\myFacultyShort}{E.T.S. de Ingenierías Informática y de
-Telecomunicación\xspace}
-\newcommand{\myDepartment}{Departamento de Ingeniería de Computadores, Automática y Robótica\xspace}
-\newcommand{\myUni}{\protect{Universidad de Granada}\xspace}
-\newcommand{\myLocation}{Granada\xspace}
-\newcommand{\myTime}{\today\xspace}
-\newcommand{\myVersion}{Version 0.1\xspace}
-
-
-\hypersetup{
-   pdfauthor = {\myName (ylopezramirez@correo.ugr.es)},
-   pdftitle = {\myTitle},
-   pdfsubject = {},
-   pdfkeywords = {Deuda técnica, MLOps, UI, ...},
-   pdfcreator = {LaTeX con el paquete ....},
-   pdfproducer = {pdflatex}
-}
-
-%\hyphenation{} % reglas de division de silabas: pa-la-bra
-
-
-\usepackage{pdfpages} %includepdf{archivo.pdf}
-\usepackage{url}
-\usepackage{colortbl,longtable}
-\usepackage[stable]{footmisc}
-\usepackage[acronym]{glossaries}
-
-\makeglossaries
-
-% Definición de comandos que me son tiles:
-\renewcommand{\glossaryname}{Glosario}
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LO]{\leftmark}
-\fancyhead[RE]{\rightmark}
-\fancyhead[RO,LE]{\textbf{\thepage}}
-\renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
-\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
-\setlength{\headheight}{2.5\headheight}
-% minimizar fragmentado de listados
-\lstnewenvironment{listing}[1][]
-   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
-
-\lstdefinestyle{CodigoC}
-   {
-	basicstyle=\scriptsize,
-	frame=single,
-	language=C,
-	numbers=left
-   }
-\lstdefinestyle{CodigoC++}
-   {
-	basicstyle=\small,
-	frame=single,
-	backgroundcolor=\color{gray30},
-	language=C++,
-	numbers=left
-   }
-
- 
-\lstdefinestyle{Consola}
-   {basicstyle=\scriptsize\bf\ttfamily,
-    backgroundcolor=\color{gray30},
-    frame=single,
-    numbers=none
-   }
-
-%Para conseguir que en las páginas en blanco no ponga cabeceras
-\makeatletter
-\def\clearpage{%
-  \ifvmode
-    \ifnum \@dbltopnum =\m@ne
-      \ifdim \pagetotal <\topskip
-        \hbox{}
-      \fi
-    \fi
-  \fi
-  \newpage
-  \thispagestyle{empty}
-  \write\m@ne{}
-  \vbox{}
-  \penalty -\@Mi
-}
-\makeatother
-
-\usepackage{pdfpages}
 \begin{document}
 \input{portada/portada}
 \input{prefacios/prefacio}
@@ -151,15 +30,10 @@ Telecomunicación\xspace}
 %\input{capitulos/08_Conclusiones}
 %
 \chapter{Conclusiones y Trabajos Futuros}
-%
-%
-%%\nocite{*}
+
 \bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
 \bibliographystyle{unsrturl}
-%
-%\appendix
-%\input{apendices/manual_usuario/manual_usuario}
-%%\input{apendices/paper/paper}
+
 \input{glosario/entradas_glosario}
 \addcontentsline{toc}{chapter}{Glosario}
 \printglossary[type=\acronymtype]
