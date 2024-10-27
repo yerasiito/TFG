@@ -1,5 +1,3 @@
-% preamble.tex
-\documentclass[a4paper,11pt]{book}
 \usepackage[a4paper, top=4cm, left=2cm, bottom=4cm, footskip=1.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -8,17 +6,22 @@
 \usepackage{dirtytalk}
 
 % ---- Code insertion ----
-\usepackage{minted}
+\usepackage[newfloat]{minted}
+\usepackage{caption}
+
 \usepackage[breakable]{tcolorbox}
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable]}
         \AfterEndEnvironment{minted}{\end{tcolorbox}}
 \BeforeBeginEnvironment{inputminted}{\begin{tcolorbox}[breakable]}
         \AfterEndEnvironment{inputminted}{\end{tcolorbox}}
 
-\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
 \definecolor{light-gray}{gray}{0.95}
 \definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
 \definecolor{nyellow}{rgb}{0.91, 0.656, 0.0}
+\definecolor{lightred}{rgb}{1.0, 0.9, 0.9}
+\definecolor{lightgreen}{rgb}{0.9, 1.0, 0.9}
 
 \newcommand{\code}[1]{\colorbox{light-gray}{\textcolor{alizarin}{\texttt{#1}}}}
 \newcommand{\high}[1]{\colorbox{light-gray}{\textcolor{nyellow}{\texttt{#1}}}}
@@ -27,7 +30,10 @@
 \xpretocmd{\inputminted}{\begin{tcolorbox}}{}{}
         \xapptocmd{\inputminted}{\end{tcolorbox}}{}{}
 
-\setminted{fontsize=\small}
+\setminted{
+    fontsize=\small,
+    breaklines,
+}
 
 \decimalpoint
 \usepackage{dcolumn}
@@ -35,6 +41,8 @@
 \newcolumntype{.}{D{.}{\esperiod}{-1}}
 \makeatletter
 \addto\shorthandsspanish{\let\esperiod\es@period@code}
+\addto\captionsspanish{\renewcommand{\listingname}{Listado}}
+
 \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-2\baselineskip}}{}{}
 \makeatother
 
@@ -90,6 +98,7 @@
 \fancyhead[RO,LE]{\textbf{\thepage}}
 \renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
 \renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
+
 \setlength{\headheight}{2.5\headheight}
 
 \makeatletter
