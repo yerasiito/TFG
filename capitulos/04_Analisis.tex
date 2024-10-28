@@ -1,11 +1,9 @@
 \chapter{Analisis}
 
 \section{Análisis de la Deuda Técnica}
-
 La deuda técnica es un concepto central en el desarrollo de software moderno, y entender sus causas, efectos y métodos de resolución resulta fundamental para la gestión eficaz de cualquier proyecto de software. En este capítulo se explora en profundidad el concepto de deuda técnica, su origen, indicadores, y métodos tanto de resolución como de prevención.
 
 \subsection{¿Qué es la Deuda Técnica?}
-
 El concepto de deuda técnica fue introducido en la década de 1990 por Ward Cunningham, uno de los autores del Manifiesto Ágil, para describir los compromisos técnicos que se adquieren cuando un equipo prioriza la entrega rápida de una funcionalidad o producto sobre una implementación ideal. En lugar de abordar las tareas necesarias para un código limpio y sostenible, como la refactorización y la optimización, los equipos pueden optar por soluciones rápidas que simplifiquen la entrega a corto plazo. Este tipo de decisiones, aunque a menudo inevitables, acumulan una \say{deuda} en el sistema que deberá \say{pagarse} en algún momento mediante el esfuerzo de corregir o mejorar el código.
 
 Cunningham explicó la deuda técnica utilizando una analogía financiera, argumentando que las soluciones rápidas son como un préstamo que el equipo toma contra la calidad del código. Al igual que los intereses de un préstamo, las consecuencias de estos atajos se acumulan con el tiempo, haciendo que el código sea más difícil de mantener y aumentar su complejidad. Su célebre frase ilustra bien esta idea: \say{Si no hacemos que nuestro programa se alinee con lo que entendemos que es la manera adecuada de pensar sobre nuestros objetos financieros, seguiremos tropezando con esa inconsistencia, lo que es como pagar intereses en un préstamo}\cite{introtodebt}.
@@ -185,7 +183,7 @@ MLFLOW_ARTIFACT_ROOT=/mnt/mlruns
 OPTUNA_STORAGE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@optuna_st
 orage:${POSTGRES_PORT}/${POSTGRES_DB}
 \end{minted}
-\captionof{listing}{Archivo de variables de entorno \texttt{.envdocker}}
+\mycaptionof{listing}{Archivo de variables de entorno \texttt{.envdocker}}
 
 Esta configuración de archivos permite levantar los contenedores Docker sin problemas de conexión y facilita la ejecución de SnapperML tanto en entornos Docker como locales. Ahora es posible visualizar la interfaz de usuario de MLflow accediendo a \code{localhost:5000}.
 
@@ -215,7 +213,10 @@ Flask-CORS permite manejar el Cross-Origin Resource Sharing (CORS) en aplicacion
 
 \subsubsection{Pydantic-Settings} Pydantic-Settings es una extensión de la popular librería Pydantic, introducida en la versión 2, que facilita la validación de configuraciones y variables de entorno. En SnapperML, esta librería es fundamental para garantizar que las configuraciones de experimentos, como las de MLflow y Optuna, sean correctas antes de ejecutarse, lo que reduce la probabilidad de errores durante la ejecución. La validación de configuraciones asegura que todos los parámetros estén en el formato esperado y dentro de un rango permitido, lo cual es especialmente útil en entornos de experimentación, donde los parámetros suelen cambiar con frecuencia. La falta de esta dependencia impide que el sistema valide correctamente las configuraciones, generando fallos al iniciar los experimentos.
 
-\begin{figure}[h] \includegraphics[width=\textwidth]{imagenes/dep_missing-pydantic_settings.png} \caption{Falla validando el estudio/experimento en Optuna debido a la falta de \texttt{pydantic-settings}.} \end{figure}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{imagenes/dep_missing-pydantic_settings.png}
+    \caption{Falla validando el experimento al faltar \texttt{pydantic-settings}.}
+\end{figure}
 
 \subsubsection{Ruamel.yaml} Ruamel.yaml es un parser avanzado para archivos YAML, que permite una manipulación precisa de configuraciones almacenadas en este formato. SnapperML utiliza Ruamel.yaml para cargar y editar configuraciones de experimentos de machine learning que suelen ser extensas y complejas. A diferencia de otros parsers YAML, Ruamel.yaml permite conservar el orden de las claves y los comentarios en los archivos, lo cual es útil para preservar la legibilidad y facilitar futuras ediciones. Esta librería mejora la experiencia de los usuarios que necesitan ajustar configuraciones con frecuencia, manteniendo la consistencia y estructura del archivo.
 
@@ -322,41 +323,33 @@ clean:
 	rm -rf $(VENV_DIR)
 \end{minted}
 
-\vspace{10mm}
-
 \textbf{venv}: Crea un entorno virtual en la ubicación especificada por \$(VENV\_DIR), aislando las dependencias del proyecto.
 
-\vspace{5mm}
+\vspace{2.5mm}
 
 \textbf{install}: Crea el entorno virtual (si aún no existe) y luego instala las dependencias del proyecto en modo editable, además de las especificadas en `requirements.txt`.
 
-\vspace{5mm}
+\vspace{2.5mm}
 
 \textbf{run\_example\_svm}: Ejecuta el archivo de configuración `svm.yaml` en SnapperML tras realizar la instalación de dependencias, lo cual facilita la prueba de ejemplos predefinidos.
 
-\vspace{5mm}
+\vspace{2.5mm}
 
 \textbf{docker}: Verifica si Docker está activo; si no, intenta iniciarlo. Posteriormente, levanta los contenedores definidos en el directorio `docker`. La variable `\$(BACKGROUND)` permite ejecutar los contenedores en segundo plano (`-d`).
 
-\vspace{5mm}
+\vspace{2.5mm}
 
 \textbf{stop\_docker}: Detiene y elimina los contenedores de Docker levantados, asegurando una limpieza adecuada de recursos.
 
-\vspace{5mm}
+\vspace{2.5mm}
 
 \textbf{clean}: Elimina archivos Python compilados (`*.pyc`, `*.pyo`) y directorios `\_\_pycache\_\_`, además de borrar el entorno virtual, asegurando que el proyecto pueda configurarse desde cero en la siguiente ejecución.
-
-\vspace{5mm}
-
-Este Makefile permite configurar el entorno de desarrollo en pocos pasos, garantizando que todas las dependencias se instalen correctamente y que el proyecto esté listo para ejecutarse con una configuración predefinida.
 
 \subsection{Cambios en Dependencias}
 Durante el desarrollo y mantenimiento de SnapperML, varios cambios en las dependencias fueron necesarios para asegurar la compatibilidad y optimizar el rendimiento del proyecto. A continuación, se detallan las modificaciones realizadas en algunas de las dependencias clave.
 
 \subsubsection{Migración de Pydantic}
 Con la actualización a Pydantic v2, SnapperML experimentó múltiples problemas de compatibilidad debido a cambios significativos en la API de la librería. Pydantic es una herramienta fundamental en SnapperML para la validación de datos y configuraciones, y esta nueva versión introdujo varias mejoras de rendimiento y nuevas funcionalidades, pero también eliminó o modificó ciertas funciones que el proyecto utilizaba.
-
-\vspace{5mm}
 
 Para facilitar la transición, se utilizó el script bump-pydantic, diseñado para ayudar en la migración de versiones anteriores de Pydantic a la versión 2. Aunque este script resolvió algunos de los problemas de compatibilidad, ciertos ajustes adicionales tuvieron que realizarse manualmente, especialmente en las validaciones de configuraciones y en el manejo de clases de datos. La migración a Pydantic v2 ha mejorado la eficiencia de las validaciones y optimizado el rendimiento en el procesamiento de configuraciones complejas, lo cual es crucial en un entorno como SnapperML, donde los experimentos suelen requerir configuraciones extensas y detalladas.
 
@@ -366,7 +359,7 @@ Para facilitar la transición, se utilizó el script bump-pydantic, diseñado pa
 La dependencia knockknock también fue actualizada debido a un cambio en su método de instalación. Anteriormente, se instalaba mediante un enlace directo desde el repositorio de GitHub, lo cual presentaba problemas de estabilidad y actualización. Con la nueva configuración, knockknock ahora se puede instalar directamente desde PyPI, lo cual facilita la gestión de dependencias y asegura que el paquete esté siempre actualizado a la última versión disponible en el repositorio de Python.
 
 \begin{minted}[escapeinside=||]{py}
-|\colorbox{lightred}{- dependency\_links=[\lq{www.github.com/SnapperML/knockknock.git@master\textbackslash%egg=knockknock}\rq]}|
+|\colorbox{lightred}{- dependency\_links=[\lq{github.com/SnapperML/knockknock.git@master/%egg=knockknock}\rq]}|
     install\_requires=[
         ...
 |\colorbox{lightgreen}{+        `knockknock`}|
@@ -381,25 +374,19 @@ Además, knockknock ha cambiado la forma en que se importan y usan sus funciones
     |\colorbox{lightred}{-    from knockknock.desktop\_sender import show\_desktop\_notification}|
     |\colorbox{lightgreen}{+    from knockknock import desktop\_sender, slack\_sender, email\_sender}|
         \end{minted}
-\captionof{listing}{knockknock - Las funciones de notificación no se importan directamente}
-
-\vspace{5mm}
+\mycaptionof{listing}{knockknock - Las funciones de notificación no se importan directamente}
 
 Este cambio es particularmente útil en SnapperML, donde el uso de decoradores simplifica el proceso de notificación para eventos clave, como el inicio y la finalización de experimentos.
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightred}{-    show\_desktop\_notification(subject, msg) % obsoleto}|
 |\colorbox{lightgreen}{+    @desktop\_sender(title=subject)}|
-    \end{minted}
-\captionof{listing}{knockknock - Ahora se usan decoradores}
-
-\vspace{5mm}
+\end{minted}
+\mycaptionof{listing}{knockknock - Ahora se usan decoradores}
 
 Al estructurar las notificaciones de esta forma, se mejora la legibilidad y mantenibilidad del código, alineándolo mejor con las prácticas de desarrollo modernas.
 
 \subsubsection{Ruamel.yaml}
 ruamel.yaml es una librería utilizada en SnapperML para el manejo y parsing de archivos YAML, que suelen emplearse para almacenar configuraciones de experimentos. Con el tiempo, ciertas funciones en ruamel.yaml fueron marcadas como obsoletas, lo que obligó a realizar una actualización para asegurar la compatibilidad del proyecto. Esta actualización incluyó el reemplazo de funciones antiguas y la adaptación a una API simplificada.
-
-\vspace{5mm}
 
 La función load, que anteriormente se utilizaba con ruamel.yaml, fue reemplazada para alinearse con los cambios en la librería y reducir posibles problemas de compatibilidad en el futuro. Esto asegura que SnapperML pueda manejar archivos de configuración YAML de forma segura y eficiente, manteniendo la estructura y consistencia de los datos. Además, al utilizar la versión actualizada, se mejora el rendimiento en la carga y edición de configuraciones complejas, lo cual es esencial para gestionar experimentos con múltiples parámetros.
 \begin{minted}[escapeinside=||]{python}
@@ -422,9 +409,7 @@ Otro cambio importante en Optuna fue la actualización de la función delete\_st
 \end{minted}
 
 \subsubsection{Dependencias Abandonadas}
-Finalmente, una de las dependencias identificadas como obsoleta en SnapperML fue tied-autoencoder-keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos "atados" (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
-
-\vspace{5mm}
+Finalmente, una de las dependencias identificadas como obsoleta en SnapperML fue tied autoencoder keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos "atados" (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
 
 Para mitigar este problema y evitar la dependencia en una librería desactualizada, se implementó directamente la funcionalidad de codificación/decodificación en el código de SnapperML, eliminando la necesidad de tied-autoencoder-keras. Esta implementación directa permite mayor control sobre el proceso de codificación, asegurando compatibilidad con las versiones actuales de Keras y mejorando la eficiencia de los autoencoders. Al gestionar los pesos directamente en el código, SnapperML mantiene la funcionalidad original de la librería sin depender de un paquete externo que ya no recibe soporte.
 
@@ -465,15 +450,15 @@ Uno de los problemas iniciales fue un conflicto de nombres entre un archivo del 
 \subsubsection{Validación de Config en Pydantic}
 Pydantic v2, se requirieron ajustes en las validaciones de configuraciones. En su versión anterior, Pydantic solo permitía valores de tipo str en ciertos validadores, lo cual limitaba la flexibilidad de SnapperML para aceptar instancias de clase completas. Para mejorar esto, se ajustó el validador de Pydantic en SnapperML para que ahora acepte tanto instancias de la clase como valores de tipo cadena. Este cambio optimiza la validación de configuraciones y permite que el sistema procese instancias completas, facilitando el manejo de configuraciones complejas y asegurando la compatibilidad con la nueva versión de Pydantic.
 \begin{minted}[escapeinside=||]{python}
- @classmethod
-    def __get_pydantic_core_schema__(
-        cls, source_type: Any, handler: Callable[[Any], CoreSchema]
-    ) -> CoreSchema:
-|\colorbox{lightred}{-      return core\_schema.no\_info\_after\_validator\_function(cls.validate, handler(Any))}|
-|\colorbox{lightgreen}{+      return core\_schema.no\_info\_after\_validator\_function(cls.validate, handler(str))}|
+@classmethod
+def __get_pydantic_core_schema__(
+    cls, source_type: Any, handler: Callable[[Any], CoreSchema]
+) -> CoreSchema:
+|\colorbox{lightred}{-  return core\_schema.no\_info\_after\_validator\_function(cls.validate, handler(Any))}|
+|\colorbox{lightgreen}{+  return core\_schema.no\_info\_after\_validator\_function(cls.validate, handler(str))}|
 ...
-|\colorbox{lightgreen}{+        if isinstance(value, cls):}|
-|\colorbox{lightgreen}{+            return value}|
+|\colorbox{lightgreen}{+    if isinstance(value, cls):}|
+|\colorbox{lightgreen}{+        return value}|
     \end{minted}
 \subsubsection{Archivo de configuración obligatorio}
 Otro problema recurrente era la falta de un archivo de configuración al ejecutar SnapperML, lo cual generaba errores difíciles de identificar en tiempo de ejecución. Para resolver esto, se implementó una validación que verifica que el archivo de configuración sea proporcionado como argumento al iniciar el sistema. Si el usuario no proporciona un archivo de configuración, el sistema ahora lanza un error claro, indicando que se necesita una ruta de archivo. Esta mejora asegura que SnapperML siempre tenga los datos necesarios para ejecutar un experimento correctamente, reduciendo errores y facilitando el flujo de trabajo de los usuarios.
@@ -506,7 +491,8 @@ Durante el análisis, se identificó una importación redundante del módulo ten
 \subsection{Refactorizaciones}
 A lo largo del proceso de optimización y mantenimiento de SnapperML, se realizaron varias refactorizaciones para mejorar la calidad del código, reducir el consumo de recursos y facilitar la identificación de problemas. A continuación, se describen las principales refactorizaciones implementadas y su impacto en el sistema.
 
-\subsubsection{Migración de \texttt{setup.py} a \texttt{pyproject.toml}}Uno de los cambios fundamentales fue la migración de setup.py a pyproject.toml, en línea con las mejores prácticas modernas de empaquetado en Python. pyproject.toml se ha convertido en el estándar para definir la configuración de empaquetado y las dependencias de los proyectos Python, permitiendo una mejor integración con herramientas modernas como poetry y pip. Esta migración simplifica la estructura del proyecto y facilita la gestión de dependencias, permitiendo que el sistema mantenga compatibilidad con el ecosistema Python actual y facilite futuras actualizaciones. Además, pyproject.toml mejora la portabilidad y reproducibilidad del proyecto, ya que unifica las configuraciones en un solo archivo.
+\subsubsection{Migración de \texttt{setup.py} a \texttt{pyproject.toml}}
+Uno de los cambios fundamentales fue la migración de setup.py a pyproject.toml, en línea con las mejores prácticas modernas de empaquetado en Python. pyproject.toml se ha convertido en el estándar para definir la configuración de empaquetado y las dependencias de los proyectos Python, permitiendo una mejor integración con herramientas modernas como poetry y pip. Esta migración simplifica la estructura del proyecto y facilita la gestión de dependencias, permitiendo que el sistema mantenga compatibilidad con el ecosistema Python actual y facilite futuras actualizaciones. Además, pyproject.toml mejora la portabilidad y reproducibilidad del proyecto, ya que unifica las configuraciones en un solo archivo.
 
 \subsubsection{Importación Selectiva de Atributos}
 Para optimizar el consumo de memoria y mejorar la eficiencia, se implementaron importaciones selectivas en módulos clave. Anteriormente, el proyecto realizaba importaciones globales utilizando from typing import *, lo cual incrementaba innecesariamente el uso de memoria al cargar todos los atributos de typing, incluso aquellos que no eran necesarios. Al cambiar a una importación selectiva de sólo los atributos específicos utilizados en el código, como Any, Dict, Tuple, TypeVar, Union, List, y Callable, se reduce significativamente la cantidad de memoria consumida por el módulo. Este ajuste contribuye a una mayor eficiencia y mantiene el código más limpio y comprensible, mejorando además el rendimiento en entornos con limitaciones de recursos.
@@ -516,7 +502,7 @@ Para optimizar el consumo de memoria y mejorar la eficiencia, se implementaron i
 \end{minted}
 
 \subsubsection{Extracción de Variables Temporales}
-Con el objetivo de simplificar expresiones complejas y mejorar la legibilidad del código, se implementó la extracción de variables temporales. En lugar de utilizar expresiones largas o patrones complejos directamente en el código, se almacenan en variables temporales. Esto no sólo facilita la comprensión del código, sino que también mejora la capacidad de depuración, ya que permite identificar errores y problemas de forma más clara. Un ejemplo de este cambio fue la extracción de un patrón de expresión regular a una variable temporal antes de realizar la coincidencia (matching), lo cual hace que el código sea más fácil de leer y entender, tanto para desarrolladores actuales como futuros..
+Con el objetivo de simplificar expresiones complejas y mejorar la legibilidad del código, se implementó la extracción de variables temporales. En lugar de utilizar expresiones largas o patrones complejos directamente en el código, se almacenan en variables temporales. Esto no sólo facilita la comprensión del código, sino que también mejora la capacidad de depuración, ya que permite identificar errores y problemas de forma más clara. Un ejemplo de este cambio fue la extracción de un patrón de expresión regular a una variable temporal antes de realizar la coincidencia (matching), lo cual hace que el código sea más fácil de leer y entender.
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightred}{-  match = re.match(rf\lq\{method\_name\}\textbackslash(\{argument\_regex\}\textbackslash)\rq, value)}|
 |\colorbox{lightgreen}{+  pattern = rf\lq\{method\_name\}\textbackslash(\{argument\_regex\}\textbackslash)\rq}|
@@ -546,12 +532,8 @@ Para facilitar la depuración y proporcionar mayor contexto durante el manejo de
 Además, se ajustaron los tipos de excepciones capturadas, sustituyendo capturas genéricas de Exception por excepciones más específicas, como ValueError, lo cual mejora la precisión en el manejo de errores. Este cambio permite que los errores se identifiquen de forma más precisa y que los mensajes de error sean informativos, ayudando a los desarrolladores a corregir problemas en menos tiempo y a reducir la cantidad de errores no controlados.
 
 \section{Conclusión del Análisis}
-A lo largo de este trabajo, se ha llevado a cabo un análisis exhaustivo y detallado del estado actual de SnapperML, abordando problemas de deuda técnica y realizando refactorizaciones clave que mejoran su eficiencia, mantenibilidad y adaptabilidad. Las actualizaciones en dependencias, la optimización del manejo de errores, y la implementación de configuraciones de entorno automatizadas contribuyen a un proyecto más robusto y accesible para desarrolladores y usuarios.
-
-\vspace{5mm}
+A lo largo de este capítulo, se ha llevado a cabo un análisis exhaustivo y detallado del estado actual de SnapperML, abordando problemas de deuda técnica y realizando refactorizaciones clave que mejoran su eficiencia, mantenibilidad y adaptabilidad. Las actualizaciones en dependencias, la optimización del manejo de errores, y la implementación de configuraciones de entorno automatizadas contribuyen a un proyecto más robusto y accesible para desarrolladores y usuarios.
 
 La migración a prácticas modernas de empaquetado, como el uso de pyproject.toml, junto con la implementación de un Makefile para la gestión del entorno de desarrollo, han simplificado el flujo de trabajo, permitiendo una configuración coherente y ágil. La eliminación de dependencias innecesarias y el ajuste de importaciones y expresiones complejas han optimizado el rendimiento y reducido el consumo de recursos, haciendo de SnapperML una herramienta más eficiente y adaptable a diferentes entornos de experimentación.
-
-\vspace{5mm}
 
 Con estos cambios, SnapperML está preparado para enfrentar futuras ampliaciones y mejoras, facilitando la colaboración y el mantenimiento continuo en un entorno de machine learning en constante evolución. En conclusión, este trabajo no solo resuelve la deuda técnica acumulada, sino que establece una base sólida para el crecimiento y la innovación en el desarrollo de herramientas de experimentación en inteligencia artificial y machine learning.

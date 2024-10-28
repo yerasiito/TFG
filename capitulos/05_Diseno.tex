@@ -1,0 +1,31 @@
+\chapter{Diseño}
+\section{Diseño Actual de SnapperML}
+
+SnapperML está diseñado como un framework abierto orientado a la reproducibilidad en proyectos de machine learning, alineándose con los principios fundamentales de MLOps. A diferencia de otras herramientas disponibles en el mercado, tanto propietarias (como Amazon Sagemaker y Google AI Platform) como de código abierto (MLFlow, Kubeflow), SnapperML busca ofrecer un enfoque simplificado y accesible para la ejecución, seguimiento y optimización de experimentos de machine learning.
+
+El framework se centra en ofrecer características clave que abarcan desde el registro detallado de experimentos hasta la optimización automatizada de hiperparámetros. Entre sus principales funcionalidades destacan:
+
+\subsubsection{Registro y Seguimiento de Experimentos}
+SnapperML permite almacenar parámetros, métricas, artefactos y otros metadatos en una base de datos centralizada, lo que facilita la gestión y comparación de experimentos. Esto es esencial para asegurar la reproducibilidad, ya que toda la información relevante se conserva para futuras referencias.
+
+\subsubsection{Control de Estocásticidad}
+El framework captura automáticamente las semillas utilizadas en generadores de números aleatorios, garantizando la capacidad de replicar resultados en experimentos posteriores. Esto es particularmente importante en proyectos de machine learning, donde la variabilidad en los resultados puede ser un problema.
+
+\subsubsection{Optimización de Hiperparámetros}
+SnapperML soporta la ejecución de múltiples experimentos en paralelo, utilizando técnicas avanzadas de optimización de hiperparámetros, como la optimización Bayesiana. Esto permite a los usuarios encontrar configuraciones óptimas de modelos de manera eficiente, maximizando la efectividad de los experimentos.
+
+\subsubsection{Ejecución Distribuida}
+El framework permite ejecutar experimentos de manera distribuida, utilizando recursos tanto locales como en clústeres remotos. Esto se logra a través de la integración con Ray, un framework de computación distribuida, que facilita la gestión de grandes volúmenes de datos y el entrenamiento intensivo de modelos.
+
+\subsubsection{Gestión de Modelos}
+SnapperML almacena y gestiona modelos entrenados, lo que permite seleccionar aquellos más adecuados para resolver un problema específico sin necesidad de repetir el proceso completo de entrenamiento.
+
+\subsubsection{Configuración de Experimentos Simplificada}
+Para reducir la "deuda de configuración", SnapperML permite definir experimentos y trabajos de optimización a través de archivos YAML o JSON. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
+
+\subsubsection{Instrumentalización Mínima}
+El diseño de SnapperML busca minimizar la necesidad de modificar el código existente en proyectos de machine learning, evitando el uso excesivo de "código pegamento" y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el framework.
+
+\vspace{5mm}
+
+SnapperML se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, MLFlow y Ray, lo que facilita su integración en distintos entornos y mejora la reproducibilidad. Estas tecnologías permiten ejecutar experimentos de manera consistente en cualquier plataforma, desde entornos locales hasta clústeres distribuidos.

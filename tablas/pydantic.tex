@@ -4,37 +4,37 @@
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|X|X|}
         \hline
-        \multicolumn{1}{|c|}{\textbf{Cambios}}                                                                    & \multicolumn{1}{c|}{\cellcolor[HTML]{F7F7F7}{\color[HTML]{212529} \textbf{Arreglos}}} \\ \hline
+        \multicolumn{1}{|c|}{\textbf{Cambios}}                                                & \multicolumn{1}{c|}{\cellcolor[HTML]{F7F7F7}{ \textbf{Arreglos}}}                       \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        {\color[HTML]{212529} División del paquete en varias partes: pydantic, pydantic-settings, pydantic-core.} &
-        {\color[HTML]{212529} Modificar imports para incluir pydantic-settings y el setup.py.}                                                                                                            \\ \hline
+        { División del paquete en varias partes: pydantic, pydantic-settings, pydantic-core.} &
+        { Modificar imports para incluir pydantic settings y el setup.py.}                                                                                                              \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        {\color[HTML]{212529} Soport de URLs deprecado. No decode functions}                                      & {\color[HTML]{212529} La clase Settings se modifica para usar ‘str’}                  \\ \hline
+        { Soport de URLs deprecado. No decode functions}                                      & { La clase Settings se modifica para usar ‘str’}                                        \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        {\color[HTML]{212529} Definición de variables por defecto obligatoria.}                                   &
-        {\color[HTML]{212529} Clase RayConfig, DockerConfig, JobConfig, GroupConfig con atributos inicializados a None}                                                                                   \\ \hline
+        { Definición de variables por defecto obligatoria.}                                   &
+        { Clases RayConfig, DockerConfig, JobConfig y GroupConfig con atributos por defecto a None.}                                                                                    \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        {\color[HTML]{212529} Clase Config deprecada}                                                             & {\color[HTML]{212529} Se usa model\_config}                                           \\ \hline
+        { Clase Config deprecada}                                                             & { Se usa model\_config}                                                                 \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        {\color[HTML]{212529} Decoradores modificados}                                                            &
-        {\color[HTML]{212529} \begin{tabular}[c]{@{}l@{}}@root\_validator() a @model\_validator y \\ @classmethod. Añade mode='before' \\ Además de @field\_validator y @field\_serializer\end{tabular}}  \\ \hline
+        { Decoradores modificados}                                                            &
+        { \begin{tabular}[c]{@{}l@{}}@root\_validator() a @model\_validator y \\ @classmethod. Añade mode='before' \\ Además de @field\_validator y \\ @field\_serializer\end{tabular}} \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        {\color[HTML]{212529} (types.py) Cambios en la validación personalizada de atributos}                     &
-        {\color[HTML]{212529} Refactorización completa de la lógica de validación de configuración de todas las clases.}                                                                                  \\ \hline
+        { (types.py) Cambios en la validación personalizada de atributos}                     &
+        { Refactorización completa de la lógica de validación de configuración de todas las clases.}                                                                                    \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        {\color[HTML]{212529} Función de serializar modificada}                                                   & {\color[HTML]{212529} Se debe incluir el decorador filed\_serializer}                 \\ \hline
+        {Función de serializar modificada}                                                    & {Se debe incluir el decorador field\_serializer}                                        \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        {\color[HTML]{212529} Función de validación parse\_obj deprecada}                                         & {\color[HTML]{212529} Se usa model\_validate}                                         \\ \hline
+        { Función de validación parse\_obj deprecada}                                         & { Se usa model\_validate}                                                               \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        Función de copy deprecada                                                                                 & Se usa model\_copy                                                                    \\ \hline
+        Función de copy deprecada                                                             & Se usa model\_copy                                                                      \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        Función dict() deprecada                                                                                  & Se usa model\_dump()                                                                  \\ \hline
+        Función dict() deprecada                                                              & Se usa model\_dump()                                                                    \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        Función \_\_get\_validators\_\_ deprecada                                                                 & Se usa \_\_get\_pydantic\_core\_schema\_\_                                            \\ \hline
+        Función \_\_get\_validators\_\_ deprecada                                             & Se usa \_\_get\_pydantic\_core\_schema\_\_                                              \\ \hline
         \rowcolor[HTML]{FFFFFF}
-        Función json deprecada                                                                                    & Se usa model\_dump\_json                                                              \\ \hline
+        Función json deprecada                                                                & Se usa model\_dump\_json                                                                \\ \hline
         \rowcolor[HTML]{F0F0F0}
-        Función suggest\_loguniform deprecada                                                                     & Se usa suggest\_float(…, log=True)                                                    \\ \hline
+        Función suggest\_loguniform deprecada                                                 & Se usa suggest\_float(…, log=True)                                                      \\ \hline
     \end{tabularx}
     \caption{Comparación de cambios y arreglos en la configuración de Pydantic}
 \end{table}

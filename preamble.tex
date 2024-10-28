@@ -1,5 +1,6 @@
 \usepackage[a4paper, top=4cm, left=2cm, bottom=4cm, footskip=1.5cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{imakeidx}
 \usepackage{indentfirst}
@@ -7,13 +8,19 @@
 
 % ---- Code insertion ----
 \usepackage[newfloat]{minted}
-\usepackage{caption}
+\usepackage{capt-of} % Allows captions outside of floats
+
+% Define a custom command for caption with default spacing
+\newcommand{\mycaptionof}[2]{%
+    \captionof{#1}{#2}\par\vspace{2.5mm}%
+}
 
 \usepackage[breakable]{tcolorbox}
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable]}
         \AfterEndEnvironment{minted}{\end{tcolorbox}}
 \BeforeBeginEnvironment{inputminted}{\begin{tcolorbox}[breakable]}
         \AfterEndEnvironment{inputminted}{\end{tcolorbox}}
+
 
 \usepackage{tabularx}
 \usepackage[table]{xcolor}
