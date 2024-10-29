@@ -1,31 +1,99 @@
 \chapter{Diseño}
-\section{Diseño Actual de SnapperML}
 
-SnapperML está diseñado como un framework abierto orientado a la reproducibilidad en proyectos de machine learning, alineándose con los principios fundamentales de MLOps. A diferencia de otras herramientas disponibles en el mercado, tanto propietarias (como Amazon Sagemaker y Google AI Platform) como de código abierto (MLFlow, Kubeflow), SnapperML busca ofrecer un enfoque simplificado y accesible para la ejecución, seguimiento y optimización de experimentos de machine learning.
+En este capítulo se explora en profundidad el diseño de SnapperML, un framework desarrollado con el objetivo de facilitar la reproducibilidad, el seguimiento y la optimización de experimentos de machine learning. SnapperML se destaca por su enfoque en la simplicidad y la accesibilidad, ofreciendo una solución poderosa y flexible para gestionar experimentos en entornos de machine learning, manteniendo al mismo tiempo la reproducibilidad y la eficiencia.
 
-El framework se centra en ofrecer características clave que abarcan desde el registro detallado de experimentos hasta la optimización automatizada de hiperparámetros. Entre sus principales funcionalidades destacan:
+La arquitectura de SnapperML ha sido diseñada para cubrir las etapas del ciclo de vida de los experimentos de machine learning. Este framework se inspira en los principios de MLOps, integrando prácticas de DevOps adaptadas a proyectos de aprendizaje automático para asegurar que los modelos puedan ser desarrollados, implementados y mantenidos de manera eficiente y reproducible.
 
-\subsubsection{Registro y Seguimiento de Experimentos}
-SnapperML permite almacenar parámetros, métricas, artefactos y otros metadatos en una base de datos centralizada, lo que facilita la gestión y comparación de experimentos. Esto es esencial para asegurar la reproducibilidad, ya que toda la información relevante se conserva para futuras referencias.
+En las siguientes secciones se detallarán las características clave de SnapperML, incluyendo el registro y seguimiento de experimentos, la optimización de hiperparámetros, la ejecución distribuida y la gestión de modelos. Además, se describirá la estructura interna del sistema, sus interfaces, y las tecnologías fundamentales que soportan su funcionamiento, como MLFlow, Optuna, y Ray.
 
-\subsubsection{Control de Estocásticidad}
-El framework captura automáticamente las semillas utilizadas en generadores de números aleatorios, garantizando la capacidad de replicar resultados en experimentos posteriores. Esto es particularmente importante en proyectos de machine learning, donde la variabilidad en los resultados puede ser un problema.
+Para proporcionar una visión clara de su arquitectura, se analizará la relación entre los distintos módulos de SnapperML, basándonos en el diagrama de diseño del sistema \ref{fig:snapperml_overview}. Esta estructura modular permite que SnapperML sea fácilmente integrable en distintos entornos y se adapte a las necesidades de los usuarios, desde configuraciones locales hasta clústeres distribuidos.
 
-\subsubsection{Optimización de Hiperparámetros}
-SnapperML soporta la ejecución de múltiples experimentos en paralelo, utilizando técnicas avanzadas de optimización de hiperparámetros, como la optimización Bayesiana. Esto permite a los usuarios encontrar configuraciones óptimas de modelos de manera eficiente, maximizando la efectividad de los experimentos.
+\section{Diseño inicial de SnapperML}
 
-\subsubsection{Ejecución Distribuida}
-El framework permite ejecutar experimentos de manera distribuida, utilizando recursos tanto locales como en clústeres remotos. Esto se logra a través de la integración con Ray, un framework de computación distribuida, que facilita la gestión de grandes volúmenes de datos y el entrenamiento intensivo de modelos.
+SnapperML está diseñado como un framework abierto orientado a la reproducibilidad en proyectos de machine learning, alineándose con los principios fundamentales de MLOps. A diferencia de otras herramientas disponibles en el mercado, tanto propietarias (como Amazon Sagemaker y Google AI Platform) como de código abierto (MLFlow, Kubeflow), SnapperML busca ofrecer un enfoque completo y accesible para la ejecución, seguimiento y optimización de experimentos de machine learning.
 
-\subsubsection{Gestión de Modelos}
-SnapperML almacena y gestiona modelos entrenados, lo que permite seleccionar aquellos más adecuados para resolver un problema específico sin necesidad de repetir el proceso completo de entrenamiento.
+El framework se centra en ofrecer características clave que abarcan desde el registro detallado de experimentos hasta la optimización automatizada de hiperparámetros. Entre sus principales funcionalidades destacan las siguientes.
 
-\subsubsection{Configuración de Experimentos Simplificada}
-Para reducir la "deuda de configuración", SnapperML permite definir experimentos y trabajos de optimización a través de archivos YAML o JSON. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
+\subsubsection{Registro y Seguimiento de Experimentos} SnapperML permite almacenar parámetros, métricas, artefactos y otros metadatos en una base de datos centralizada, lo que facilita la gestión y comparación de experimentos. Esto es esencial para asegurar la reproducibilidad, ya que toda la información relevante se conserva para futuras referencias.
 
-\subsubsection{Instrumentalización Mínima}
-El diseño de SnapperML busca minimizar la necesidad de modificar el código existente en proyectos de machine learning, evitando el uso excesivo de "código pegamento" y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el framework.
+\subsubsection{Control de Estocásticidad} El framework captura automáticamente las semillas utilizadas en generadores de números aleatorios, garantizando la capacidad de replicar resultados en experimentos posteriores. Esto es particularmente importante en proyectos de machine learning, donde la variabilidad en los resultados puede ser un problema.
 
-\vspace{5mm}
+\subsubsection{Optimización de Hiperparámetros} SnapperML soporta la ejecución de múltiples experimentos en paralelo, utilizando técnicas avanzadas de optimización de hiperparámetros, como la optimización Bayesiana. Esto permite a los usuarios encontrar configuraciones óptimas de modelos de manera eficiente, maximizando la efectividad de los experimentos.
+
+\subsubsection{Ejecución Distribuida} El framework permite ejecutar experimentos de manera distribuida, utilizando recursos tanto locales como en clústeres remotos. Esto se logra a través de la integración con Ray, un framework de computación distribuida, que facilita la gestión de grandes volúmenes de datos y el entrenamiento intensivo de modelos.
+
+\subsubsection{Gestión de Modelos} SnapperML almacena y gestiona modelos entrenados, lo que permite seleccionar aquellos más adecuados para resolver un problema específico sin necesidad de repetir el proceso completo de entrenamiento.
+
+\subsubsection{Configuración de Experimentos Simplificada} Para reducir la "deuda de configuración", SnapperML permite definir experimentos y trabajos de optimización a través de archivos YAML o JSON. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
+
+\subsubsection{Instrumentalización Mínima} El diseño de SnapperML busca minimizar la necesidad de modificar el código existente en proyectos de machine learning, evitando el uso excesivo de "código pegamento" y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el framework.
 
 SnapperML se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, MLFlow y Ray, lo que facilita su integración en distintos entornos y mejora la reproducibilidad. Estas tecnologías permiten ejecutar experimentos de manera consistente en cualquier plataforma, desde entornos locales hasta clústeres distribuidos.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/snapperml_overview.png}
+    \caption{Arquitectura de SnapperML}
+    \label{fig:snapperml_overview}
+\end{figure}
+
+La figura \ref{fig:snapperml_overview} muestra la arquitectura modular de SnapperML, destacando la interacción entre sus principales componentes. La interfaz de línea de comandos (CLI) actúa como el punto de entrada principal, permitiendo a los usuarios definir y ejecutar experimentos mediante archivos de configuración. Dentro de la arquitectura, módulos como el motor de ejecución de trabajos (\textit{Job Runner}), el motor de optimización de hiperparámetros, el motor de seguimiento (\textit{Tracking Engine}), y el motor de empaquetado (\textit{Packaging Engine}) permiten gestionar los distintos aspectos de un experimento de machine learning.
+
+La interfaz de almacenamiento conecta la base de datos SQL y el almacenamiento de artefactos, proporcionando una ubicación centralizada para métricas, parámetros, registros y artefactos, y permitiendo la visualización a través de una interfaz web (Mlflow UI). Gracias a su integración con herramientas externas, SnapperML puede interactuar con herramientas de machine learning populares, facilitando la reproducibilidad y el seguimiento de experimentos a gran escala. Para más detalles sobre la arquitectura de snapperML, consultar la thesis de Antonio Molner \cite{snapperml_thesis}.
+
+\section{Ampliación del diseño inicial}
+Como parte de mi trabajo, he implementado una interfaz web para interactuar con SnapperML de una manera más sencilla y efectiva. Esta interfaz tiene como objetivo facilitar el uso del framework, permitiendo que los usuarios gestionen y monitoreen sus experimentos de machine learning de forma más intuitiva, sin necesidad de interactuar directamente con la línea de comandos. La adición de esta interfaz mejora la accesibilidad de SnapperML, permitiendo a usuarios con diferentes niveles de experiencia en programación aprovechar sus funcionalidades.
+
+Para comprender cómo se ha diseñado e implementado esta interfaz, es importante analizar primero las tecnologías seleccionadas para el frontend, así como el flujo de interacción entre la interfaz de usuario (UI) y SnapperML.
+
+Para entender como se ha hecho el diseño primero hay que explorar las tecnologías usadas para el frontend y como funcionan
+
+\subsection{Herramientas frontend}
+El desarrollo del frontend se ha llevado a cabo utilizando un conjunto de tecnologías modernas, seleccionadas por su eficiencia, flexibilidad y facilidad de integración con proyectos de machine learning. A continuación, se describen las herramientas utilizadas y las razones de su elección frente a otras alternativas.
+
+\subsubsection{Vite}
+Vite es un \textit{bundler} y servidor de desarrollo de alto rendimiento para proyectos de frontend. A diferencia de herramientas más antiguas como Webpack, Vite utiliza un enfoque basado en módulos de \textit{JavaScript nativo} y una arquitectura de desarrollo impulsada por ESBuild, lo que reduce significativamente los tiempos de construcción y mejora la velocidad en el entorno de desarrollo. Esta elección es especialmente beneficiosa en SnapperML, ya que permite iterar rápidamente en el desarrollo de la interfaz, facilitando la prueba de nuevas características sin comprometer el rendimiento.
+
+\subsubsection{React}
+React es una biblioteca de JavaScript popular para la construcción de interfaces de usuario basadas en componentes. La elección de React se justifica por su flexibilidad y su gran ecosistema, lo que permite construir interfaces modulares y reutilizables. Además, React facilita el manejo del estado de la UI, crucial para una aplicación que debe gestionar múltiples experimentos y parámetros. A diferencia de otros \textit{frameworks} como Angular o Vue, React proporciona una curva de aprendizaje más amigable y se integra bien con otras tecnologías utilizadas en este proyecto.
+
+\subsubsection{TypeScript}
+TypeScript es un superconjunto de JavaScript que añade tipado estático, lo que ayuda a prevenir errores en tiempo de desarrollo y mejora la mantenibilidad del código. Al utilizar TypeScript en SnapperML, se obtiene un control más riguroso sobre los tipos de datos, lo cual es particularmente útil en aplicaciones de machine learning donde los datos y las configuraciones son variados y complejos. TypeScript reduce los errores en tiempo de ejecución, asegurando que la interfaz sea robusta y fiable.
+
+\subsubsection{Bootstrap}
+Bootstrap es un \textit{framework} CSS que facilita la creación de interfaces de usuario con diseño responsive. Esta herramienta se ha elegido por su facilidad de uso y su amplia gama de componentes predefinidos, que aceleran el proceso de desarrollo de la UI y garantizan una experiencia de usuario consistente. Además, Bootstrap permite que la interfaz se adapte a diferentes tamaños de pantalla, lo cual es crucial para usuarios que acceden a SnapperML desde diferentes dispositivos.
+
+La combinación de estas herramientas permite crear una interfaz de usuario rápida, escalable y fácil de mantener, garantizando una experiencia de usuario óptima para la gestión de experimentos en SnapperML. La elección de Vite, React, TypeScript y Bootstrap proporciona una arquitectura frontend moderna y eficiente, asegurando que la aplicación pueda evolucionar fácilmente y mantenerse al día con las necesidades de los usuarios.
+
+\subsection{Diseño de la UI}
+% Con las herramientas anteriores mostrar el diseño de la web (bocetos)
+Con las herramientas seleccionadas, el diseño de la interfaz web de SnapperML se centra en proporcionar una experiencia intuitiva y accesible, permitiendo a los usuarios gestionar sus experimentos de machine learning sin necesidad de acceder a la línea de comandos. La interfaz incluye las siguientes secciones clave:
+
+\begin{itemize}
+    \item \textbf{Dashboard de Experimentos}: Una pantalla principal que muestra una lista de los experimentos registrados, incluyendo información relevante como nombre, estado, métrica principal y fecha de creación. Los usuarios pueden ver el progreso de los experimentos en tiempo real y seleccionar experimentos específicos para ver más detalles.
+    \item \textbf{Detalle de Experimentos}: Una vista detallada de cada experimento, donde los usuarios pueden ver los parámetros, métricas y resultados obtenidos. Esta sección también permite visualizar los artefactos generados durante el entrenamiento del modelo, como gráficos y archivos de salida.
+
+    \item \textbf{Configuración de Nuevos Experimentos}: Un formulario intuitivo que permite a los usuarios configurar y lanzar nuevos experimentos, especificando parámetros como el modelo, la configuración de hiperparámetros y el tipo de optimización. La interfaz guía a los usuarios a través de la configuración, minimizando errores y facilitando la personalización de experimentos complejos.
+
+    \item \textbf{Historial de Ejecuciones y Métricas}: Una sección donde los usuarios pueden consultar el historial de ejecuciones y comparar métricas entre experimentos. Esto permite realizar análisis más profundos y facilita la identificación de configuraciones óptimas para distintos modelos.
+\end{itemize}
+
+La interfaz está diseñada de manera modular, lo que permite añadir nuevas funcionalidades sin afectar el diseño general. La estructura basada en componentes de React, combinada con la flexibilidad de Bootstrap, asegura que cada sección sea fácilmente reutilizable y adaptable a futuras ampliaciones del proyecto.
+
+\subsection{Integración de la UI}
+% Meter la UI en el diseño de Antonio Molner y explicar como interactua todo en conjunto. Añadir mi diagrama de flujo.
+
+La interfaz web de SnapperML se integra directamente en la arquitectura general del framework, interactuando con los distintos componentes de backend para ofrecer una experiencia de usuario fluida y completa. En particular, la interfaz utiliza una serie de APIs expuestas por SnapperML para acceder a las funcionalidades principales del sistema.
+
+En el diagrama de flujo de la Figura \ref{fig:snapperml_new_overview}, se muestra cómo la interfaz de usuario se comunica con los distintos módulos de SnapperML. Cuando un usuario realiza una acción en la UI (por ejemplo, lanzar un nuevo experimento), la solicitud es procesada por el backend, que actúa como intermediario entre la interfaz y el motor de ejecución del framework. A continuación, el motor de ejecución gestiona el experimento y almacena los resultados en la base de datos y en el sistema de almacenamiento de artefactos.
+
+La integración de la UI permite que los usuarios interactúen con SnapperML sin necesidad de utilizar la línea de comandos, lo cual es especialmente útil para aquellos con menos experiencia en programación. Además, la UI proporciona una visualización clara de las métricas y resultados, lo que facilita el análisis y la toma de decisiones basadas en datos.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/snapperml_overview.png}
+    \caption{Diagrama de flujo de la integración de la UI en SnapperML}
+    \label{fig:snapperml_new_overview}
+\end{figure}
+
+Esta integración asegura que todas las interacciones realizadas a través de la interfaz web se registren y puedan ser replicadas, alineándose con los objetivos de reproducibilidad del framework. Con esta UI, SnapperML se convierte en una herramienta más accesible y eficiente, adaptándose a un mayor rango de usuarios en el campo del machine learning.
