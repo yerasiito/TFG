@@ -46,24 +46,89 @@ Como parte de mi trabajo, he implementado una interfaz web para interactuar con 
 
 Para comprender cómo se ha diseñado e implementado esta interfaz, es importante analizar primero las tecnologías seleccionadas para el frontend, así como el flujo de interacción entre la interfaz de usuario (UI) y SnapperML.
 
-Para entender como se ha hecho el diseño primero hay que explorar las tecnologías usadas para el frontend y como funcionan
+Para entender como se ha hecho el diseño primero hay que explorar las tecnologías usadas para el frontend y como funcionan.
 
 \subsection{Herramientas frontend}
 El desarrollo del frontend se ha llevado a cabo utilizando un conjunto de tecnologías modernas, seleccionadas por su eficiencia, flexibilidad y facilidad de integración con proyectos de machine learning. A continuación, se describen las herramientas utilizadas y las razones de su elección frente a otras alternativas.
 
 \subsubsection{Vite}
-Vite es un \textit{bundler} y servidor de desarrollo de alto rendimiento para proyectos de frontend. A diferencia de herramientas más antiguas como Webpack, Vite utiliza un enfoque basado en módulos de \textit{JavaScript nativo} y una arquitectura de desarrollo impulsada por ESBuild, lo que reduce significativamente los tiempos de construcción y mejora la velocidad en el entorno de desarrollo. Esta elección es especialmente beneficiosa en SnapperML, ya que permite iterar rápidamente en el desarrollo de la interfaz, facilitando la prueba de nuevas características sin comprometer el rendimiento.
+
+Vite es un \textit{bundler} y servidor de desarrollo de alto rendimiento diseñado para proyectos de frontend modernos. A diferencia de herramientas más antiguas como Webpack y Parcel, Vite utiliza un enfoque basado en módulos de \textit{JavaScript nativo} y está impulsado por ESBuild, un compilador ultrarrápido escrito en Go. Esto permite a Vite ofrecer tiempos de carga casi instantáneos en el desarrollo y construir aplicaciones rápidamente, optimizando el tiempo de desarrollo.
+
+Para SnapperML, Vite es especialmente beneficioso ya que permite iterar rápidamente en la interfaz de usuario, facilitando la prueba de nuevas características y la integración con otras herramientas del proyecto sin comprometer el rendimiento.
+
+Las principales ventajas de Vite frente a otras opciones son:
+
+\begin{itemize}
+    \item \textbf{Rendimiento en Desarrollo}: Vite utiliza ESBuild para compilar módulos, lo que le permite ofrecer tiempos de carga instantáneos incluso en aplicaciones grandes. Esto resulta en un entorno de desarrollo más rápido y reactivo, que mejora la experiencia de desarrollo y acelera el ciclo de retroalimentación.
+    \item \textbf{Simplicidad de Configuración}: A diferencia de Webpack, que requiere una configuración detallada, Vite proporciona una configuración sencilla y directa que permite a los desarrolladores concentrarse en la lógica de la aplicación en lugar de ajustar opciones de construcción. La configuración minimalista de Vite es una gran ventaja en SnapperML, ya que reduce el tiempo necesario para poner en marcha el proyecto y facilita el mantenimiento a largo plazo.
+
+    \item \textbf{Compatibilidad con Módulos ES Nativos}: Vite aprovecha los módulos de ES nativos del navegador, lo que significa que no es necesario empaquetar toda la aplicación en una sola vez para el desarrollo. Esto mejora la velocidad de recarga y hace que el entorno de desarrollo sea más eficiente, ya que solo recarga los módulos que se modifican.
+
+    \item \textbf{Integración con Frameworks Modernos}: Vite está optimizado para frameworks modernos como React y Vue. Su compatibilidad con TypeScript y otras tecnologías frontend facilita la integración con SnapperML, haciendo que la experiencia de desarrollo sea más fluida.
+\end{itemize}
+
+\input{tablas/vite.tex}
+
+Vite ofrece un equilibrio perfecto entre rendimiento, simplicidad y funcionalidad avanzada, lo que lo convierte en la elección ideal para el desarrollo de la interfaz de usuario en SnapperML.
 
 \subsubsection{React}
-React es una biblioteca de JavaScript popular para la construcción de interfaces de usuario basadas en componentes. La elección de React se justifica por su flexibilidad y su gran ecosistema, lo que permite construir interfaces modulares y reutilizables. Además, React facilita el manejo del estado de la UI, crucial para una aplicación que debe gestionar múltiples experimentos y parámetros. A diferencia de otros \textit{frameworks} como Angular o Vue, React proporciona una curva de aprendizaje más amigable y se integra bien con otras tecnologías utilizadas en este proyecto.
+
+React es una biblioteca de JavaScript ampliamente utilizada para el desarrollo de interfaces de usuario basadas en componentes. Creada y mantenida por Facebook, React permite construir aplicaciones frontend modulares, escalables y fáciles de mantener. Su enfoque basado en componentes permite dividir la interfaz en secciones reutilizables, lo cual es ideal para proyectos como SnapperML, que requiere una interfaz interactiva y altamente personalizable.
+
+La elección de React frente a otros \textit{frameworks} o bibliotecas de frontend como Angular y Vue se debe a varias razones específicas:
+
+\begin{itemize}
+    \item \textbf{Flexibilidad y Ecosistema Extenso}: React tiene un ecosistema sólido y bien documentado, con una gran cantidad de librerías y herramientas complementarias. Esto permite a los desarrolladores integrar funcionalidades avanzadas y optimizar la UI sin necesidad de reinventar la rueda, lo que acelera el desarrollo y mejora la eficiencia.
+
+    \item \textbf{Enfoque en Componentes Reutilizables}: El diseño basado en componentes de React facilita la creación de interfaces modulares. En SnapperML, donde diferentes módulos de experimentación y monitoreo deben ser visualizados y gestionados, React permite una construcción estructurada y lógica, donde cada sección de la UI puede actualizarse de manera independiente.
+
+    \item \textbf{Virtual DOM para un Rendimiento Óptimo}: React utiliza el Virtual DOM para actualizar solo los componentes que han cambiado, en lugar de renderizar toda la página en cada actualización. Esto reduce la carga sobre el navegador y mejora la velocidad de respuesta, proporcionando una experiencia de usuario más fluida, especialmente en aplicaciones que requieren un manejo frecuente de datos, como SnapperML.
+
+    \item \textbf{Integración Sencilla con TypeScript}: React funciona bien con TypeScript, proporcionando tipado estático que mejora la seguridad y confiabilidad del código. Esto es particularmente importante en SnapperML, donde se gestionan configuraciones complejas y datos de experimentos, y cualquier error en la UI puede afectar la experiencia del usuario.
+\end{itemize}
+
+\input{tablas/react.tex}
+
+React proporciona un equilibrio adecuado entre flexibilidad, rendimiento y facilidad de uso, lo que lo convierte en una herramienta ideal para construir la interfaz de usuario en SnapperML. Gracias a su arquitectura basada en componentes y el uso de Virtual DOM, React permite una experiencia de usuario ágil y una UI robusta que puede adaptarse a las crecientes necesidades de un sistema de machine learning.
 
 \subsubsection{TypeScript}
-TypeScript es un superconjunto de JavaScript que añade tipado estático, lo que ayuda a prevenir errores en tiempo de desarrollo y mejora la mantenibilidad del código. Al utilizar TypeScript en SnapperML, se obtiene un control más riguroso sobre los tipos de datos, lo cual es particularmente útil en aplicaciones de machine learning donde los datos y las configuraciones son variados y complejos. TypeScript reduce los errores en tiempo de ejecución, asegurando que la interfaz sea robusta y fiable.
+
+TypeScript es un superconjunto de JavaScript que introduce tipado estático, permitiendo detectar errores en tiempo de desarrollo y mejorando la mantenibilidad del código. Este tipado ayuda a evitar errores comunes de JavaScript y permite a los desarrolladores identificar problemas antes de que el código llegue a producción. TypeScript es especialmente beneficioso en SnapperML, donde el manejo de datos de configuración y parámetros de experimentos de machine learning exige una estructura rigurosa y precisa.
+
+Las razones clave para elegir TypeScript en lugar de JavaScript puro incluyen:
+
+\begin{itemize}
+    \item \textbf{Tipado Estático para Mayor Seguridad}: TypeScript permite definir tipos de datos explícitos, lo cual ayuda a prevenir errores comunes que pueden surgir debido a tipos incorrectos o cambios en la estructura de los datos. En el contexto de SnapperML, donde las configuraciones y datos de los experimentos pueden ser complejos, el tipado estático asegura que las funciones y componentes de la UI gestionen los datos de manera coherente y predecible.
+    \item \textbf{Mantenibilidad y Escalabilidad}: Al añadir tipos al código, TypeScript facilita la comprensión y el mantenimiento a largo plazo del proyecto. Esto permite a los desarrolladores comprender rápidamente el propósito de cada variable o función, lo cual es útil en un proyecto como SnapperML, donde pueden intervenir varios colaboradores y donde la interfaz puede evolucionar con el tiempo.
+
+    \item \textbf{Detección Temprana de Errores}: Gracias al análisis estático, TypeScript permite detectar errores en tiempo de desarrollo en lugar de en tiempo de ejecución. Esto reduce la cantidad de errores que llegan al usuario final, asegurando que la interfaz de SnapperML sea más robusta y confiable.
+
+    \item \textbf{Integración con Herramientas Modernas de Desarrollo}: TypeScript se integra sin problemas con entornos modernos de desarrollo (IDE) y herramientas de control de versiones, proporcionando autocompletado, refactorización y documentación en línea. Estas funcionalidades optimizan la productividad y aseguran un flujo de trabajo más eficiente para el equipo de desarrollo.
+\end{itemize}
+
+\input{tablas/typescript.tex}
+
+TypeScript es ideal para SnapperML debido a su capacidad para mejorar la calidad del código y la seguridad en tiempo de desarrollo. Su sistema de tipado reduce la posibilidad de errores en la gestión de datos complejos, lo que resulta esencial en aplicaciones de machine learning donde los datos y configuraciones requieren una precisión absoluta. La elección de TypeScript aporta una base sólida para el crecimiento y la escalabilidad de la interfaz de usuario en SnapperML, asegurando que el código sea robusto y fácil de mantener a largo plazo.
 
 \subsubsection{Bootstrap}
-Bootstrap es un \textit{framework} CSS que facilita la creación de interfaces de usuario con diseño responsive. Esta herramienta se ha elegido por su facilidad de uso y su amplia gama de componentes predefinidos, que aceleran el proceso de desarrollo de la UI y garantizan una experiencia de usuario consistente. Además, Bootstrap permite que la interfaz se adapte a diferentes tamaños de pantalla, lo cual es crucial para usuarios que acceden a SnapperML desde diferentes dispositivos.
 
-La combinación de estas herramientas permite crear una interfaz de usuario rápida, escalable y fácil de mantener, garantizando una experiencia de usuario óptima para la gestión de experimentos en SnapperML. La elección de Vite, React, TypeScript y Bootstrap proporciona una arquitectura frontend moderna y eficiente, asegurando que la aplicación pueda evolucionar fácilmente y mantenerse al día con las necesidades de los usuarios.
+Bootstrap es un \textit{framework} CSS ampliamente utilizado que facilita el desarrollo de interfaces de usuario responsivas y uniformes. Este \textit{framework} ofrece una serie de componentes predefinidos, como botones, formularios, tarjetas y barras de navegación, que aceleran el proceso de desarrollo de la UI y garantizan una experiencia de usuario consistente. Su sistema de rejilla (\textit{grid system}) permite que las interfaces se adapten a diferentes tamaños de pantalla, lo cual es crucial para un proyecto como SnapperML, donde los usuarios pueden acceder desde múltiples dispositivos, incluyendo computadoras y dispositivos móviles.
+
+Las principales ventajas de Bootstrap frente a otras opciones son:
+
+\begin{itemize}
+    \item \textbf{Diseño Responsive y Adaptable}: Bootstrap incluye un sistema de rejilla flexible que permite que el diseño de la interfaz se adapte a cualquier tamaño de pantalla, desde móviles hasta monitores de escritorio. Esto asegura que SnapperML proporcione una experiencia de usuario consistente y optimizada independientemente del dispositivo utilizado.
+    \item \textbf{Componentes Predefinidos}: Bootstrap ofrece una amplia gama de componentes predefinidos, como formularios, botones, tablas y alertas, que son fáciles de personalizar e integrar. Estos elementos permiten construir la UI de SnapperML de forma rápida y estandarizada, manteniendo una apariencia profesional sin necesidad de diseñar cada componente desde cero.
+
+    \item \textbf{Facilidad de Uso y Curva de Aprendizaje Baja}: Bootstrap es fácil de aprender y aplicar, incluso para desarrolladores con experiencia limitada en diseño frontend. Esto permite que el equipo de desarrollo de SnapperML pueda centrarse en la lógica y funcionalidad de la aplicación, sin invertir demasiado tiempo en el diseño visual.
+
+    \item \textbf{Consistencia Visual y Mantenimiento Sencillo}: Al ser uno de los \textit{frameworks} CSS más utilizados, Bootstrap asegura que la interfaz mantenga una apariencia consistente y profesional. La utilización de clases predefinidas facilita el mantenimiento del código y permite realizar cambios en el diseño con mínima alteración del HTML.
+\end{itemize}
+
+\input{tablas/bootstrap.tex}
+
+La elección de Bootstrap para SnapperML permite un desarrollo rápido y una experiencia de usuario intuitiva, asegurando que la interfaz se vea bien en cualquier dispositivo y que los componentes mantengan un diseño coherente. En conjunto con herramientas como Vite, React y TypeScript, Bootstrap contribuye a una arquitectura frontend moderna y eficiente, proporcionando una base sólida y escalable para futuras mejoras en la interfaz de usuario.
 
 \subsection{Diseño de la UI}
 % Con las herramientas anteriores mostrar el diseño de la web (bocetos)
@@ -89,11 +154,17 @@ En el diagrama de flujo de la Figura \ref{fig:snapperml_new_overview}, se muestr
 
 La integración de la UI permite que los usuarios interactúen con SnapperML sin necesidad de utilizar la línea de comandos, lo cual es especialmente útil para aquellos con menos experiencia en programación. Además, la UI proporciona una visualización clara de las métricas y resultados, lo que facilita el análisis y la toma de decisiones basadas en datos.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\textwidth]{imagenes/snapperml_overview.png}
-    \caption{Diagrama de flujo de la integración de la UI en SnapperML}
-    \label{fig:snapperml_new_overview}
-\end{figure}
+\afterpage{
+    \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm} % No margins
+    \thispagestyle{empty} % No header or footer
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=0.85\textwidth]{imagenes/ml_experiment_overview_expansion.png}
+        \caption{Diagrama de flujo de la integración de la UI en SnapperML}
+        \label{fig:snapperml_new_overview}
+    \end{figure}
+    \clearpage
+    \restoregeometry % Reset to original margins after this page
+}
 
 Esta integración asegura que todas las interacciones realizadas a través de la interfaz web se registren y puedan ser replicadas, alineándose con los objetivos de reproducibilidad del framework. Con esta UI, SnapperML se convierte en una herramienta más accesible y eficiente, adaptándose a un mayor rango de usuarios en el campo del machine learning.

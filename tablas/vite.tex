@@ -1,0 +1,22 @@
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|
+            >{\columncolor[HTML]{EFEFEF}}l |l|l|l|}
+        \hline
+        \multicolumn{1}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{Característica}} &
+        \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Vite}}            &
+        \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Webpack}}         &
+        \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Parcel}}                                                                           \\ \hline
+        Velocidad                                                             & Muy rápida           & Lenta               & Rápida            \\ \hline
+        Configuración                                                         & Mínima               & Compleja            & Mínima            \\ \hline
+        HMR                                                                   & Instantáneo          & Más lento           & Rápido            \\ \hline
+        Escalabilidad                                                         & Alta, ideal para SPA & Muy alta            & Media             \\ \hline
+        Compatibilidad                                                        & Moderno (ES Modules) & Amplia (ES5+)       & Amplia            \\ \hline
+        Uso ideal                                                             & SPA modernas         & Proyectos complejos & Prototipos y apps \\ \hline
+    \end{tabular}
+    \caption{Comparativa de características clave entre Vite, Webpack y Parcel.}
+    \label{tab:vite}
+\end{table}
