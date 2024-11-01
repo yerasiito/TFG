@@ -1,0 +1,31 @@
+.
+├── README.md
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   ├── MLflow-Logo.svg
+│   ├── snapper-logo.png
+│   └── snapper.png
+├── src
+│   ├── App.tsx
+│   ├── assets
+│   │   └── components
+│   │       ├── About.tsx
+│   │       ├── Contact.tsx
+│   │       ├── Execute.tsx
+│   │       ├── FileUpload.tsx
+│   │       ├── NavBar.tsx
+│   │       ├── Terminal.tsx
+│   │       ├── YamlAttributes.tsx
+│   │       └── YamlEditor.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── styles.css
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+5 directories, 24 files

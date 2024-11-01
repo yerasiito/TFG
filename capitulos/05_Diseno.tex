@@ -1,4 +1,4 @@
-\chapter{Diseño}
+\chapter{Diseño} \label{diseño}
 
 En este capítulo se explora en profundidad el diseño de SnapperML, un framework desarrollado con el objetivo de facilitar la reproducibilidad, el seguimiento y la optimización de experimentos de machine learning. SnapperML se destaca por su enfoque en la simplicidad y la accesibilidad, ofreciendo una solución poderosa y flexible para gestionar experimentos en entornos de machine learning, manteniendo al mismo tiempo la reproducibilidad y la eficiencia.
 
@@ -33,11 +33,11 @@ SnapperML se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{imagenes/snapperml_overview.png}
-    \caption{Arquitectura de SnapperML}
+    \caption{Arquitectura inicial de SnapperML}
     \label{fig:snapperml_overview}
 \end{figure}
 
-La figura \ref{fig:snapperml_overview} muestra la arquitectura modular de SnapperML, destacando la interacción entre sus principales componentes. La interfaz de línea de comandos (CLI) actúa como el punto de entrada principal, permitiendo a los usuarios definir y ejecutar experimentos mediante archivos de configuración. Dentro de la arquitectura, módulos como el motor de ejecución de trabajos (\textit{Job Runner}), el motor de optimización de hiperparámetros, el motor de seguimiento (\textit{Tracking Engine}), y el motor de empaquetado (\textit{Packaging Engine}) permiten gestionar los distintos aspectos de un experimento de machine learning.
+La figura \ref{fig:snapperml_overview} muestra la arquitectura modular inicial de SnapperML, destacando la interacción entre sus principales componentes. La interfaz de línea de comandos (CLI) actúa como el punto de entrada principal, permitiendo a los usuarios definir y ejecutar experimentos mediante archivos de configuración. Dentro de la arquitectura, módulos como el motor de ejecución de trabajos (\textit{Job Runner}), el motor de optimización de hiperparámetros, el motor de seguimiento (\textit{Tracking Engine}), y el motor de empaquetado (\textit{Packaging Engine}) permiten gestionar los distintos aspectos de un experimento de machine learning.
 
 La interfaz de almacenamiento conecta la base de datos SQL y el almacenamiento de artefactos, proporcionando una ubicación centralizada para métricas, parámetros, registros y artefactos, y permitiendo la visualización a través de una interfaz web (Mlflow UI). Gracias a su integración con herramientas externas, SnapperML puede interactuar con herramientas de machine learning populares, facilitando la reproducibilidad y el seguimiento de experimentos a gran escala. Para más detalles sobre la arquitectura de snapperML, consultar la thesis de Antonio Molner \cite{snapperml_thesis}.
 
@@ -181,14 +181,7 @@ En esta sección, se detallan los diferentes componentes de la arquitectura de S
 
 El frontend de SnapperML se basa en una arquitectura moderna y eficiente, utilizando un conjunto de herramientas avanzadas: React, TypeScript y Bootstrap. Estas tecnologías han sido seleccionadas estratégicamente para garantizar un desarrollo ágil, una experiencia de usuario óptima y una interfaz que sea tanto intuitiva como visualmente atractiva.
 
-\subsubsection{React}
 React es el núcleo de la arquitectura frontend, encargado de la creación de componentes modulares y reutilizables. Esta biblioteca de JavaScript permite construir interfaces de usuario complejas mediante un enfoque basado en componentes, lo que facilita el mantenimiento y la extensión del sistema. En SnapperML, React se utiliza para desarrollar elementos clave como el formulario de configuración de experimentos, la terminal web interactiva y el \textit{dashboard} de experimentos. Cada componente es altamente modular, lo que permite realizar cambios en partes específicas de la UI sin afectar al resto del sistema. Esta modularidad no solo mejora la eficiencia del desarrollo, sino que también asegura que el sistema sea fácilmente escalable.
-
-\subsubsection{TypeScript}
-TypeScript complementa a React proporcionando tipado estático al código JavaScript, lo que introduce una capa adicional de seguridad y robustez. Esto es especialmente crítico en SnapperML, donde se manejan configuraciones de experimentos complejas y datos que deben ser gestionados de forma precisa. TypeScript también mejora la mantenibilidad del código, facilitando la colaboración entre desarrolladores y asegurando que las actualizaciones o refactorizaciones del frontend se realicen de manera segura y controlada.
-
-\subsubsection{Bootstrap}
-Bootstrap se emplea para asegurar que la interfaz sea completamente responsiva y ofrezca una experiencia de usuario consistente en todos los dispositivos, desde teléfonos móviles hasta pantallas de escritorio. Este \textit{framework} CSS proporciona una amplia gama de componentes predefinidos y utilidades de diseño, lo que acelera el proceso de desarrollo sin sacrificar la calidad visual. La elección de Bootstrap también permite que la UI mantenga un diseño limpio y profesional, adaptándose a las diferentes necesidades de los usuarios de SnapperML.
 
 El frontend de SnapperML incorpora funcionalidades específicas que mejoran la interacción y usabilidad del sistema:
 
@@ -202,6 +195,16 @@ El frontend de SnapperML incorpora funcionalidades específicas que mejoran la i
     \item \textbf{Terminal}: La terminal web interactiva es un elemento clave que proporciona al usuario una representación en tiempo real de la ejecución de Snapper. Permite la ejecución de comandos básicos y muestra los resultados de manera dinámica, lo que facilita el monitoreo y depuración de los experimentos. Esta característica es especialmente útil para usuarios avanzados que desean tener un control más directo sobre las operaciones de SnapperML.
 \end{itemize}
 
+\subsection{Comunicación con la API}
+
+El frontend interactúa con SnapperML a través de una API RESTful desarrollada con Flask. Esta API actúa como intermediario, gestionando las solicitudes del frontend y ejecutando las operaciones necesarias en el backend. Las principales rutas de la API incluyen:
+\begin{itemize}
+    \item \textbf{/save\_experiment\_file}: Permite a los usuarios subir y guardar archivos de configuración de experimentos en la carpeta de artifacts. Se llama automaticamente al ejecutar snapperML en la UI.
+    \item \textbf{/execute}: Lanza la ejecución de un experimento basado en el archivo de configuración proporcionado. También permite la ejecución de cualquier comando en la terminal web interactiva.
+    \item \textbf{/cancel}: Permite cancelar la ejecución de un experimento en curso.
+\end{itemize}
+La API también se encarga de validar las solicitudes y devolver respuestas estructuradas, asegurando que la interacción entre la UI y el backend sea segura y rápida.
+
 \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm} % No margins
 \thispagestyle{empty} % No header or footer
 \begin{figure}[ht]
@@ -212,16 +215,6 @@ El frontend de SnapperML incorpora funcionalidades específicas que mejoran la i
 \end{figure}
 \newpage
 \restoregeometry
-
-\subsection{Comunicación con la API}
-
-El frontend interactúa con SnapperML a través de una API RESTful desarrollada con Flask. Esta API actúa como intermediario, gestionando las solicitudes del frontend y ejecutando las operaciones necesarias en el backend. Las principales rutas de la API incluyen:
-\begin{itemize}
-    \item \textbf{/save\_experiment\_file}: Permite a los usuarios subir y guardar archivos de configuración de experimentos en la carpeta de artifacts. Se llama automaticamente al ejecutar snapperML en la UI.
-    \item \textbf{/execute}: Lanza la ejecución de un experimento basado en el archivo de configuración proporcionado. También permite la ejecución de cualquier comando en la terminal web interactiva.
-    \item \textbf{/cancel}: Permite cancelar la ejecución de un experimento en curso.
-\end{itemize}
-La API también se encarga de validar las solicitudes y devolver respuestas estructuradas, asegurando que la interacción entre la UI y el backend sea segura y rápida.
 
 \subsection{CLI Interface y Módulos de Ejecución}
 

@@ -6,6 +6,7 @@
 \usepackage{dirtytalk}
 \usepackage[export]{adjustbox}
 
+
 % ---- Code insertion ----
 \usepackage[newfloat]{minted}
 \usepackage{capt-of} % Allows captions outside of floats
@@ -128,3 +129,19 @@
     \penalty -\@Mi
 }
 \makeatother
+
+\newcommand{\TreeBranch}{% ├
+    \smash{\raisebox{-1ex}{\rule{1pt}{\baselineskip}}}%
+    \raisebox{0.5ex}{\rule{1ex}{1pt}}%
+}
+\newcommand{\TreeEnd}{% └
+    \smash{\raisebox{0.5ex}{\rule{1pt}{\dimexpr\baselineskip-1.5ex}}}%
+    \raisebox{0.5ex}{\rule{1ex}{1pt}}%
+}
+\newcommand{\TreeLine}{% ─
+    \raisebox{0.5ex}{\rule{1.5ex}{1pt}}%
+}
+\newcommand{\TreeVert}{% │
+    \smash{\raisebox{-1ex}{\rule{1pt}{\baselineskip}}}%
+    \raisebox{0.5ex}{\rule{1ex}{0pt}}%
+}
