@@ -2,7 +2,6 @@
 ├── README.md
 ├── eslint.config.js
 ├── index.html
-├── package-lock.json
 ├── package.json
 ├── public
 │   ├── MLflow-Logo.svg
@@ -25,7 +24,4 @@
 ├── styles.css
 ├── tsconfig.app.json
 ├── tsconfig.json
-├── tsconfig.node.json
 └── vite.config.ts
-
-5 directories, 24 files

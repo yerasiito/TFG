@@ -542,15 +542,31 @@ La estructura del proyecto de la UI se ha organizado de forma lógica para maxim
 La estructura del proyecto está organizada de manera que cada componente de React tenga una responsabilidad específica y bien definida, lo que facilita la gestión y el desarrollo del proyecto. A continuación, se describen los principales archivos y componentes:
 
 \begin{itemize}
-    \item \textbf{README.md}: Archivo de documentación que proporciona una descripción general del proyecto, instrucciones de instalación y uso.
-    \item \textbf{eslint.config.js}: Configuración de ESLint para asegurar la calidad y consistencia del código.
-    \item \textbf{index.html}: Archivo principal HTML donde se monta la aplicación de React.
-    \item \textbf{package-lock.json} y \textbf{package.json}: Archivos de configuración de Node.js que gestionan las dependencias del proyecto.
-    \item \textbf{public/}: Carpeta que contiene recursos públicos, como imágenes y logos utilizados en la UI.
-    \item \textbf{src/}: Carpeta principal del código fuente que incluye los componentes de React y otros archivos esenciales.
+    \item \textbf{README.md}: Archivo de documentación que proporciona una visión general del proyecto, instrucciones de instalación, guías de uso, y cualquier otra información relevante. Este archivo es crucial para nuevos desarrolladores que se unan al proyecto, ya que explica cómo configurar y ejecutar la aplicación.
+    \item \textbf{eslint.config.js}: Configuración de ESLint, una herramienta de análisis estático de código que ayuda a identificar y corregir problemas en el código JavaScript y TypeScript. Este archivo asegura que el código cumpla con los estándares de calidad y que siga un estilo de codificación consistente, reduciendo errores y mejorando la legibilidad.
+
+    \item \textbf{index.html}: El archivo HTML principal donde se monta la aplicación de React. Sirve como punto de entrada para la interfaz de usuario y carga los recursos necesarios, como los scripts de JavaScript generados por Vite. Este archivo es simple pero esencial, ya que define la estructura básica de la aplicación web.
+
+    \item \textbf{package.json}: Archivo de configuración de Node.js que lista las dependencias necesarias para el proyecto, scripts de comandos, y metadatos como el nombre y la versión del proyecto. También define las herramientas de desarrollo y las bibliotecas que se utilizan en la aplicación, facilitando la gestión de dependencias.
+
+    \item \textbf{public/}: Carpeta que contiene archivos estáticos que se sirven directamente desde el servidor. En esta carpeta se incluyen imágenes como \texttt{MLflow-Logo.svg}, \texttt{snapper-logo.png}, y \texttt{snapper.png}, que se utilizan en la interfaz de usuario. Estos archivos no se procesan ni transforman y se cargan tal cual desde el servidor.
+
+    \item \textbf{src/}: Carpeta principal del código fuente de la aplicación. Aquí es donde se encuentra todo el código de React y TypeScript que compone la UI.
+          \begin{itemize}
+              \item \textbf{App.tsx}: Componente raíz de la aplicación que define la estructura general de la UI. Sirve como punto de partida para organizar los distintos componentes y gestionar la navegación y el enrutamiento dentro de la aplicación.
+              \item \textbf{main.tsx}: Archivo de entrada que monta el componente \texttt{App.tsx} en el DOM. Utiliza Vite para iniciar la aplicación y gestionar el ciclo de vida de React. Este archivo es fundamental para poner en marcha la aplicación en el navegador.
+              \item \textbf{vite-env.d.ts}: Archivo de declaración de tipos generado automáticamente por Vite. Proporciona soporte para la integración de TypeScript y ayuda a garantizar que el proyecto se compile correctamente sin errores relacionados con los tipos.
+          \end{itemize}
+
+    \item \textbf{styles.css}: Archivo CSS que contiene los estilos globales de la aplicación. Se utiliza para definir la apariencia y el diseño de la UI, asegurando que la aplicación tenga un aspecto cohesivo y profesional. Este archivo puede incluir tanto estilos personalizados como clases de Bootstrap para un diseño más rápido y uniforme.
+
+    \item \textbf{tsconfig.json}: Archivos de configuración de TypeScript que definen las reglas de compilación y el comportamiento del compilador.
+
+    \item \textbf{vite.config.ts}: Archivo de configuración de Vite, el bundler utilizado en este proyecto. Define cómo se debe compilar y servir el proyecto, incluyendo configuraciones para plugins y opciones de optimización. Vite proporciona una experiencia de desarrollo rápida y moderna, lo que es esencial para un proyecto como SnapperML.
+
 \end{itemize}
 
-\subsubsection{Descripción de los Componentes}
+\subsection{Descripción de los Componentes}
 Los componentes de React del proyecto están organizados dentro de \texttt{src/assets/components} y son responsables de diferentes funcionalidades dentro de la UI:
 
 \begin{itemize}
@@ -563,7 +579,188 @@ Los componentes de React del proyecto están organizados dentro de \texttt{src/a
     \item \textbf{YamlEditor.tsx}: Componente que proporciona un editor de texto simple en la web, donde los usuarios pueden modificar el archivo de configuración YAML antes de ejecutar SnapperML.
 \end{itemize}
 
-\subsubsection{Ficheros de Configuración y Almacenamiento de Artefactos}
-Los archivos de configuración que los usuarios editan a través de la UI se guardan en la carpeta \texttt{artifacts}. Este sistema asegura que cada configuración esté bien organizada y disponible para su posterior análisis y ejecución. La interfaz también permite una edición segura y controlada de estos archivos, lo que mejora la usabilidad y eficiencia del sistema.
+\subsection{Problemas Durante la Implementación}
+Durante el desarrollo de la interfaz de usuario para SnapperML, surgieron varios problemas técnicos que requirieron soluciones específicas y la aplicación de buenas prácticas en la programación. A continuación, se describen algunos de los problemas más relevantes, junto con las estrategias empleadas para resolverlos.
 
-En conjunto, esta estructura modular y bien organizada no solo facilita el desarrollo y mantenimiento del proyecto, sino que también proporciona una experiencia de usuario optimizada para gestionar experimentos de machine learning de manera intuitiva y eficaz.
+\subsubsection{CORS}
+CORS (Cross-Origin Resource Sharing) es un mecanismo de seguridad implementado en los navegadores que restringe cómo los recursos de una página web pueden ser solicitados desde un dominio diferente al que sirvió la página. En otras palabras, si una aplicación web desea interactuar con una API que se encuentra en un dominio diferente, es necesario gestionar adecuadamente las políticas de CORS para evitar errores de bloqueo.
+
+Para resolver los problemas de CORS en SnapperML, se consideraron dos soluciones principales:
+\begin{enumerate}
+    \item Instalar y Configurar \texttt{flask\_cors}: Una solución rápida y efectiva fue utilizar el paquete \texttt{flask\_cors}, que simplifica el manejo de estas políticas en aplicaciones Flask. Se añadió el siguiente fragmento de código para permitir solicitudes desde diferentes orígenes:
+          \begin{minted}{python} 
+from flask_cors import CORS
+CORS(app, allow_headers=["Content-Type", "Authorization"], methods=["POST", "OPTIONS"]) 
+    \end{minted}
+          Este enfoque es sencillo de implementar y útil para entornos de desarrollo o APIs que requieren flexibilidad en sus políticas de CORS.
+
+    \item Configuración con Nginx: Una solución más robusta y adecuada para entornos de producción fue utilizar Nginx como servidor proxy inverso, configurando manualmente las políticas de CORS. Se utilizó el siguiente fragmento de configuración:
+          \begin{minted}{bash} 
+ server { 
+    listen 80; 
+    server_name localhost;
+    location / {
+        proxy_pass http://localhost:4000/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass_request_headers on;
+    }
+    
+    location /execute/ {
+        proxy_pass http://localhost:5000/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass_request_headers on;
+    }
+    
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+ }
+    \end{minted}
+
+          Tras realizar esta configuración, fue necesario reiniciar Nginx con el comando \texttt{systemctl restart nginx} para que los cambios surtieran efecto.
+\end{enumerate}
+
+\subsubsection{Buffers y Sincronización}
+Otro desafío surgió al gestionar los procesos de la API que ejecutan comandos en SnapperML. Cuando se inicia un proceso desde la API, este se ejecuta y bloquea la API hasta que finaliza la ejecución. Para manejar la salida de los procesos en tiempo real, se implementó un generador que monitorea tanto la salida estándar (\texttt{stdout}) como los errores (\texttt{stderr}):
+\begin{minted}{python} 
+def generate(): 
+    while True: 
+    reads = [process.stdout, process.stderr] readable, _, _ = select.select(reads, [], []) 
+    for stream in readable: 
+        output = stream.readline() 
+        if output: 
+            yield output stream.flush() 
+        if process.poll() is not None: 
+            break 
+    process.stdout.close() 
+    process.stderr.close() 
+\end{minted}
+
+El problema era que la salida no se mostraba dinámicamente, y el usuario no podía saber si el proceso se estaba ejecutando correctamente hasta que este terminaba. Se intentó eliminar el búfer de salida para forzar el envío inmediato de los datos mediante el comando:
+\begin{minted}{bash} 
+stdbuf -oL snapper-ml --config_file nombre_config
+\end{minted}
+
+Aparentemente, este enfoque parecía funcionar, ya que la salida se mostraba de forma más dinámica. Sin embargo, se observó que parte de la salida se perdía debido a condiciones de carrera, un problema de sincronización donde las operaciones de lectura y escritura de datos ocurren de manera descoordinada. En este caso, las líneas de salida se escribían varias veces antes de enviarse, provocando que algunas se perdieran.
+
+Para solucionar este problema, se consideró utilizar mecanismos de concurrencia como cerrojos y semáforos. Sin embargo, la solución definitiva implicó el uso de \textbf{expect}, una herramienta diseñada para scripts interactivos que permite gestionar el búfer de manera eficiente. Se instaló con:
+
+\begin{minted}{bash} 
+pacman -S expect # En Arch Linux 
+apt-get install expect # En Ubuntu 
+\end{minted}
+
+Luego, se utilizó el comando \texttt{unbuffer} para ejecutar SnapperML sin problemas de búfer:
+\begin{minted}{bash} 
+unbuffer snapper-ml --config_file nombre_config 
+\end{minted}
+
+\subsubsection{\texttt{useEffect} y Funciones Asíncronas en React}
+A pesar de que la API ahora enviaba correctamente la salida, se seguían omitiendo partes en la web. Esto se debía al uso de \texttt{useEffect} en \texttt{Execute.tsx}, una función de React diseñada para ejecutar efectos secundarios en respuesta a cambios de estado. Aunque \texttt{useEffect} funciona bien en la mayoría de los casos, es asíncrona por naturaleza, lo que provocaba problemas de sincronización al manejar la salida de la API.
+
+Para resolverlo, se reemplazó \texttt{useEffect} por un enfoque más controlado. Se expuso la función \texttt{writeOutput} (y \texttt{writeCommand}) y se llamó directamente después de la llamada a la API:
+
+\begin{minted}{typescript} 
+useImperativeHandle(ref, () => ({
+    writeOutput,
+    writeCommand: (command: string) => {
+      xterm.current?.write(`${command}\n`);
+    },
+  }));
+\end{minted}
+
+Esto permitió actualizar la terminal interactiva en tiempo real, sin perder información, y garantizó que los datos de la API se procesaran correctamente. De esta forma, se solucionaron los problemas de sincronización y se mejoró la experiencia de usuario en la UI.
+
+\section{Desarrollo de Funcionalidades en la UI}
+El desarrollo de la interfaz de usuario (UI) en SnapperML ha sido un proceso fundamental para proporcionar a los usuarios una experiencia amigable y accesible. A lo largo de esta sección, se describen las principales funcionalidades implementadas y las técnicas empleadas para optimizar tanto la navegación como la gestión de procesos y datos en tiempo real.
+
+\subsection{Navegación en React}
+
+React no soporta el enrutamiento de subdominios de forma nativa. Para abordar esta limitación, se utiliza la dependencia \texttt{react-router}, que proporciona una solución completa para la navegación en aplicaciones web. A continuación, se muestra un ejemplo de cómo se implementa la navegación en SnapperML:
+
+\begin{minted}{html}
+<div>
+  <NavBar></NavBar>
+  <Routes>
+    <Route path="/" element={<FileUpload />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/contact" element={<Contact />} />
+  </Routes>
+</div>
+\end{minted}
+\mycaptionof{listing}{Ejemplo de configuración de rutas en React usando React-Router}
+
+\subsection{Detección de Atributos YAML}
+
+Para mostrar de manera visual los atributos del archivo YAML de configuración, se utiliza una función recursiva. Esto permite representar correctamente atributos anidados:
+
+\begin{minted}{jsx} 
+return Object.entries(data).map(([key, value]) => {
+    if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+    ) {
+        // If the value is an object, render it recursively
+        return (
+        <div key={fieldKey} className="form-group nested-attributes">
+            <label className="bold">{key}</label>
+            <div>{renderAttributes(value, fieldKey, level + 1)}</div>
+        </div>
+        );
+    } else {
+        // Render input for non-object values
+        return (
+        <div key={fieldKey} className="form-group" style={indentationStyle}>
+            <label className="regular">{key}</label>
+            <input
+            type="text"
+            className="form-control custom-input"
+            readOnly
+            value={
+                typeof value === "string"
+                ? value.replace(/(^"|"$)/g, "")
+                : String(value)
+            }
+            />
+        </div>
+        );
+    }
+    });
+};
+\end{minted}
+\mycaptionof{listing}{Función para detectar y mostrar atributos YAML}
+
+Esta implementación asegura que todos los parámetros, incluidos los atributos anidados, se representen adecuadamente en la interfaz.
+
+\subsection{Mutex para Gestión de Procesos en la API}
+Para evitar condiciones de carrera al gestionar múltiples procesos en la API, se utiliza un \textit{mutex} mediante la librería \texttt{threading} de Python. A continuación se muestra cómo se utiliza:
+
+\begin{minted}{python}
+## Diccionario para almacenar procesos en ejecución identificados por un ID único
+processes = {}
+## Mutex para prevenir condiciones de carrera
+process_lock = threading.Lock()
+\end{minted}
+\mycaptionof{listing}{Gestión de procesos con mutex en Python}
+
+Se utiliza el \texttt{mutex} tanto para añadir nuevos procesos al diccionario:
+\begin{minted}{python}
+process_id = request.remote_addr
+with process_lock:
+	processes[process_id] = process
+\end{minted}
+\mycaptionof{listing}{Añadir un proceso con mutex}
+Para eliminarlos de forma segura:
+\begin{minted}{python}
+with process_lock:
+    processes.pop(process_id, None) # Eliminar el proceso del diccionario global
+\end{minted}
+\mycaptionof{listing}{Eliminar un proceso con mutex}
+
+\subsection{HMR y Estilización}
+Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de Hot Module Reloading (HMR) proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
+Esta característica es particularmente útil para el diseño de la UI, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
