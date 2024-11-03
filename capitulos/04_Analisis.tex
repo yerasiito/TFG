@@ -1,7 +1,88 @@
 \chapter{Analisis}
+En el presente capítulo se aborda un análisis exhaustivo de los principales problemas que afectan la calidad y sostenibilidad del software en proyectos de MLOps, con un enfoque particular en SnapperML. Para entender las dificultades y desafíos técnicos que enfrenta un sistema como SnapperML, es fundamental examinar tanto el estado del arte de las herramientas de MLOps y desarrollo web, como el concepto de deuda técnica y sus implicación en el desarrollo.
 
 \section{Fundamentos y estado del arte}
-Hablar sobre el estado del arte.
+En esta sección se presentan los fundamentos y el estado del arte relacionados con la gestión de experimentos de machine learning y el desarrollo web. Las herramientas de MLOps han revolucionado la manera en que se gestionan, reproducen y optimizan los experimentos en proyectos de aprendizaje automático, mientras que las tecnologías modernas de frontend y backend continúan mejorando la experiencia de usuario y la eficiencia del desarrollo de aplicaciones web.
+
+A lo largo de esta sección, se analizan las herramientas más utilizadas y sus principales características, destacando cómo se comparan y complementan entre sí. Esta revisión es esencial para establecer un contexto adecuado y justificar las decisiones tecnológicas tomadas en el desarrollo y optimización de SnapperML.
+
+\subsection{Herramientas para MLOps}
+\begin{itemize}
+    \item \textbf{MLflow}: MLflow es una plataforma de código abierto que gestiona el ciclo de vida completo de un proyecto de machine learning, incluyendo la experimentación, la reproducibilidad, y el despliegue. MLflow consta de cuatro componentes principales:
+          \begin{itemize}
+              \item \textbf{Tracking}: Una API y una interfaz de usuario que permiten registrar experimentos, parámetros, métricas, artefactos, y otros metadatos de forma estructurada.
+              \item \textbf{Projects}: Facilita el empaquetado y la distribución de proyectos ML en un formato estándar, como YAML, especificando las dependencias, el entorno, los parámetros y el punto de entrada del proyecto.
+              \item \textbf{Models}: Permite empaquetar modelos de frameworks populares (TensorFlow, PyTorch, Scikit-Learn, etc.) en un formato unificado y almacenarlos en un registro de modelos. Además, proporciona soporte para el despliegue en múltiples entornos, como REST APIs.
+              \item \textbf{Model Registry}: Un componente para gestionar el ciclo de vida de los modelos, incluyendo etapas de desarrollo, pruebas, y producción, con funciones de registro y control de versiones.
+          \end{itemize}
+    \item \textbf{Weights \& Biases}: Weights \& Biases (W\&B) es una herramienta popular para la experimentación y el seguimiento de modelos de machine learning. Ofrece funcionalidades avanzadas como la gestión de experimentos, la optimización de hiperparámetros, y la visualización de métricas. W\&B se integra fácilmente con frameworks de ML y ofrece soporte para la colaboración en equipo, lo que permite a los usuarios compartir resultados y análisis.
+
+    \item \textbf{Comet}: Comet proporciona una plataforma basada en la nube (con opciones de despliegue on-premise) para el seguimiento y la gestión de experimentos. Permite registrar y rastrear parámetros, métricas, artefactos, y resultados de manera estructurada. Entre sus características se incluyen soporte para cuadernos Jupyter, optimización de hiperparámetros, y un sistema robusto de visualización. También permite monitorear métricas del sistema, como el uso de CPU y memoria, y se integra con múltiples lenguajes y frameworks.
+
+    \item \textbf{Polyaxon}: Polyaxon es una plataforma de MLOps enfocada en la gestión completa del ciclo de vida de los proyectos de ML. Utiliza Kubernetes para asegurar que los experimentos sean reproducibles, escalables y portables. Polyaxon permite definir y ejecutar experimentos complejos, optimizar hiperparámetros, gestionar métricas y parámetros, y desplegar modelos a producción. Además, cuenta con un sistema avanzado de manejo de usuarios y roles, lo que lo hace adecuado para grandes organizaciones.
+
+    \item \textbf{Kubeflow}: Kubeflow es una plataforma de MLOps que se enfoca principalmente en el despliegue de flujos de trabajo de ML en Kubernetes. Su objetivo es hacer que los proyectos de ML sean portables y escalables. Incluye Kubeflow Pipelines, que facilita la creación y ejecución de flujos de trabajo complejos de ML, y herramientas para gestionar modelos y datos. Kubeflow es altamente integrable con otras soluciones de MLOps, haciendo que sea una opción poderosa para equipos que ya utilizan Kubernetes.
+
+    \item \textbf{Amazon SageMaker}: Amazon SageMaker es la plataforma de ML de AWS que ofrece un conjunto de herramientas para cubrir todo el ciclo de vida del desarrollo de modelos. Incluye capacidades como gestión de datos, cuadernos Jupyter en la nube, registro y seguimiento de experimentos, optimización de hiperparámetros, y despliegue de modelos con monitorización. Amazon SageMaker Studio proporciona un entorno de desarrollo integral para gestionar todos los aspectos de un proyecto de ML, y herramientas como SageMaker Debugger y SageMaker Autopilot automatizan y mejoran el desarrollo y la optimización de modelos.
+
+    \item \textbf{Google Vertex AI}: Vertex AI es la suite de herramientas de Google Cloud Platform para ML, que integra servicios como AutoML, la gestión de modelos, y el despliegue escalable. Vertex AI ofrece una interfaz unificada para gestionar experimentos, optimizar modelos, y realizar entrenamientos a gran escala. La plataforma se integra estrechamente con otros servicios de GCP, como BigQuery y Dataflow, para facilitar el manejo de datos a gran escala y el entrenamiento distribuido.
+
+    \item \textbf{Azure Machine Learning}: Azure ML es la plataforma de MLOps de Microsoft que ofrece soporte para todas las etapas del ciclo de vida del ML, desde el entrenamiento y la experimentación hasta el despliegue y la monitorización. Incluye funcionalidades avanzadas como pipelines reproducibles, integración con servicios de datos de Azure, y soporte para el formato ONNX para la inferencia en múltiples entornos. Azure ML también ofrece soporte para la optimización de hiperparámetros y un completo entorno de desarrollo colaborativo.
+
+    \item \textbf{Neptune.ai}: Neptune.ai es una herramienta ligera pero poderosa para la gestión de experimentos de ML. Ofrece una interfaz intuitiva y una API en Python para registrar y rastrear experimentos, facilitando la comparación y el análisis de resultados. Neptune es compatible con diversos frameworks y permite una colaboración eficaz mediante la gestión de proyectos y el control de acceso basado en roles.
+
+    \item \textbf{Data Version Control (DVC)}: DVC es una herramienta de gestión de versiones para datos y modelos en proyectos de ML. Permite rastrear y reproducir experimentos de manera similar a Git, pero optimizada para grandes volúmenes de datos. DVC es útil para proyectos que necesitan un control estricto sobre versiones de datos y modelos, facilitando la reproducibilidad y la colaboración en equipos de data science.
+\end{itemize}
+\input{tablas/mlops.tex}
+\begin{itemize}
+    \item \textbf{Seguimiento de experimentos}: Capacidad para registrar y rastrear detalles de los experimentos, como parámetros, métricas y resultados.
+    \item \textbf{Registro de detalles de hardware}: Funcionalidad para registrar información del hardware, como el uso de CPU y memoria, durante la ejecución de los experimentos.
+    \item \textbf{Control automático de estocasticidad}: Herramienta para gestionar y registrar semillas aleatorias automáticamente, lo que garantiza la reproducibilidad de los experimentos.
+    \item \textbf{Registro de dependencias}: Capacidad para registrar y gestionar las dependencias de software y bibliotecas necesarias para ejecutar los experimentos.
+    \item \textbf{Optimización de hiperparámetros (HPO)}: Soporte nativo para la optimización de hiperparámetros mediante técnicas avanzadas, como la optimización bayesiana.
+    \item \textbf{Empaquetado de proyectos}: Capacidad para empaquetar proyectos de ML en un formato reproducible, especificando el entorno, las dependencias y los puntos de entrada.
+    \item \textbf{Ejecución en la nube o en clusters}: Soporte para ejecutar experimentos en la nube o en infraestructuras de clusters, ofreciendo escalabilidad y flexibilidad.
+    \item \textbf{Interfaz web}: Presencia de una interfaz web que facilita la gestión y visualización de experimentos y resultados.
+    \item \textbf{Código abierto}: Indica si la herramienta es de código abierto y puede ser modificada y utilizada libremente por la comunidad.
+\end{itemize}
+
+\subsection{Herramientas web}
+\subsubsection{Frontend}
+El desarrollo frontend continúa evolucionando con un enfoque en mejorar la experiencia del usuario, la eficiencia del desarrollo, y la modularidad. En la encuesta de Stack Overflow de 2024, se destacan tecnologías clave que siguen definiendo el entorno del desarrollo frontend.
+\begin{itemize}
+    \item \textbf{Frameworks y bibliotecas}: React.js lidera el panorama como una de las bibliotecas más populares para construir interfaces de usuario interactivas y componentes reutilizables, ideal para aplicaciones de una sola página (SPAs). Angular también sigue siendo una opción sólida, proporcionando una solución completa para aplicaciones web empresariales con su arquitectura basada en componentes y TypeScript. Vue.js continúa ganando adeptos gracias a su simplicidad y flexibilidad, permitiendo a los desarrolladores integrar progresivamente funcionalidades en sus proyectos.
+    \item \textbf{Herramientas y optimización}: Tecnologías como Webpack y Vite mejoran la experiencia de desarrollo mediante la optimización del empaquetado de módulos y la recarga en caliente. Además, los desarrolladores recurren a Sass y Tailwind CSS para un control mejorado sobre los estilos y una gestión más eficiente de las hojas de estilo.
+          \begin{figure*}[h]
+              \centering
+              \begin{subfigure}[t]{0.45\textwidth}
+                  \centering
+                  \includegraphics[width=\textwidth]{imagenes/survey_web_frameworks.png}
+                  \caption{Sobre frameworks web}
+              \end{subfigure}%
+              ~
+              \begin{subfigure}[t]{0.5\textwidth}
+                  \centering
+                  \includegraphics[width=\textwidth]{imagenes/survey_other_tools.png}
+                  \caption{Sobre otras herramientas}
+              \end{subfigure}
+              \caption{Resultados de la encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey}}
+          \end{figure*}
+
+\end{itemize}
+
+\subsubsection{Backend}
+El desarrollo backend sigue siendo un componente crucial para las aplicaciones web modernas, proporcionando la lógica, la autenticación y las operaciones con bases de datos necesarias para aplicaciones robustas y escalables.
+\begin{itemize}
+    \item \textbf{Frameworks y entornos}: Express.js, un framework minimalista para Node.js, sigue siendo el favorito para crear aplicaciones de backend rápidas y escalables. También es frecuente el uso de NestJS, que se basa en TypeScript y aprovecha patrones de programación orientada a objetos y funcionales. Django y ASP.NET Core permanecen como opciones destacadas para aplicaciones más estructuradas, especialmente en proyectos que requieren características de seguridad y escalabilidad.
+    \item \textbf{Bases de datos y gestión}: Las bases de datos relacionales como PostgreSQL y MySQL se combinan cada vez más con bases de datos NoSQL como MongoDB, lo que permite a los desarrolladores elegir modelos de datos que optimicen el rendimiento y la flexibilidad. Además, las arquitecturas basadas en microservicios están facilitando el uso de diferentes tecnologías de almacenamiento según las necesidades de la aplicación.
+    \item \textbf{Infraestructura y despliegue}: Herramientas como Docker y Kubernetes son ahora fundamentales para la contenedorización y orquestación de aplicaciones web, haciendo que el backend sea más fácil de escalar y desplegar en múltiples entornos. Las plataformas sin servidor, como AWS Lambda, están permitiendo una escalabilidad automática sin gestionar servidores físicos.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/survey_database.png}
+    \caption{Encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey} sobre bases de datos. }
+\end{figure}
 
 \section{Análisis de la Deuda Técnica}
 La deuda técnica es un concepto central en el desarrollo de software moderno, y entender sus causas, efectos y métodos de resolución resulta fundamental para la gestión eficaz de cualquier proyecto de software. En este capítulo se explora en profundidad el concepto de deuda técnica, su origen, indicadores, y métodos tanto de resolución como de prevención.
@@ -134,6 +215,30 @@ Evitar la deuda técnica a futuro es tan importante como resolver la ya existent
     \item Documentación clara y accesible: la documentación, tanto del código como de los procesos, asegura que cualquier desarrollador pueda entender el sistema y realizar cambios sin introducir deuda técnica.
 \end{itemize}
 
+\subsection{Herramientas para deuda tecnica}
+El análisis de deuda técnica es fundamental para mantener y mejorar la calidad del código a lo largo del ciclo de vida de un proyecto. Aquí se describen algunas de las herramientas más relevantes utilizadas en la industria para evaluar, rastrear y gestionar la deuda técnica.
+\begin{itemize}
+    \item \textbf{SonarQube}: Una de las herramientas más conocidas para el análisis de código estático. SonarQube proporciona un análisis exhaustivo, detectando code smells, errores, y vulnerabilidades de seguridad. También ofrece métricas de complejidad y permite integrar los resultados en pipelines de CI/CD. Gracias a su interfaz visual, es fácil interpretar los resultados y priorizar las acciones de refactorización. Soporta múltiples lenguajes de programación y es una herramienta de código abierto, con versiones comerciales para grandes empresas.
+    \item \textbf{Codacy}: Una plataforma basada en la nube que realiza análisis de código estático, identifica code smells, y proporciona métricas de complejidad. Codacy se integra fácilmente en pipelines de CI/CD y ofrece paneles interactivos para visualizar el estado de la calidad del código. Es compatible con más de 40 lenguajes de programación, pero a diferencia de SonarQube, no es completamente de código abierto.
+    \item \textbf{CodeClimate}: Esta herramienta ofrece un análisis de código basado en calidad y deuda técnica. CodeClimate proporciona un sistema de calificación para medir el estado del código y facilita la integración en flujos de trabajo de CI/CD. Además, permite rastrear la evolución de la calidad del código a lo largo del tiempo. Aunque algunas funcionalidades avanzadas no son de código abierto, la herramienta sigue siendo una opción poderosa para equipos que buscan mejorar la mantenibilidad de su base de código.
+    \item \textbf{DeepSource}: Una herramienta de análisis de código estático que se centra en proporcionar una solución integral para mejorar la calidad del software. DeepSource ofrece detección de code smells, métricas de complejidad y soporte para correcciones automáticas de problemas comunes. Se integra con sistemas de CI/CD y admite varios lenguajes, pero es una herramienta de pago con opciones limitadas para usuarios gratuitos.
+    \item \textbf{Coverity}: Desarrollada por Synopsys, Coverity es una herramienta de análisis de código estático orientada a detectar problemas de seguridad y errores críticos. Aunque no ofrece funcionalidades avanzadas de visualización de datos, es altamente precisa y se utiliza en entornos donde la seguridad del software es una prioridad. Es una herramienta propietaria y no está disponible como software de código abierto.
+    \item \textbf{Checkstyle}: Una herramienta especializada en el análisis de código Java. Checkstyle permite definir reglas personalizadas para verificar la adherencia a las normas de estilo y detectar problemas de mantenimiento. Aunque no ofrece soporte para otros lenguajes y tiene capacidades limitadas en comparación con herramientas más modernas, sigue siendo ampliamente utilizada en proyectos Java de gran envergadura.
+    \item \textbf{PMD}: Similar a Checkstyle, PMD es una herramienta de análisis de código para Java y otros lenguajes como Apex. Se centra en la detección de errores comunes de programación y problemas de diseño, como código duplicado. PMD es de código abierto y se utiliza principalmente en entornos donde la calidad del código es crítica.
+    \item \textbf{FxCop}: Una herramienta de análisis de código para proyectos .NET. FxCop verifica el cumplimiento de las prácticas recomendadas y detecta problemas de diseño y mantenimiento. Aunque no es tan avanzado como otras herramientas modernas, sigue siendo útil para desarrolladores que trabajan en el ecosistema de Microsoft.
+    \item \textbf{ESLint}: Una herramienta muy popular en la comunidad de desarrollo web, ESLint se utiliza para analizar código JavaScript y TypeScript. Permite definir reglas personalizadas para garantizar un código limpio y libre de errores. ESLint se integra fácilmente con editores de texto y sistemas de CI/CD, y es ampliamente adoptado por desarrolladores de frontend.
+    \item \textbf{JSHint}: Otra herramienta para el análisis de código JavaScript. JSHint detecta problemas en el código y ayuda a los desarrolladores a escribir código más robusto y mantenible. Aunque ESLint ha ganado más popularidad, JSHint sigue siendo utilizado en proyectos donde se requiere una configuración más sencilla.
+\end{itemize}
+\input{tablas/deuda.tex}
+\begin{itemize}
+    \item \textbf{Análisis de Código Estático}: Evalúa el código sin ejecutarlo para encontrar errores, vulnerabilidades, y problemas de mantenimiento.
+    \item \textbf{Detección de Code Smells}: Identifica patrones de diseño de código que podrían indicar problemas futuros.
+    \item \textbf{Métricas de Complejidad}: Calcula la complejidad del código para detectar funciones y métodos difíciles de entender y mantener.
+    \item \textbf{Integración CI/CD}: Se puede integrar con pipelines de CI/CD para analizar el código automáticamente en cada construcción.
+    \item \textbf{Visualización de Datos}: Proporciona gráficos y paneles para visualizar problemas y métricas del código.
+    \item \textbf{Soporte para Múltiples Lenguajes}: Admite varios lenguajes de programación, aumentando su aplicabilidad.
+    \item \textbf{Código Abierto}: Indica si la herramienta es de código abierto, lo que permite a la comunidad contribuir y modificarla.
+\end{itemize}
 % Analisis de la deuda
 \section{Análisis de la Deuda Técnica en SnapperML}
 En esta sección se realiza un análisis exhaustivo de los problemas de deuda técnica identificados en SnapperML. El objetivo es presentar cada aspecto de la deuda técnica detectada, comprender las razones detrás de estos problemas y detallar las soluciones y mejoras implementadas para optimizar el funcionamiento y la sostenibilidad del sistema a largo plazo.

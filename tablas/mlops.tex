@@ -1,0 +1,34 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|
+                >{\columncolor[HTML]{EFEFEF}}l |c|c|c|c|c|c|c|}
+            \hline
+            \multicolumn{1}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}MLOPS\\ vs\\ Características\end{tabular}}} &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Registro de \\ detalles de \\ hardware\end{tabular}}             &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Control \\ estocástico \\ automático\end{tabular}}               &
+            \cellcolor[HTML]{EFEFEF}\textbf{HPO}                                                                                        &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Empaquetado \\ de proyectos\end{tabular}}                        &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Ejecución \\ en \\ la nube o \\ en clusters\end{tabular}}        &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Interfaz \\ web\end{tabular}}                                    &
+            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Código \\ abierto\end{tabular}}                                                                                         \\ \hline
+            \cellcolor[HTML]{EFEFEF}\textbf{Snapper-ML}                                                                                 & Sí      & Sí & Sí & Sí      & Sí & Sí      & Sí      \\ \hline
+            \cellcolor[HTML]{EFEFEF}\textbf{MLflow}                                                                                     & No      & a  & No & Sí      & Sí & Parcial & Sí      \\ \hline
+            \textbf{Weights \& Biases}                                                                                                  & Sí      & No & Sí & No      & Sí & Sí      & No      \\ \hline
+            \textbf{CometML}                                                                                                            & No      & No & Sí & Parcial & No & Sí      & No      \\ \hline
+            \textbf{Polyaxon}                                                                                                           & No      & No & Sí & Sí      & Sí & Sí      & Híbrido \\ \hline
+            \cellcolor[HTML]{EFEFEF}\textbf{Kubeflow}                                                                                   & No      & No & Sí & Sí      & Sí & Sí      & Sí      \\ \hline
+            \textbf{\begin{tabular}[c]{@{}l@{}}Amazon \\ SageMaker\end{tabular}}                                                        & Parcial & No & Sí & Parcial & Sí & Sí      & No      \\ \hline
+            \textbf{Google Vertex AI}                                                                                                   & Parcial & No & Sí & Sí      & Sí & Sí      & No      \\ \hline
+            \textbf{\begin{tabular}[c]{@{}l@{}}Azure Machine \\ Learning\end{tabular}}                                                  & Parcial & No & Sí & Sí      & Sí & Sí      & No      \\ \hline
+            {\color[HTML]{212529} \textbf{Neptune.ai}}                                                                                  & Sí      & No & Sí & No      & Sí & Sí      & Sí      \\ \hline
+            {\color[HTML]{212529} \textbf{\begin{tabular}[c]{@{}l@{}}Data Version \\ Control (DVC)\end{tabular}}}                       & No      & No & No & Sí      & No & No      & Sí      \\ \hline
+        \end{tabular}%
+    }
+    \caption{Comparación de herramientas MLOps destacadas}
+    \label{mlops}
+\end{table}
