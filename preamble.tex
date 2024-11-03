@@ -5,15 +5,15 @@
 \usepackage{imakeidx}
 \usepackage{dirtytalk}
 \usepackage[export]{adjustbox}
-\usepackage{subcaption}
 
 % ---- Code insertion ----
 \usepackage[newfloat]{minted}
-\usepackage{capt-of} % Allows captions outside of float
+\usepackage{subcaption}
 
 % Define a custom command for caption with default spacing
 \newcommand{\mycaptionof}[2]{%
-    \captionof{#1}{#2}\par\vspace{2.5mm}%
+    \captionsetup{type=listing}
+    \captionof{#1}{#2}\vspace{2.5mm}
 }
 
 \usepackage[breakable]{tcolorbox}
