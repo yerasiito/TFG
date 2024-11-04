@@ -1,22 +1,22 @@
 \chapter{Planificación} \label{planificacion}
 Para gestionar la planificación del proyecto, se ha implementado el método Kanban para organizar y asignar tareas de manera eficiente, utilizando la herramienta Wakatime para registrar y analizar el tiempo invertido en cada actividad. Esta metodología permite un seguimiento preciso de las tareas completadas y del esfuerzo dedicado, asegurando así el cumplimiento de los objetivos semanales en un periodo de seis semanas. La planificación ha resultado fundamental para equilibrar el desarrollo del trabajo de fin de grado junto con las prácticas en la empresa, en las cuales dedico cinco horas diarias de trabajo durante la semana, dejando las tardes de entre semana y el fin de semana como el principal período de dedicación al proyecto académico.
 
-\section{Planificación semanal}
-Dado el tiempo total de un mes y medio para la realización del proyecto, la planificación se ha organizado de la siguiente manera:
+\section{Planificación semanal} 
+Dado el marco temporal de seis semanas para la realización del proyecto, la planificación se ha dividido estratégicamente para asegurar un progreso constante y alcanzar los objetivos propuestos. A continuación, se detalla el enfoque semanal:
 
-\begin{itemize}
-    \item \textbf{Primera semana}: documentación y análisis del estado del proyecto.
-    \item \textbf{Segunda semana}: resolución de deuda técnica.
-    \item \textbf{Tercera semana}: desarrollo de la interfaz de usuario.
-    \item \textbf{Cuarta y quinta semana}: redacción de la memoria.
-    \item \textbf{Sexta semana}: incorporación de funcionalidades adicionales y tests al proyecto, así como finalización de documentación y ajustes finales.
+\begin{itemize} 
+    \item \textbf{Semana 1}: Revisión de la documentación y evaluación del estado del proyecto, definiendo prioridades y organizando las tareas iniciales. 
+    \item \textbf{Semana 2}: Resolución de \Gls{deuda} mediante la optimización y refactorización del código, mejorando la estabilidad y eficiencia del proyecto. 
+    \item \textbf{Semana 3}: Diseño y desarrollo de la interfaz de usuario, asegurando su integración con el backend y realizando pruebas de usabilidad. 
+    \item \textbf{Semanas 4 y 5}: Redacción de la memoria del TFG, incluyendo revisión, corrección y documentación de todo el trabajo realizado. 
+    \item \textbf{Semana 6}: Implementación de funcionalidades adicionales, realización de pruebas finales y ajustes, y finalización de la memoria para su entrega. 
 \end{itemize}
-Cada sección semanal incluirá:
-\begin{itemize}
-    \item Lista de tareas (Kanban)
-    \item Registro de tiempo (Wakatime)
-    \item Literatura y referencias empleadas
-    \item Commits de github (si aplica)
+Cada semana de trabajo incluirá: 
+\begin{itemize} 
+    \item Organización de tareas mediante el tablero Kanban. 
+    \item Registro detallado de las horas invertidas en cada actividad, utilizando Wakatime. 
+    \item Consulta de literatura relevante y referencias empleadas para respaldar las decisiones tomadas. 
+    \item Registro de commits en GitHub, documentando los cambios significativos realizados (si aplica). 
 \end{itemize}
 
 \section{Semana 1: Documentación y prueba del estado del proyecto}
@@ -26,119 +26,120 @@ En la primera semana, se dedicará tiempo a la comprensión profunda del proyect
 \begin{itemize}
     \item Revisión de la estructura del proyecto y código existente.
     \item Leer la documentación actual del proyecto.
-    \item Identificación de áreas con deuda técnica para su futura resolución.
-    \item Configuración de herramientas de seguimiento (Kanban y Wakatime). \item Revisión de literatura sobre MLOps y buenas prácticas de desarrollo de software.
+    \item Identificación de áreas con \Gls{deuda} para su futura resolución.
+    \item Configuración de herramientas de seguimiento (Kanban y Wakatime). \item Revisión de literatura sobre \Gls{mlopsg} y buenas prácticas de desarrollo de software.
 \end{itemize}
 
 \subsubsection{Wakatime semanal}
-Reporte semanal del tiempo de trabajo y análisis.
-\begin{figure}[ht]
+Reporte semanal del tiempo de trabajo y análisis. Se ha trabajado principalmente con pyton.
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{imagenes/wakatime_02-10_08-10.png}
-    \caption{Wakatime 02.10.2024 a 08.10.2024}
+    \caption{Registro de tiempo trabajado desde 02/10/2024 hasta 08/10/2024 según Wakatime.}
 \end{figure}
-\begin{itemize}
-    \item Los días anteriores al 5 de Octubre fueron dedicados a realizar las primeras tareas de investigación y documentación. El navegador no está configurado con wakatime por eso no hay seguimiento.
-    \item A partir del 5 de Octubre se empezó a depurar el código para resolver la deuda técnica encontrada.
-\end{itemize}
+
+Los días anteriores al 5 de Octubre fueron dedicados a realizar las primeras tareas de investigación y documentación. El navegador no está configurado con wakatime por eso no hay seguimiento.
 
 \subsubsection{Literatura investigada}
 \begin{itemize}
-    \item \cite{mlops} MLOps: buenas prácticas y fundamentos.
-    \item \cite{introtodebt} Introducción al concepto de deuda técnica.
-    \item \cite{DORA} Informe DORA sobre MLOps.
+    \item \cite{mlops} \Gls{mlopsg}: buenas prácticas y fundamentos.
+    \item \cite{introtodebt} Introducción al concepto de \Gls{deuda}.
+    \item \cite{DORA} Informe DORA sobre \Gls{mlopsg}.
     \item \cite{snapperml_thesis} Thesis de ml-experiment realizada por Antonio Molner.
-    \item \cite{snapperml_documentation} Documentacion oficial del framework snapper-ml.
+    \item \cite{snapperml_documentation} Documentacion oficial del \gls{framework} \Gls{snapperml}.
 \end{itemize}
 
-\section{Semana 2: Resolución de deuda técnica}
-Durante la segunda semana, el enfoque será identificar y corregir la deuda técnica en el proyecto, aplicando buenas prácticas de programación para mejorar la calidad y mantenibilidad del código.
+\section{Semana 2: Resolución de \Gls{deuda}}
+Durante la segunda semana, el enfoque se centrará en identificar y corregir la \Gls{deuda} acumulada en el proyecto, aplicando buenas prácticas de programación para optimizar la calidad y mantenibilidad del código. Las tareas planificadas incluyen:
 
-\subsubsection{Tareas de la semana}
-\begin{itemize}
-    \item Refactorización de módulos con código duplicado o complejo.
-    \item Migración y actualización de dependencias.
-    \item Eliminar código obsoleto y/o no utilizado.
-    \item Optimización de funciones para mejorar el rendimiento.
-    \item Documentación de los cambios realizados y su justificación.
+\begin{itemize} 
+    \item Refactorización de módulos con código duplicado o excesivamente complejo. 
+    \item Migración y actualización de dependencias a sus versiones más recientes. \item Eliminación de código obsoleto o innecesario para simplificar la base de código. 
+    \item Optimización de funciones clave para mejorar el rendimiento general del sistema. \item Documentación detallada de los cambios realizados, incluyendo la justificación técnica de cada decisión. 
 \end{itemize}
+
+Este enfoque contribuirá a un entorno de desarrollo más limpio y eficiente, facilitando futuras expansiones y mantenimientos.
 
 \subsubsection{Kanban semanal}
-Lista de tareas por tipo. Puede ser Bug, Enhancement o Feature. Ver figura \ref{fig:kanban_deuda}
+Lista de tareas por tipo. Se muestra el tablero según el tipo de tarea que puede ser: Bug, Mejora (Enhancement) o Funcionalidad (Feature). Ver figura \ref{fig:kanban_deuda} en la página siguiente.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{imagenes/kanban_resolver_deuda_tecnica.png}
-    \caption{Milestone - Resolver la deuda técnica}
+    \caption{Tablero Kanban correspondiente al hito: Resolución de la \Gls{deuda}}
     \label{fig:kanban_deuda}
 \end{figure}
 
 \subsubsection{Wakatime semanal}
-Reporte semanal del tiempo de trabajo y análisis. Ver figura \ref{fig:wakatime_07_10_2024}
+Reporte semanal del tiempo de trabajo y análisis. Se trabaja principalmente con python. Ver figura \ref{fig:wakatime_07_10_2024} en la siguiente página.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/wakatime_07-10_20-10.png}
-    \caption{Wakatime 07.10.2024 a 20.10.2024}
+    \caption{Registro de tiempo trabajado desde 07/10/2024 hasta 20/10/2024 según Wakatime.}
     \label{fig:wakatime_07_10_2024}
 \end{figure}
 \begin{itemize}
-    \item El tiempo de resolución de la deuda técnica va desde el 6 hasta el 13 de Octubre.
-    \item Tiempo total dedicado de 23 horas y 35 minutos.
+    \item El tiempo trabajado en la resolución de la \Gls{deuda} se estima desde el 6 hasta el 13 de Octubre. Aunque realmente es un proceso continuo a lo largo del proyecto.
+    \item Tiempo total dedicado en la semana de 23 horas y 35 minutos.
 \end{itemize}
 
 \subsubsection{Commits}
-Para un mejor seguimiento y organización se ha realizado un \say{pull request} al repositorio principal de SnapperML.
+Para un mejor seguimiento y organización se ha realizado un \say{pull request} al repositorio principal de \Gls{snapperml}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/github_pr_deuda.png}
-    \caption{Pull request: Resolución de la deuda técnica}
+    \caption{Pull request: Resolución de la \Gls{deuda}}
     \label{fig:github_pr_deuda}
 \end{figure}
 
 \subsubsection{Literatura y recursos utilizados}
 \begin{itemize}
-    \item \cite{cunningham} Artículo de Ward Cunningham sobre deuda técnica.
-    \item \cite{introtodebt} Conceptos y gestión de deuda técnica.
-    \item \cite{stackoverflow_python_debug} Post de stackoverflow sobre como hacer debug en VSC.
+    \item \cite{cunningham} Artículo de Ward Cunningham sobre \Gls{deuda}.
+    \item \cite{introtodebt} Conceptos y gestión de \Gls{deuda}.
+    \item \cite{stackoverflow_python_debug} Post de stackoverflow sobre como hacer debug en \acrshort{vsc}.
     \item \cite{pydantic} Dependencia de validación de configuración de los experimentos.
-    \item \cite{mlops_principles} Principios fundamentales de MLOPs.
+    \item \cite{mlops_principles} Principios fundamentales de \Gls{mlopsg}.
     \item \cite{knockknock} Dependencia de notificaciones.
-    \item \cite{optuna_samplers} Dependencia de optimización de Hiperparámetros.
+    \item \cite{optuna_samplers} Dependencia de \acrfull{hpo}.
 \end{itemize}
 
 \section{Semana 3: Desarrollo de la interfaz de usuario}
-En la tercera semana, el objetivo será desarrollar una interfaz de usuario intuitiva para el sistema, basada en las prácticas de usabilidad y accesibilidad.
+Durante la tercera semana, se dedicará un esfuerzo significativo al diseño y desarrollo de una interfaz de usuario que no solo sea funcional, sino también intuitiva y atractiva para el usuario final. Se aplicarán principios de usabilidad y accesibilidad, asegurando que la interacción con el sistema sea sencilla para una amplia variedad de usuarios. Además, se buscará garantizar que la interfaz sea responsiva y se adapte adecuadamente a diferentes dispositivos y tamaños de pantalla, brindando una experiencia consistente y agradable.
 
-\subsubsection{Tareas de la semana}
-\begin{itemize}
-    \item Diseño de los elementos de la interfaz (formularios, botones, visualización de logs).
-    \item Implementación de la interfaz utilizando React y Bootstrap.
-    \item Implementación de la interfaz web interactiva.
-    \item Documentación de la estructura y funcionalidades de la interfaz.
-\end{itemize}
+\subsubsection{Tareas planificadas} 
+\begin{itemize} 
+    \item Diseño de los componentes principales de la interfaz, como formularios, botones y la visualización de \glspl{log}, garantizando una experiencia de usuario fluida. 
+    \item Implementación de la interfaz empleando React y Bootstrap para asegurar un desarrollo eficiente y un diseño moderno y responsivo. \item Integración de la interactividad necesaria en la interfaz web, optimizando la comunicación con el backend. 
+    \item Documentación completa de la estructura, funcionalidades y decisiones de diseño de la interfaz, facilitando futuras mejoras y mantenimientos. \end{itemize}
+
+Este enfoque garantizará que la interfaz sea intuitiva y fácil de usar, proporcionando una experiencia visualmente atractiva que capte la atención del usuario y se mantenga coherente con los objetivos generales del proyecto.
 
 \subsubsection{Kanban semanal}
-Lista de tareas por tipo. Puede ser Bug, Enhancement o Feature. Ver figura \ref{fig:kanban_desarrollar_la_interfaz_web}
+Lista de tareas por tipo. Se muestra el tablero según el tipo de tarea que puede ser: Bug, Mejora (Enhancement) o Funcionalidad (Feature). Ver figura \ref{fig:kanban_desarrollar_la_interfaz_web} en la página siguiente.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/kanban_desarrollar_la_interfaz_web.png}
+    \caption{Tablero Kanban correspondiente al hito: Desarrollar la Interfaz Web}
+    \label{fig:kanban_desarrollar_la_interfaz_web}
+\end{figure}
 
 \subsubsection{Wakatime semanal}
 Reporte semanal del tiempo de trabajo y análisis.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/wakatime_14-10_20-10.png}
-    \caption{Wakatime 14.10.2024 a 20.10.2024}
+    \caption{Registro de tiempo trabajado desde 14/10/2024 hasta 20/10/2024 según Wakatime.}
 \end{figure}
-\begin{itemize}
-    \item Tiempo record de 9 horas y 30 minutos el Domingo 20 de Octubre con aumento del 169\% de la productividad.
-    \item En total el fin de semana se dedicaron 16 horas y 10 minutos.
-\end{itemize}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{imagenes/kanban_desarrollar_la_interfaz_web.png}
-    \caption{Milestone - Desarrollar la Interfaz Web}
-    \label{fig:kanban_desarrollar_la_interfaz_web}
-\end{figure}
+Tiempo record de 9 horas y 30 minutos el Domingo 20 de Octubre con aumento del 169\% de la productividad.
 
 \subsubsection{Commits}
-Para un mejor seguimiento y organización se ha realizado un \say{pull request} al repositorio principal de SnapperML. Ver figura \ref{fig:github_pr_ui}.
+Para un mejor seguimiento y organización se ha realizado un \acrfull{pr} al repositorio principal de \Gls{snapperml}. Ver figura \ref{fig:github_pr_ui}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{imagenes/github_pr_ui.png}
+    \caption{\acrlong{pr}: \Gls{snapperml} UI}
+    \label{fig:github_pr_ui}
+\end{figure}
 
 \subsubsection{Literatura y recursos utilizados}
 \begin{itemize}
@@ -146,39 +147,37 @@ Para un mejor seguimiento y organización se ha realizado un \say{pull request} 
     \item \cite{bootstrap} Documentación de Bootstrap.
     \item \cite{vite} ¿Por qué elegir vite?
     \item \cite{typescript} Handbook de typescript.
-    \item \cite{cors} Cross-Origin Resource Sharing (CORS)
-    \item \cite{flask} Pagina oficial de Flask (API)
+    \item \cite{cors} \acrfull{cors}
+    \item \cite{flask} Pagina oficial de Flask (\Gls{apig})
 \end{itemize}
 
-% Figura de subsubsection commits
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{imagenes/github_pr_ui.png}
-    \caption{Pull request: SnapperML UI}
-    \label{fig:github_pr_ui}
-\end{figure}
-
 \section{Semana 4 y 5: Redacción de la memoria}
-En la cuarta y quinta semana, el objetivo principal será avanzar en la memoria del proyecto, documentando todos los aspectos técnicos y funcionales, así como el proceso de desarrollo.
+Durante la cuarta y quinta semana, el objetivo principal será progresar de manera significativa en la redacción de la memoria del proyecto. Se documentarán en detalle todos los aspectos técnicos y funcionales, abarcando desde la planificación y el diseño hasta la implementación y las pruebas realizadas. Además, se describirá el proceso de desarrollo de manera estructurada, proporcionando un análisis claro de las decisiones técnicas tomadas y su justificación, junto con las dificultades encontradas y cómo se resolvieron. Esto asegurará una memoria completa y comprensible, que refleje fielmente el trabajo realizado.
 
 \subsubsection{Tareas de la semana}
 \begin{itemize}
     \item Redacción de la sección de introducción y objetivos del proyecto.
     \item Documentación de los requisitos y la especificación del sistema.
-    \item Descripción detallada de las soluciones aplicadas para resolver la deuda técnica.
+    \item Descripción detallada de las soluciones aplicadas para resolver la \Gls{deuda}.
     \item Redacción de la planificación semanal y metodología.
     \item Redacción de la implementación y conclusiones.
 \end{itemize}
+Se dedicará especial atención a mantener una redacción clara y coherente, asegurando que cada sección de la memoria aporte valor y esté adecuadamente estructurada. Además, se emplearán gráficos, tablas y ejemplos de código donde sea necesario para ilustrar conceptos complejos y facilitar la comprensión. La memoria final buscará no solo cumplir con los requisitos académicos, sino también servir como un recurso de referencia útil para futuros desarrolladores o investigadores interesados en el proyecto.
 
-\subsubsection{Kanban semanal (por prioridad)}
+\subsubsection{Kanban semanal}
+Lista de tareas por prioridad. A continuación se muestra el tablero kanban según la prioridad de la tarea: baja, media o alta.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{imagenes/kanban_documentar_la_memoria.png}
-    \caption{Milestone - Documentar la memoria}
+    \includegraphics[width=0.87\textwidth]{imagenes/kanban_documentar_la_memoria.png}
+    \caption{Tablero Kanban correspondiente al hito: Documentar la memoria}
 \end{figure}
 
 \subsubsection{Wakatime semanal}
-Reporte semanal del tiempo de trabajo y análisis. Pendiente.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/wakatime_22-10_04-11.png}
+    \caption{Registro de tiempo trabajado desde 22/10/2024 hasta 03/11/2024 según Wakatime.}
+\end{figure}
 
 \subsubsection{Literatura utilizada}
 \begin{itemize}
@@ -202,21 +201,25 @@ Por último se centrará en resolver problemas de seguridad y accesibilidad en e
     \item Revisión final de toda la documentación del proyecto.
 \end{itemize}
 \subsubsection{Kanban semanal}
-Lista de tareas por tipo. Puede ser Enhancement o Feature. Ver figura \ref{fig:kanban_mejorar_snapper}
-
-\subsubsection{Wakatime semanal}
-Reporte semanal del tiempo de trabajo y análisis. Pendiente.
-
-\subsubsection{Literatura utilizada}
-\begin{itemize}
-    \item Referencias adicionales sobre MLOps y diseño de pruebas en proyectos de software.
-    \item \cite{security} Guías sobre seguridad en desarrollo web.
-    \item \cite{accesibilidad_espania} Guías de accesibilidad y usabilidad para interfaces web.
-\end{itemize}
+Lista de tareas por tipo. Se muestra el tablero según el tipo de tarea que puede ser: Bug, Mejora (Enhancement) o Funcionalidad (Feature). Ver figura \ref{fig:kanban_mejorar_snapper}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{imagenes/kanban_ampliar_snapper.png}
-    \caption{Milestone - Mejorar snapperML}
+    \includegraphics[width=0.9\textwidth]{imagenes/kanban_ampliar_snapper.png}
+    \caption{Tablero Kanban correspondiente al hito: Mejorar snapperML}
     \label{fig:kanban_mejorar_snapper}
 \end{figure}
+
+\subsubsection{Wakatime semanal}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/wakatime_22-10_04-11.png}
+    \caption{Template}
+\end{figure}
+
+\subsubsection{Literatura utilizada}
+\begin{itemize}
+    \item Referencias adicionales sobre \Gls{mlopsg} y diseño de pruebas en proyectos de software.
+    \item \cite{security} Guías sobre seguridad en desarrollo web.
+    \item \cite{accesibilidad_espania} Guías de accesibilidad y usabilidad para interfaces web.
+\end{itemize}

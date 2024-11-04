@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{book}
+\documentclass[openany,a4paper,11pt]{book}
 \input{preamble}
 
 \begin{document}
@@ -6,9 +6,11 @@
 \input{prefacios/prefacio}
 \frontmatter
 \tableofcontents
-%\listoffigures
-%\listoftables
-
+\glsaddall
+\printglossary[type=\acronymtype, nonumberlist]
+\printglossary[nonumberlist]
+\listoffigures
+\listoftables
 \mainmatter
 \setlength{\parskip}{5pt}
 \setlength{\parindent}{0pt}
@@ -24,18 +26,14 @@
 \input{capitulos/05_Diseno}
 
 \input{capitulos/06_Implementacion}
-%
+
 \input{capitulos/07_Pruebas}
-%
+
 \input{capitulos/08_Conclusiones}
 
 \bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
 \bibliographystyle{unsrturl}
 
-\addcontentsline{toc}{chapter}{Glosario}
-\printglossary[type=\acronymtype]
-\printglossary
-\input{glosario/entradas_glosario}
 \input{Anexos/anexos.tex}
 
 \thispagestyle{empty}

@@ -1,42 +1,42 @@
 \chapter{Introducción}
-En este capítulo se presenta el contexto y la motivación del proyecto de resolución de deuda técnica e integración de una interfaz web en un framework MLOps (Snapper), además de su relevancia en el campo de la Inteligencia Artificial y la reproducibilidad de experimentos.
+En este capítulo se presenta el contexto y la motivación del proyecto de resolución de \gls{deuda} e integración de una interfaz web en un \gls{framework} \acrshort{mlops} (\Gls{snapperml}), además de su relevancia en el campo de la \acrlong{ia} y la reproducibilidad de experimentos.
 
 \section{Motivación}
-\acrshort{mlops} son un conjunto de prácticas para los flujos de trabajo cuyo objetivo es optimizar el proceso de implementación y mantenimiento de los modelos de aprendizaje automático \cite{mlops}.
+\acrfull{mlops} son un conjunto de prácticas para los flujos de trabajo cuyo objetivo es optimizar el proceso de implementación y mantenimiento de los modelos de aprendizaje automático \cite{mlops}.
 
-Este paradigma, inspirado en los principios de DevOps y GitOps, pretende establecer un proceso de evolución continua para integrar los modelos de aprendizaje automático al desarrollo del software. Las organizaciones están reconociendo cada vez más la importancia de la adopción de tecnologías como la Inteligencia Artificial (IA) en sus flujos de trabajo, lo que ha generado un cambio significativo en la forma en que se desarrollan y operan los modelos de ML.
+Este paradigma, inspirado en los principios de \Gls{devops} y \Gls{gitops}, pretende establecer un proceso de evolución continua para integrar los modelos de aprendizaje automático al desarrollo del software. Las organizaciones están reconociendo cada vez más la importancia de la adopción de tecnologías como la \acrfull{ia} en sus flujos de trabajo, lo que ha generado un cambio significativo en la forma en que se desarrollan y operan los modelos de \acrfull{ml}.
 
-Según el informe DORA \cite{DORA}, el uso de IA no solo incrementa la productividad de los equipos en desarrollo, sino que también mejora la calidad del código y reduce la complejidad del mismo, aspectos cruciales para mantener el ciclo de vida del aprendizaje automático con eficiencia. Sin embargo, el informe también señala que la adopción masiva de estas tecnologías plantea desafíos, como la disminución de la estabilidad en la entrega del software, lo que resalta la necesidad de equilibrar las innovaciones tecnológicas con las mejores prácticas operativas.
+Según el informe DORA \cite{DORA}, el uso de \acrshort{ia} no solo incrementa la productividad de los equipos en desarrollo, sino que también mejora la calidad del código y reduce la complejidad del mismo, aspectos cruciales para mantener el ciclo de vida del aprendizaje automático con eficiencia. Sin embargo, el informe también señala que la adopción masiva de estas tecnologías plantea desafíos, como la disminución de la estabilidad en la entrega del software, lo que resalta la necesidad de equilibrar las innovaciones tecnológicas con las mejores prácticas operativas.
 
-Uno de los conceptos clave en la gestión del ciclo de vida del software es la deuda técnica, un término introducido por Ward Cunningham para describir los compromisos técnicos que se asumen al implementar soluciones rápidas y no óptimas para cumplir con plazos o demandas del mercado. Cunningham compara la deuda técnica con un préstamo financiero: \say{Un poco de deuda acelera el desarrollo siempre que se pague pronto con refactorización} \cite{cunningham}. Sin embargo, si no se gestiona adecuadamente, esta deuda genera intereses que disminuyen la productividad y pueden eventualmente paralizar equipos de ingeniería bajo la carga de una implementación no refactorizada \cite{introtodebt}.
+Uno de los conceptos clave en la gestión del ciclo de vida del software es la \Gls{deuda}, un término introducido por Ward Cunningham para describir los compromisos técnicos que se asumen al implementar soluciones rápidas y no óptimas para cumplir con plazos o demandas del mercado. Cunningham compara la \gls{deuda} con un préstamo financiero: \say{Un poco de deuda acelera el desarrollo siempre que se pague pronto con refactorización} \cite{cunningham}. Sin embargo, si no se gestiona adecuadamente, esta deuda genera intereses que disminuyen la productividad y pueden eventualmente paralizar equipos de ingeniería bajo la carga de una implementación no refactorizada \cite{introtodebt}.
 
 \section{Objetivo}
 
-En el desarrollo del proyecto SnapperML, mi trabajo ha consistido en abordar la deuda técnica existente para mejorar la mantenibilidad y escalabilidad del framework. Esto ha implicado identificar y resolver problemas acumulados que afectaban tanto al rendimiento como a la calidad del código, siguiendo los principios de refactorización para eliminar dicha deuda. Además, como parte del proceso de evolución del proyecto, he integrado una interfaz web que facilita la interacción de los usuarios con el framework, mejorando la usabilidad y la accesibilidad de las funcionalidades del sistema.
+En el desarrollo del proyecto \Gls{snapperml}, mi trabajo ha consistido en abordar la \gls{deuda} existente para mejorar la mantenibilidad y escalabilidad del \gls{framework}. Esto ha implicado identificar y resolver problemas acumulados que afectaban tanto al rendimiento como a la calidad del código, siguiendo los principios de refactorización para eliminar dicha deuda. Además, como parte del proceso de evolución del proyecto, he integrado una interfaz web que facilita la interacción de los usuarios con el \gls{framework}, mejorando la usabilidad y la accesibilidad de las funcionalidades del sistema.
 
-Este proyecto no solo busca optimizar los flujos de trabajo mediante MLOps, sino también garantizar que el código sea más sostenible a largo plazo, eliminando barreras técnicas que podrían afectar la capacidad de continuar desarrollando nuevas funcionalidades en el futuro. SnapperML proporciona una solución de código abierto que permite a usuarios y organizaciones reproducir experimentos de IA de manera efectiva, ahora con una interfaz web más accesible y un código más limpio, gracias a la resolución de la deuda técnica existente.
+Este proyecto no solo busca optimizar los flujos de trabajo mediante MLOps, sino también garantizar que el código sea más sostenible a largo plazo, eliminando barreras técnicas que podrían afectar la capacidad de continuar desarrollando nuevas funcionalidades en el futuro. \Gls{snapperml} proporciona una solución de código abierto que permite a usuarios y organizaciones reproducir experimentos de IA de manera efectiva, ahora con una interfaz web más accesible y un código más limpio, gracias a la resolución de la \gls{deuda} existente.
 
 \section{Funcionalidad}
-La funcionalidad del framework se puede dividir en x partes:
+La funcionalidad del \gls{framework} se puede dividir en 4 partes:
 \begin{enumerate}
-    \item \textbf{Snapper CLI}: el framework de snapper-ml empaquetado en un comando de terminal. Todo el proceso de ejecución se muestra mediante logs a la consola y en ficheros de logs.
-    \item \textbf{API en Flask}: recibe las peticiones del servidor web y lanza el proceso de ejecución de snapper con el fichero de configuración dado.
-    \item \textbf{Servidor web (Vite)}: Una interfaz de usuario que permite la subida de archivos de configuración en formato .yaml/.yml y llamar a la api para ejecutar la CLI de snapper-ml con el archivo subido al servidor.
-    \item \textbf{Bases de datos (dockerizadas)}: el almacenamiento predeterminado para los resultados generados por los experimentos. Mlflow almacena los artefactos y Optuna los parámetros de cada ejecución del experimento.
+    \item \textbf{\Gls{snapperml} \Gls{clig}}: el \gls{framework} de \Gls{snapperml} empaquetado en un comando de terminal. Todo el proceso de ejecución se muestra mediante \glspl{log} a la consola y en ficheros de \glspl{log}.
+    \item \textbf{\Gls{apig} en Flask}: recibe las peticiones del servidor web y lanza el proceso de ejecución de \Gls{snapperml} con el fichero de configuración dado.
+    \item \textbf{Servidor web (Vite)}: Una interfaz de usuario que permite la subida de archivos de configuración en formato .yaml/.yml y llamar a la \Gls{apig} para ejecutar la \Gls{clig} de \Gls{snapperml} con el archivo subido al servidor.
+    \item \textbf{Bases de datos (dockerizadas)}: el almacenamiento predeterminado para los resultados generados por los experimentos. MLflow almacena los artefactos y Optuna los parámetros de cada ejecución del experimento.
 \end{enumerate}
 
 \section{Estructura del proyecto}
-El proyecto está organizado en varios capítulos que cubren todos los aspectos del desarrollo en SnapperML. A continuación, se describe brevemente el contenido de cada capítulo:
+El proyecto está organizado en varios capítulos que cubren todos los aspectos del desarrollo en \Gls{snapperml}. A continuación, se describe brevemente el contenido de cada capítulo:
 
-\begin{enumerate}
+\begin{itemize}
     \item \textbf{Capítulo 2: Especificación de requisitos} - Este capítulo detalla los requisitos funcionales y no funcionales del sistema, así como los perfiles de los usuarios y los casos de uso.
-    \item \textbf{Capítulo 3: Análisis de Tecnologías} - Se presenta un análisis de las tecnologías existentes que son relevantes para la reutilización de un proyecto como este.
-    \item \textbf{Capítulo 4: Plan de Proyecto} - En este capítulo se detalla la organización de los recursos, la planificación temporal, el estudio de las tecnologías utilizadas y la estimación de costes.
-    \item \textbf{Capítulo 5: Diseño} - Se describe el diseño propuesto para el sistema, la arquitectura que este tendrá, el prototipo de interfaz y los diagramas UML y una descripción detallada de los casos de uso del sistema.
+    \item \textbf{Capítulo 3: Planificación} - En este capítulo se detalla la organización de los recursos, la planificación temporal, el estudio de las tecnologías utilizadas y la estimación de costes.
+    \item \textbf{Capítulo 4: Análisis} - Se presenta un análisis de las tecnologías existentes y de la deuda técnica del proyecto.
+    \item \textbf{Capítulo 5: Diseño} - Se describe el diseño propuesto para el sistema, la arquitectura que este tendrá, el diseño de interfaz, la arquitectura y los diagramas de flujo del sistema.
     \item \textbf{Capítulo 6: Implementación} - En este capítulo se especifica el entorno de desarrollo usado, la estructura final usada, algunos ejemplos de código que interactúa con otras partes del sistema, el despliegue de la aplicación, y los desafíos encontrados durante la implementación del sistema.
     \item \textbf{Capítulo 7: Pruebas} - Aquí se cubrirán las distintas pruebas a las el código se ha sometido para alcanzar los estándares de calidad propuestos.
     \item \textbf{Capítulo 8: Conclusiones} - En este capítulo se presentan las conclusiones del proyecto, incluyendo una reflaxión sobre la experiencia personal y propuestas de mejora.
-\end{enumerate}
+\end{itemize}
 
 \section{Publicación del proyecto}
 Todo el proyecto ha sido desarrollado usando control de versiones y publicado en GitHub. Se puede encontrar el código fuente en \href{https://github.com/SnapperML/SnapperML/tree/master}{SnapperML} \cite{snapperml}.
