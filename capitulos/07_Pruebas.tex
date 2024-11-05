@@ -1,24 +1,24 @@
 \chapter{Pruebas} 
-En este capítulo se detallan las pruebas realizadas para asegurar que SnapperML funcione correctamente y cumpla con los estándares de calidad requeridos para un framework de MLOps. Se describen los distintos tipos de pruebas ejecutadas, los casos de prueba más relevantes, y los resultados obtenidos. La validación exhaustiva del sistema es fundamental para detectar y corregir errores, optimizar el rendimiento y confirmar que se cumplen los requisitos tanto funcionales como no funcionales.
+En este capítulo se detallan las pruebas realizadas para asegurar que \Gls{snapperml} funcione correctamente y cumpla con los estándares de calidad requeridos para un \gls{framework} de \Gls{mlopsg}. Se describen los distintos tipos de pruebas ejecutadas, los casos de prueba más relevantes, y los resultados obtenidos. La validación exhaustiva del sistema es fundamental para detectar y corregir errores, optimizar el rendimiento y confirmar que se cumplen los requisitos tanto funcionales como no funcionales.
 
-\section{Estrategia de pruebas} La estrategia de pruebas implementada en SnapperML se basó en múltiples niveles de verificación para garantizar que cada componente del sistema, así como el sistema en su conjunto, cumplieran con las expectativas. La estrategia abarcó:
+\section{Estrategia de pruebas} La estrategia de pruebas implementada en \Gls{snapperml} se basó en múltiples niveles de verificación para garantizar que cada componente del sistema, así como el sistema en su conjunto, cumplieran con las expectativas. La estrategia abarcó:
 
 \begin{itemize} 
-    \item \textbf{Pruebas Unitarias}: Estas pruebas validaron las funcionalidades individuales de SnapperML, asegurando que cada módulo y función operara de manera correcta y aislada. Se escribieron pruebas para componentes críticos como la carga y validación de archivos YAML, la interacción con la API de MLFlow, y el sistema de control de estocasticidad. 
-    \item \textbf{Pruebas de Integración}: Se realizaron para verificar que la interacción entre los módulos del sistema, como la comunicación entre la interfaz web, la API de Flask y el backend que ejecuta SnapperML, fuera fluida y sin errores. 
-    \item \textbf{Pruebas de Sistema}: Estas pruebas evaluaron SnapperML en un entorno que simulaba el entorno de producción, validando tanto los requisitos funcionales como los no funcionales. Se midió el rendimiento bajo carga y se evaluó la estabilidad del sistema. 
-    \item \textbf{Pruebas de Aceptación}: En conjunto con el tutor del proyecto, se llevaron a cabo pruebas de aceptación para confirmar que SnapperML cumpliera con todos los requisitos establecidos y las expectativas del cliente, evaluando los casos de uso específicos definidos en la fase de planificación. 
+    \item \textbf{Pruebas Unitarias}: Estas pruebas validaron las funcionalidades individuales de \Gls{snapperml}, asegurando que cada módulo y función operara de manera correcta y aislada. Se escribieron pruebas para componentes críticos como la carga y validación de archivos \acrshort{yaml}, la interacción con la \Gls{apig} de MLFlow, y el sistema de control de estocasticidad. 
+    \item \textbf{Pruebas de Integración}: Se realizaron para verificar que la interacción entre los módulos del sistema, como la comunicación entre la interfaz web, la \Gls{apig} de Flask y el \gls{backend} que ejecuta \Gls{snapperml}, fuera fluida y sin errores. 
+    \item \textbf{Pruebas de Sistema}: Estas pruebas evaluaron \Gls{snapperml} en un entorno que simulaba el entorno de producción, validando tanto los requisitos funcionales como los no funcionales. Se midió el rendimiento bajo carga y se evaluó la estabilidad del sistema. 
+    \item \textbf{Pruebas de Aceptación}: En conjunto con el tutor del proyecto, se llevaron a cabo pruebas de aceptación para confirmar que \Gls{snapperml} cumpliera con todos los requisitos establecidos y las expectativas del cliente, evaluando los casos de uso específicos definidos en la fase de planificación. 
 \end{itemize}
 
-\section{Cobertura de pruebas} Se aseguró una cobertura de código extensa mediante la creación de casos de prueba para las funciones y métodos principales del sistema. Se utilizaron herramientas de prueba como \texttt{pytest} y \texttt{unittest} para automatizar las pruebas. Un ejemplo de prueba unitaria para la API de SnapperML es el siguiente:
+\section{Cobertura de pruebas} Se aseguró una cobertura de código extensa mediante la creación de casos de prueba para las funciones y métodos principales del sistema. Se utilizaron herramientas de prueba como \texttt{pytest} y \texttt{unittest} para automatizar las pruebas. Un ejemplo de prueba unitaria para la \Gls{apig} de \Gls{snapperml} es el siguiente:
 
 \begin{minted}{python} 
-def test_upload_yaml_file(client):
+def test_upload_\acrshort{yaml}_file(client):
 import sys
 import pytest
 
 sys.path.append('..')
-from api import app
+from \Gls{apig} import app
 
 @pytest.fixture
 def client():
@@ -28,12 +28,12 @@ def client():
 
 def test_save_experiment_file_success(client):
     response = client.post('/save_experiment_file', json={
-        'yamlContent': 'example: value\nanother_example: value2',
-        'filename': 'test.yaml'
+        '\acrshort{yaml}Content': 'example: value\nanother_example: value2',
+        'filename': 'test.\acrshort{yaml}'
     })
     data = response.get_json()
     assert response.status_code == 200
-    assert "YAML file created successfully" in data['message']
+    assert "\acrshort{yaml} file created successfully" in data['message']
 
 def test_save_experiment_file_invalid_data(client):
     response = client.post('/save_experiment_file', json={})
@@ -61,30 +61,30 @@ def test_cancel_no_process(client):
     assert "No running process found" in data['status']
 
 \end{minted} 
-    \mycaptionof{listing}{Ejemplo de prueba unitaria para la carga de archivos YAML en la API de SnapperML}
+    \mycaptionof{listing}{Ejemplo de prueba unitaria para la carga de archivos \acrshort{yaml} en la \Gls{apig} de \Gls{snapperml}}
 
 \section{Resultados de las pruebas unitarias} 
 Las pruebas unitarias mostraron una alta cobertura del código, especialmente en los módulos de carga y validación de archivos, control de estocasticidad y generación de artefactos. La mayoría de los errores detectados fueron corregidos, lo que contribuyó a mejorar la robustez del sistema.
 
 \section{Pruebas de Integración} 
-Se realizaron pruebas de integración para asegurar que todos los componentes de SnapperML funcionaran en conjunto de manera correcta. Estas pruebas validaron flujos de trabajo completos, como la interacción entre la interfaz web y la API de Flask, la ejecución de experimentos a través de Ray, y el registro de métricas en MLFlow.
+Se realizaron pruebas de integración para asegurar que todos los componentes de \Gls{snapperml} funcionaran en conjunto de manera correcta. Estas pruebas validaron flujos de trabajo completos, como la interacción entre la interfaz web y la \Gls{apig} de Flask, la ejecución de experimentos a través de Ray, y el registro de métricas en MLFlow.
 
 \subsection{Resultados de las pruebas de integración} 
 Los resultados confirmaron que los módulos podían comunicarse de manera eficiente, sin pérdidas de datos ni errores en la ejecución de experimentos. Se solucionaron problemas menores relacionados con la sincronización de datos y la gestión de procesos.
 
 \section{Pruebas de Sistema} 
-Las pruebas de sistema fueron realizadas para evaluar el rendimiento y la estabilidad de SnapperML en un entorno que simulaba la producción. Se validaron tanto los requisitos funcionales como los no funcionales, asegurando que el sistema pudiera manejar cargas de trabajo significativas sin degradar el rendimiento.
+Las pruebas de sistema fueron realizadas para evaluar el rendimiento y la estabilidad de \Gls{snapperml} en un entorno que simulaba la producción. Se validaron tanto los requisitos funcionales como los no funcionales, asegurando que el sistema pudiera manejar cargas de trabajo significativas sin degradar el rendimiento.
 
 \subsection{Casos de prueba} 
 Un ejemplo de un caso de prueba de sistema es:
 
-\begin{itemize} \item \textbf{Descripción}: Evaluar la capacidad de SnapperML para procesar un gran número de experimentos simultáneamente sin afectar la estabilidad del sistema. 
+\begin{itemize} \item \textbf{Descripción}: Evaluar la capacidad de \Gls{snapperml} para procesar un gran número de experimentos simultáneamente sin afectar la estabilidad del sistema. 
     \item \textbf{Resultado Esperado}: El sistema debería ejecutar y registrar todos los experimentos sin errores, manteniendo un tiempo de respuesta razonable. 
     \item \textbf{Resultado Obtenido}: El sistema procesó los experimentos con éxito, aunque se identificaron áreas de optimización en la asignación de recursos que se mejoraron posteriormente. 
 \end{itemize}
 
 \section{Pruebas de Aceptación} 
-En colaboración con el tutor del proyecto, se llevaron a cabo pruebas de aceptación para garantizar que SnapperML cumpliera con los requisitos establecidos. Se validaron casos de uso como la carga y edición de archivos de configuración, la ejecución de experimentos, y la generación de artefactos.
+En colaboración con el tutor del proyecto, se llevaron a cabo pruebas de aceptación para garantizar que \Gls{snapperml} cumpliera con los requisitos establecidos. Se validaron casos de uso como la carga y edición de archivos de configuración, la ejecución de experimentos, y la generación de artefactos.
 
 \subsection{Proceso de aceptación} 
 Durante el proceso de aceptación, se evaluaron todas las funcionalidades principales en un entorno controlado. Las pruebas confirmaron que el sistema era fácil de usar y que cumplía con las expectativas del cliente. Se sugirieron algunas mejoras menores en la interfaz de usuario, las cuales fueron implementadas en la versión final.
@@ -93,4 +93,4 @@ Durante el proceso de aceptación, se evaluaron todas las funcionalidades princi
 El sistema fue aceptado tras confirmar que cumplía con todos los requisitos. Las funcionalidades principales, como el seguimiento de experimentos y la optimización de hiperparámetros, se desempeñaron conforme a lo esperado. Se realizaron pequeñas mejoras para optimizar el rendimiento y la usabilidad.
 
 \section{Conclusiones de Pruebas} 
-El proceso de pruebas fue fundamental para asegurar la calidad y confiabilidad de SnapperML. Las pruebas permitieron detectar y corregir errores, optimizar la asignación de recursos, y asegurar que el sistema cumpliera con todos los requisitos funcionales y no funcionales. Como resultado, se logró un sistema robusto y listo para su despliegue en entornos de producción, cumpliendo con los estándares de MLOps y las expectativas del cliente.
+El proceso de pruebas fue fundamental para asegurar la calidad y confiabilidad de \Gls{snapperml}. Las pruebas permitieron detectar y corregir errores, optimizar la asignación de recursos, y asegurar que el sistema cumpliera con todos los requisitos funcionales y no funcionales. Como resultado, se logró un sistema robusto y listo para su despliegue en entornos de producción, cumpliendo con los estándares de \Gls{mlopsg} y las expectativas del cliente.

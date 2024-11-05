@@ -1,3 +1,4 @@
+% Define the hidden glossary
 \newacronym{ci}{CI}{Integración Continua}
 \newacronym{cd}{CD}{Entrega Continua}
 \newacronym{mlops}{MLOps}{Machine Learning Operations}
@@ -6,10 +7,19 @@
 \newacronym{api}{API}{Interfaz de Programación de Aplicaciones}
 \newacronym{cli}{CLI}{Interfaz de Línea de Comandos}
 \newacronym{yaml}{YAML}{Yet Another Markup Language}
+\newacronym{json}{JSON}{JavaScript Object Notation}
 \newacronym{vsc}{VSC}{Visual Studio Code}
 \newacronym{hpo}{HPO}{Optimización de Hiperparámetros}
 \newacronym{pr}{PR}{Pull Request}
 \newacronym{cors}{CORS}{Cross-Origin Resource Sharing}
+\newacronym{ui}{UI}{Interfaz de Usuario}
+\newacronym{es}{ESM}{Módulos ECMAScript}
+\newacronym{hmr}{HMR}{Hot Module Replacement}
+\newacronym{dom}{DOM}{Document Object Model}
+\newacronym{ide}{IDE}{Integrated Development Environment}
+\newacronym{css}{CSS}{Cascading Style Sheets}
+\newacronym{html}{HTML}{HyperText Markup Language}
+\newacronym{nfs}{NFS}{Sistemas de Archivos en Red}
 
 \newglossaryentry{snapperml}
 {
@@ -43,38 +53,110 @@
 }
 
 \newglossaryentry{deuda}{
-    name = {deuda técnica},
+    name = {Deuda Técnica},
+    text = {deuda técnica},
     description = {Costo a futuro de hacer un desarrollo rápido en lugar de hacerlo de forma correcta, lo que puede generar problemas de mantenimiento y calidad}
 }
 
+\newglossaryentry{deudaCapital}{
+    name={Deuda Técnica},
+    text={Deuda Técnica},
+    description={Costo a futuro de hacer un desarrollo rápido en lugar de hacerlo de forma correcta, lo que puede generar problemas de mantenimiento y calidad},
+    type={hidden}
+}
+
 \newglossaryentry{framework}{
-    name = framework,
-    description = {Conjunto de herramientas, bibliotecas y buenas prácticas que proporcionan una estructura estándar para desarrollar software, facilitando y agilizando el proceso de programación.}
+    name = Framework,
+    text = framework,
+    description = {Conjunto de herramientas, bibliotecas y buenas prácticas que proporcionan una estructura estándar para desarrollar software, facilitando y agilizando el proceso de programación}
 }
 
 \newglossaryentry{log}{
-    name = log,
+    name = Log,
+    text = log,
     plural = logs,
-    description = {Registros o archivos que almacenan información detallada sobre eventos y actividades que ocurren en un sistema o aplicación, como errores, advertencias, o acciones realizadas, para ayudar en el monitoreo, depuración y análisis del rendimiento.}
+    description = {Registro o archivo que almacena información detallada sobre eventos y actividades que ocurren en un sistema o aplicación, como errores, advertencias, o acciones realizadas, para ayudar en el monitoreo, depuración y análisis del rendimiento}
 }
 
 \newglossaryentry{apig}{
     name = API,
     plural = APIs,
-    description = {Conjunto de reglas y definiciones que permiten a diferentes aplicaciones o sistemas comunicarse entre sí, facilitando el intercambio de datos y la ejecución de funciones.}
+    description = {Conjunto de reglas y definiciones que permiten a diferentes aplicaciones o sistemas comunicarse entre sí, facilitando el intercambio de datos y la ejecución de funciones}
 }
 
 \newglossaryentry{clig}{
     name = CLI,
-    description = {Forma de interactuar con un sistema operativo o software mediante la introducción de comandos de texto en lugar de utilizar una interfaz gráfica.}
+    description = {Forma de interactuar con un sistema operativo o software mediante la introducción de comandos de texto en lugar de utilizar una interfaz gráfica}
 }
 
 \newglossaryentry{hpog}{
     name = HPO,
-    description = {Proceso de ajustar los hiperparámetros de un modelo de aprendizaje automático para mejorar su rendimiento. A diferencia de los parámetros aprendidos durante el entrenamiento, los hiperparámetros son configuraciones definidas antes de que el modelo comience a entrenar, como la tasa de aprendizaje o el número de capas en una red neuronal.}
+    description = {Proceso de ajustar los hiperparámetros de un modelo de aprendizaje automático para mejorar su rendimiento. A diferencia de los parámetros aprendidos durante el entrenamiento, los hiperparámetros son configuraciones definidas antes de que el modelo comience a entrenar, como la tasa de aprendizaje o el número de capas en una red neuronal}
 }
 
 \newglossaryentry{corsg}{
     name = CORS,
-    description = {Mecanismo de seguridad que permite o bloquea el acceso a recursos desde diferentes dominios, controlando cómo los servidores y los navegadores manejan las solicitudes de origen cruzado.}
+    description = {Mecanismo de seguridad que permite o bloquea el acceso a recursos desde diferentes dominios, controlando cómo los servidores y los navegadores manejan las solicitudes de origen cruzado}
+}
+
+\newglossaryentry{ciclomatica}{
+    name = {Complejidad Ciclomática},
+    text = {complejidad ciclomática},
+    description = {Métrica que mide la cantidad de rutas independientes a través del código fuente de un programa. Se utiliza para evaluar la complejidad y el riesgo asociado a la prueba y mantenimiento del software, indicando cuántos casos de prueba mínimos se necesitan para cubrir todas las posibles rutas de ejecución}
+}
+
+\newglossaryentry{code smells}{
+    name = {Code Smells},
+    text = {code smells},
+    description = {Indicios en el código que sugieren problemas de diseño o implementación que podrían dificultar su mantenimiento o evolución. No suelen ser errores que impidan que el programa funcione, pero pueden señalar áreas del código que necesitan refactorización para mejorar su calidad}
+}
+
+\newglossaryentry{deprecado}{
+    name = {Código deprecado},
+    description = {Código que aún funciona pero se ha marcado como obsoleto y no se recomienda usarlo, generalmente porque ha sido reemplazado por una mejor alternativa. Puede ser eliminado en futuras versiones, por lo que es importante actualizarlo}
+}
+
+\newglossaryentry{artefactos}{
+    name = Artefactos,
+    text = artefactos,
+    description = {Elementos generados y utilizados durante el desarrollo de modelos de aprendizaje automático, como conjuntos de datos procesados, modelos entrenados, métricas de rendimiento, gráficos, y archivos de configuración. Estos artefactos ayudan a documentar y reproducir experimentos}
+}
+
+\newglossaryentry{estocasticidad}{
+    name = {Estocasticidad},
+    text = {estocasticidad},
+    description = {Aleatoriedad o incertidumbre inherente en un proceso o sistema. En matemáticas y ciencia de datos, describe fenómenos que no son completamente deterministas, ya que su comportamiento depende de variables aleatorias}
+}
+
+\newglossaryentry{frontend}{
+    name = Frontend,
+    text = frontend,
+    description = {Parte del desarrollo web que se ocupa de la interfaz de usuario y la experiencia visual de una aplicación. Incluye todo lo que los usuarios ven e interactúan directamente, como botones, diseño, y contenido, utilizando tecnologías como HTML, CSS y JavaScript}
+}
+
+\newglossaryentry{backend}{
+    name = Backend,
+    text = backend,
+    description = {Parte del desarrollo web que gestiona el funcionamiento interno de una aplicación, incluyendo la lógica del negocio, la gestión de bases de datos y la comunicación con el frontend. Se encarga de procesar solicitudes, ejecutar scripts, y almacenar y recuperar datos, utilizando lenguajes como Python, Java, o Node.js}
+}
+
+\newglossaryentry{esg}{
+    name = {Modulos ES},
+    text = {modulos ES},
+    description = {Forma de estructurar y organizar el código JavaScript mediante la importación y exportación de funciones, objetos o variables. Facilitan la reutilización y mantenimiento del código, y son soportados de manera nativa por los navegadores modernos}
+}
+
+\newglossaryentry{hmrg}{
+    name = HMR,
+    description = {Funcionalidad en los entornos de desarrollo web que permite actualizar módulos en una aplicación en tiempo real sin necesidad de recargar toda la página}
+}
+
+\newglossaryentry{domg}{
+    name = {DOM},
+    description = {Representación estructurada de un documento HTML o XML en forma de árbol, que permite a los lenguajes de programación manipular y actualizar dinámicamente el contenido, estructura y estilo de la página web.}
+}
+
+\newglossaryentry{ideg}{
+    name = IDE,
+    description = {Entorno de desarrollo que proporciona herramientas integradas como un editor de código, depurador, y compilador para facilitar la creación de software. Ejemplos comunes incluyen Visual Studio Code, PyCharm, y Eclipse.}
 }

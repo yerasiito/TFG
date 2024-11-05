@@ -1,37 +1,37 @@
 \chapter{Implementación}
-En esta sección se hablará en profundidad sobre como se ha resuelto la deuda técnica y como se ha implementado la interfaz web.
+Este capítulo describe en detalle el proceso de implementación llevado a cabo en \Gls{snapperml}, con énfasis en las soluciones técnicas adoptadas para abordar la \gls{deuda} y el diseño de la interfaz web. La sección se organiza en dos partes principales: la configuración inicial del entorno de desarrollo y las estrategias utilizadas para resolver los desafíos técnicos. Además, se detalla el desarrollo de la interfaz de usuario, explicando la estructura del proyecto y los componentes clave que permiten la interacción eficiente con \Gls{snapperml}.
 
 \section{Configuración inicial}
-Antes de empezar a trabajar con el código hay que hacer unas preparaciones previas y la configuración inicial.
+La configuración inicial es el paso previo para garantizar un entorno de desarrollo estable y eficiente en SnapperML. Este proceso incluye la preparación del entorno, la selección de herramientas adecuadas y la configuración específica del sistema, elementos esenciales para optimizar el flujo de trabajo y asegurar una ejecución fluida de las distintas funcionalidades del proyecto.
 
 \subsection{Entorno de desarrollo}
 
-Para el desarrollo de SnapperML, he elegido Visual Studio Code (VSC) como mi entorno de desarrollo integrado (IDE) principal. Esta elección no fue al azar, ya que VSC ofrece una combinación única de rendimiento, extensibilidad y soporte para múltiples lenguajes y herramientas, lo que lo convierte en una opción ideal para proyectos complejos como SnapperML. A continuación, se detallan las razones por las cuales opté por VSC en lugar de otros IDEs populares, como PyCharm:
+Para el desarrollo de \Gls{snapperml}, he elegido \acrfull{vsc} como mi \Gls{ideg}. Esta elección no fue al azar, ya que \acrlong{vsc} ofrece una combinación única de rendimiento, extensibilidad y soporte para múltiples lenguajes y herramientas, lo que lo convierte en una opción ideal para proyectos complejos como \Gls{snapperml}. A continuación, se detallan las razones por las cuales opté por \acrshort{vsc} en lugar de otros \Glspl{ideg} populares, como PyCharm:
 
 \begin{itemize}
-    \item \textbf{Rendimiento y Ligereza}: A diferencia de PyCharm, que puede ser pesado y consumir más recursos del sistema, VSC es un IDE ligero que ofrece un rendimiento fluido, incluso en máquinas con especificaciones moderadas. Esto es especialmente importante cuando se trabaja con proyectos de machine learning que ya requieren una cantidad significativa de recursos para ejecutar experimentos y modelos.
-    \item \textbf{Extensibilidad y Plugins}: Visual Studio Code destaca por su extensibilidad a través de una amplia variedad de extensiones. Pude personalizar mi entorno de trabajo instalando plugins esenciales como \textit{Python} para soporte de sintaxis y depuración, \textit{Docker} para gestionar contenedores, \textit{YAML} para la edición de archivos de configuración, y \textit{debugpy} para integrar la depuración de Python. Esta flexibilidad me permitió adaptar el IDE a las necesidades específicas de SnapperML.
+    \item \textbf{Rendimiento y Ligereza}: A diferencia de PyCharm, que puede ser pesado y consumir más recursos del sistema, \acrshort{vsc} es un \Gls{ideg} ligero que ofrece un rendimiento fluido, incluso en máquinas con especificaciones moderadas. Esto es especialmente importante cuando se trabaja con proyectos de machine learning que ya requieren una cantidad significativa de recursos para ejecutar experimentos y modelos.
+    \item \textbf{Extensibilidad y Plugins}: \acrlong{vsc} destaca por su extensibilidad a través de una amplia variedad de extensiones. Pude personalizar mi entorno de trabajo instalando plugins esenciales como \textit{Python} para soporte de sintaxis y depuración, \textit{Docker} para gestionar contenedores, \textit{\acrshort{yaml}} para la edición de archivos de configuración, y \textit{debugpy} para integrar la depuración de Python. Esta flexibilidad me permitió adaptar el \Gls{ideg} a las necesidades específicas de \Gls{snapperml}.
 
-    \item \textbf{Integración con Docker y Contenedores}: La extensión de Docker en VSC facilita la gestión y ejecución de contenedores directamente desde el IDE. Esto fue de ayuda para el desarrollo de SnapperML, donde las bases de datos y la interfaz de MLflow se ejecutan en contenedores Docker. Con VSC, pude controlar los contenedores, inspeccionar los registros y solucionar problemas rápidamente.
+    \item \textbf{Integración con Docker y Contenedores}: La extensión de Docker en \acrshort{vsc} facilita la gestión y ejecución de contenedores directamente desde el \Gls{ideg}. Esto fue de ayuda para el desarrollo de \Gls{snapperml}, donde las bases de datos y la interfaz de MLflow se ejecutan en contenedores Docker. Con \acrshort{vsc}, pude controlar los contenedores, inspeccionar los registros y solucionar problemas rápidamente.
 
-    \item \textbf{Depuración Avanzada}: VSC, junto con \texttt{debugpy}, ofrece una experiencia de depuración potente y personalizable. Esto fue fundamental para resolver la deuda técnica del proyecto, que requería un análisis detallado del comportamiento del código y la identificación de errores complejos. La capacidad de configurar múltiples escenarios de depuración me permitió investigar a fondo las diferentes partes de SnapperML y optimizar su ejecución.
+    \item \textbf{Depuración Avanzada}: \acrshort{vsc}, junto con \texttt{debugpy}, ofrece una experiencia de depuración potente y personalizable. Esto fue fundamental para resolver la \gls{deuda} del proyecto, que requería un análisis detallado del comportamiento del código y la identificación de errores complejos. La capacidad de configurar múltiples escenarios de depuración me permitió investigar a fondo las diferentes partes de \Gls{snapperml} y optimizar su ejecución.
 
-    \item \textbf{Soporte para Lenguajes Múltiples}: SnapperML involucra varios lenguajes y tecnologías, como Python, YAML, Docker, y más. VSC proporciona un soporte excelente para todos estos lenguajes en un solo IDE, eliminando la necesidad de cambiar entre diferentes herramientas y mejorando mi flujo de trabajo.
+    \item \textbf{Soporte para Lenguajes Múltiples}: \Gls{snapperml} involucra varios lenguajes y tecnologías, como Python, \acrshort{yaml}, Docker, y más. \acrshort{vsc} proporciona un soporte excelente para todos estos lenguajes en un solo \Gls{ideg}, eliminando la necesidad de cambiar entre diferentes herramientas y mejorando mi flujo de trabajo.
 
-    \item \textbf{Git Integrado}: VSC tiene integración nativa con Git, lo que facilitó el control de versiones y la colaboración en el proyecto. Pude realizar cambios, gestionar ramas y resolver conflictos de manera eficiente sin salir del entorno de desarrollo.
+    \item \textbf{Git Integrado}: \acrshort{vsc} tiene integración nativa con Git, lo que facilitó el control de versiones y la colaboración en el proyecto. Pude realizar cambios, gestionar ramas y resolver conflictos de manera eficiente sin salir del entorno de desarrollo.
 
-    \item \textbf{Personalización y Configuración del Entorno}: VSC permite una personalización completa a través del archivo \texttt{settings.json}, donde configuré opciones específicas como el autoformateo al guardar y la gestión de entornos virtuales. Esto contribuyó a mantener un código limpio y a seguir las mejores prácticas de desarrollo.
+    \item \textbf{Personalización y Configuración del Entorno}: \acrshort{vsc} permite una personalización completa a través del archivo \texttt{settings.json}, donde configuré opciones específicas como el autoformateo al guardar y la gestión de entornos virtuales. Esto contribuyó a mantener un código limpio y a seguir las mejores prácticas de desarrollo.
 \end{itemize}
 
 \input{tablas/visualcode.tex}
 
 \subsection{Configuración del Debugger}
 
-La configuración del \textit{debugger} en el desarrollo de SnapperML presentó varios desafíos debido a la naturaleza del framework. Dado que SnapperML se ejecuta principalmente desde la línea de comandos (CLI) y no como un módulo de Python estándar, la depuración no era un proceso directo. La depuración de un proyecto ejecutado desde la CLI requiere un archivo especial de \textit{entry point} denominado \texttt{run\_experiment.py}. Sin embargo, al intentar lanzar el \textit{debugger} utilizando este archivo, me encontré con que no se ejecutaba correctamente: no se imprimía nada en pantalla ni se lanzaba la ejecución de SnapperML.
+La configuración del \textit{debugger} en el desarrollo de \Gls{snapperml} presentó varios desafíos debido a la naturaleza del framework. Dado que \Gls{snapperml} se ejecuta principalmente desde la línea de comandos (\Gls{clig}) y no como un módulo de Python estándar, la depuración no era un proceso directo. La depuración de un proyecto ejecutado desde la \Gls{clig} requiere un archivo especial de \textit{entry point} denominado \texttt{run\_experiment.py}. Sin embargo, al intentar lanzar el \textit{debugger} utilizando este archivo, me encontré con que no se ejecutaba correctamente: no se imprimía nada en pantalla ni se lanzaba la ejecución de \Gls{snapperml}.
 
-Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque SnapperML no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in VSC?}. El post completo con detalles y contexto se encuentra en el Anexo \ref{Anexo A}.
+Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como esta \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque \Gls{snapperml} no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in \acrshort{vsc}?}. El post completo con detalles y contexto se encuentra en el Anexo \ref{Anexo A}.
 
-Aunque aún no había recibido respuestas, logré encontrar una solución preliminar por mi cuenta. Configuré el \textit{debugger} en Visual Studio Code (VSC) usando \texttt{debugpy}, una extensión integrada para la depuración de Python. La primera configuración que utilicé fue la siguiente:
+Aunque aún no había recibido respuestas, logré encontrar una solución preliminar por mi cuenta. Configuré el \textit{debugger} en \acrfull{vsc} usando \texttt{debugpy}, una extensión integrada para la depuración de Python. La primera configuración que utilicé fue la siguiente:
 
 \begin{minted}{json}
 {
@@ -43,7 +43,7 @@ Aunque aún no había recibido respuestas, logré encontrar una solución prelim
             "program": "${workspaceFolder}/.venv/bin/snapper-ml", 
             "args": [
                 "--config_file",
-                "examples/experiments/svm.yaml"
+                "examples/experiments/svm.\acrshort{yaml}"
             ],
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
@@ -52,15 +52,18 @@ Aunque aún no había recibido respuestas, logré encontrar una solución prelim
     ]
 }
 \end{minted}
+\mycaptionof{listing}{Primera configuración para depurar \Gls{snapperml} con \texttt{debugpy}}
 
-\mycaptionof{listing}{Primera configuración para depurar SnapperML con \texttt{debugpy}}
+Esta configuración permitió que \acrshort{vsc} lanzara \Gls{snapperml} desde la \Gls{clig}, especificando el archivo de configuración de experimentos \texttt{svm.\acrshort{yaml}}. Sin embargo, la solución aún presentaba ciertos problemas, ya que los errores de ejecución diferían al depurar, lo que complicaba la identificación y solución de problemas. Después de una exhaustiva búsqueda de soluciones y varias pruebas sin éxito, un comentario en mi publicación de Stack Overflow me redirigió a un post relacionado \cite{stackoverflow_first_solution}.
 
-Esta configuración permitió que VSC lanzara SnapperML desde la CLI, especificando el archivo de configuración de experimentos \texttt{svm.yaml}. Sin embargo, la solución aún presentaba ciertos problemas ya que los errores de ejecución eran diferentes que al depurar. Hasta que un comentario en mi publicación de Stack Overflow me redirigió a un post relacionado \cite{stackoverflow_first_solution}. Resultó que para que el \textit{entry point} se ejecutara correctamente, era necesario añadir un bloque específico de Python:
+Resultó que para que el \textit{entry point} se ejecutara correctamente, era necesario añadir un bloque específico de Python que iniciara el script de manera adecuada:
+
 \begin{minted}{python}
 # run_experiment.py <= entry point
 if __name__ == '__main__':
     app() 
 \end{minted}
+\mycaptionof{listing}{Modificación del entry point para depurar}
 \begin{minted}{json}
 {
     "configurations": [
@@ -71,20 +74,15 @@ if __name__ == '__main__':
             "program": "${workspaceFolder}/snapper_ml/scripts/run_experiment.py",
             "args": [
                 "--config_file",
-                "examples/experiments/svm.yaml"
-            ],
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "envFile": "${workspaceFolder}/.env",
+                "examples/experiments/svm.\acrshort{yaml}"
+            ]
         }
     ]
 }
 \end{minted}
-\mycaptionof{listing}{Segunda configuración para depurar SnapperML}
+\mycaptionof{listing}{Segunda configuración para depurar \Gls{snapperml}}
 
-Esta pequeña modificación aseguraba que el archivo \texttt{run\_experiment.py} actuara correctamente como \textit{entry point} al ser ejecutado directamente. Después de realizar este ajuste, marqué mi pregunta en Stack Overflow como duplicada y publiqué una respuesta detallada en la pregunta original \cite{stackoverflow_first_solution}. En esa respuesta, describí cómo resolví el problema, incluyendo el código y las instrucciones para configurar el \textit{debugger}.
-
-Finalmente añadí una última configuración para ejecutar ficheros directamente ya que me permitía arreglar otro tipo de errores:
+Esta modificación aseguraba que \texttt{run\_experiment.py} actuara correctamente como \textit{entry point}. Después de ajustarlo, marqué mi pregunta en Stack Overflow como duplicada y publiqué una respuesta detallada en la pregunta original \cite{stackoverflow_first_solution}. En esa respuesta, describí cómo resolví el problema, incluyendo el código y las instrucciones para configurar el \textit{debugger}. Finalmente añadí una última configuración para ejecutar ficheros directamente ya que me permitía arreglar otro tipo de errores:
 
 \begin{minted}{json}
 {
@@ -96,80 +94,75 @@ Finalmente añadí una última configuración para ejecutar ficheros directament
             "program": "train_svm.py",
             "console": "integratedTerminal",
             "args": [
-                "examples/experiments/svm.yaml"
+                "examples/experiments/svm.\acrshort{yaml}"
             ],
         }
     ]
 }
 \end{minted}
-\mycaptionof{listing}{Tercera configuración para depurar SnapperML}
+\mycaptionof{listing}{Tercera configuración para depurar \Gls{snapperml}}
 
-Gracias a estas configuraciones, pude depurar SnapperML de manera eficiente, ya sea ejecutando directamente desde la CLI, utilizando el \textit{entry point} o directamente un fichero con todas las validaciones necesarias.
+Gracias a estas configuraciones, pude depurar \Gls{snapperml} de manera eficiente, ya sea ejecutando directamente desde la \Gls{clig}, utilizando el \textit{entry point} o directamente un fichero con todas las validaciones necesarias.
 
 \subsection{Plugins}
 
-Para optimizar el entorno de desarrollo en Visual Studio Code, se utilizaron varios plugins específicos que facilitaron la depuración y el desarrollo de SnapperML. Estos plugins incluyen:
+Para optimizar el entorno de desarrollo en \acrlong{vsc}, se utilizaron varios plugins específicos que facilitaron la depuración y el desarrollo de \Gls{snapperml}. Estos plugins incluyen:
 
 \begin{itemize}
     \item \textbf{Python}: Extensión oficial de Microsoft que proporciona soporte para depuración, linting, y otras herramientas esenciales de Python.
-    \item \textbf{Python Debugger}: Una extensión para integrar la depuración de Python directamente con Visual Studio Code.
-    \item \textbf{Docker}: Para gestionar y ejecutar contenedores directamente desde VSC, esencial para desplegar las bases de datos y la interfaz de MLflow.
-    \item \textbf{YAML}: Plugin que ofrece soporte de sintaxis y validación de archivos YAML, fundamental para la configuración de experimentos en SnapperML.
-    \item \textbf{WakaTime}: Una herramienta de seguimiento del tiempo que se integra con VSC y proporciona análisis detallados sobre cuánto tiempo se dedica a cada archivo y actividad dentro del proyecto. WakaTime es especialmente útil para gestionar el tiempo de desarrollo y evaluar la productividad. Esto permitió analizar cómo se distribuyen las horas de trabajo, identificar áreas que requerían más atención, y optimizar el flujo de trabajo para cumplir con los plazos del proyecto. Para saber más sobre este apartado consulta el capítulo \ref{planificacion} de planificación.
+    \item \textbf{Python Debugger}: Una extensión para integrar la depuración de Python directamente con \acrlong{vsc}.
+    \item \textbf{Docker}: Para gestionar y ejecutar contenedores directamente desde \acrshort{vsc}, esencial para desplegar las bases de datos y la interfaz de MLflow.
+    \item \textbf{\acrshort{yaml}}: Plugin que ofrece soporte de sintaxis y validación de archivos \acrshort{yaml}, fundamental para la configuración de experimentos en \Gls{snapperml}.
+    \item \textbf{WakaTime}: Una herramienta de seguimiento del tiempo que se integra con \acrshort{vsc} y proporciona análisis detallados sobre cuánto tiempo se dedica a cada archivo y actividad dentro del proyecto. WakaTime es especialmente útil para gestionar el tiempo de desarrollo y evaluar la productividad. Esto permitió analizar cómo se distribuyen las horas de trabajo, identificar áreas que requerían más atención, y optimizar el flujo de trabajo para cumplir con los plazos del proyecto. Para saber más sobre este apartado consulta el capítulo \ref{planificacion} de planificación.
 \end{itemize}
 
 \subsection{Configuración del Usuario (User Settings)}
 
-La configuración personalizada de Visual Studio Code mejoró significativamente el flujo de trabajo y la experiencia de desarrollo. Se ajustaron varias opciones en \texttt{settings.json} para optimizar el entorno:
+La configuración personalizada de \acrlong{vsc} mejoró significativamente el flujo de trabajo y la experiencia de desarrollo. Se ajustaron varias opciones en \texttt{settings.json} para optimizar el entorno:
 
 \begin{minted}{json} 
 { 
     "workbench.colorTheme": "Default Dark Modern",
     "editor.tabSize": 2,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
     "editor.formatOnSave": true,
-    "workbench.iconTheme": "symbols",
-    "workbench.externalBrowser": "chrome",
     "browse-lite.chromeExecutable": "/usr/bin/google-chrome-stable",
     "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-\acrshort{vsc}ode"
     },
     "editor.tabCompletion": "on",
     "wakatime.apiKey": "apikey"
     "docker.attachShellCommand.linux": "/bin/bash" 
 } 
 \end{minted}
-\mycaptionof{listing}{Configuración personalizada de usuario en Visual Studio Code}
+\mycaptionof{listing}{Configuración personalizada de usuario en \acrlong{vsc}}
 
-Estas configuraciones aseguran un entorno de desarrollo más eficiente y organizado, permitiendo trabajar de manera fluida con SnapperML, desde la depuración hasta la gestión de contenedores.
+Estas configuraciones aseguran un entorno de desarrollo más eficiente y organizado, permitiendo trabajar de manera fluida con \Gls{snapperml}, desde la depuración hasta la gestión de contenedores.
 
-\section{Resolviendo la deuda técnica}
-En el capítulo de diseño \ref{diseño} se ha hablado en profundidad sobre la deuda técnica y los problemas encontrados. En esta sección se detallará el proceso de resolución de dicha deuda.
+\section{Resolviendo la Deuda Técnica}
+En el capítulo de \textbf{Diseño \ref{diseño}} se ha hablado en profundidad sobre la \gls{deuda} y los problemas encontrados. En esta sección se detallará el proceso de resolución de dicha deuda.
 
 \subsection{Archivos de configuración inválidos}
-Uno de los problemas identificados en SnapperML está relacionado con la configuración de variables de entorno, necesarias para ejecutar el proyecto tanto en un entorno Docker como en una máquina local. En el archivo docker-compose.yaml, se hace referencia a un archivo .env, pero se encontró que ciertas variables de entorno requeridas por MLflow no estaban definidas en este archivo, lo que generaba problemas de conexión y ejecución.
+Uno de los problemas identificados en \Gls{snapperml} está relacionado con la configuración de variables de entorno, necesarias para ejecutar el proyecto tanto en un entorno Docker como en una máquina local. En el archivo docker-compose.yaml, se hace referencia a un archivo .env, pero se encontró que ciertas variables de entorno requeridas por MLflow no estaban definidas en este archivo.
 
-Para resolver este problema, se crearon dos archivos de entorno: uno para Docker (.envdocker) y otro para la máquina local (.env). El archivo .envdocker define las variables necesarias para que los servicios de MySQL y PostgreSQL se comuniquen dentro de la red de los contenedores Docker, mientras que el archivo .env está configurado para conexiones locales, utilizando 127.0.0.1 como host en lugar de los nombres de los contenedores. Esta solución permite ejecutar SnapperML en ambos entornos sin problemas de configuración.
+\vspace{2.5mm}
+
+Para resolver este problema, se crearon dos archivos de entorno: uno para Docker (.envdocker) y otro para la máquina local (.env). El archivo .envdocker define las variables necesarias para que los servicios de MySQL y PostgreSQL se comuniquen dentro de la red de los contenedores Docker, mientras que el archivo .env está configurado para conexiones locales, utilizando 127.0.0.1 como host en lugar de los nombres de los contenedores. Esta solución permite ejecutar \Gls{snapperml} en ambos entornos sin problemas de configuración.
+
+\vspace{2.5mm}
 
 A continuación se muestra el contenido del archivo .envdocker para el entorno Docker:
 \begin{minted}[breaklines]{bash}
-# .envdocker
-
-# MySQL Configuration
 MYSQL_ROOT_PASSWORD=root_password
 MYSQL_DATABASE=mlflow_db
 MYSQL_USER=mlflow_user
 MYSQL_PASSWORD=mlflow_password
 MYSQL_PORT=3306
 
-# PostgreSQL Configuration
 POSTGRES_USER=optuna_user
 POSTGRES_PASSWORD=optuna_password
 POSTGRES_DB=optuna_db
 POSTGRES_PORT=5432
 
-# MLflow Configuration
 MLFLOW_TRACKING_URI=mysql+mysqldb://${MYSQL_USER}:${MYSQL_PASSWORD}@mlflow_stor
 age:${MYSQL_PORT}/${MYSQL_DATABASE}
 
@@ -178,16 +171,15 @@ una_storage:${POSTGRES_PORT}/${POSTGRES_DB}
 
 MLFLOW_ARTIFACT_ROOT=/mnt/mlruns
 
-# Optuna Storage URI
 OPTUNA_STORAGE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@optuna_st
 orage:${POSTGRES_PORT}/${POSTGRES_DB}
 \end{minted}
 \mycaptionof{listing}{Archivo de variables de entorno \texttt{.envdocker}}
 
-Esta configuración de archivos permite levantar los contenedores Docker sin problemas de conexión y facilita la ejecución de SnapperML tanto en entornos Docker como locales. Ahora es posible visualizar la interfaz de usuario de MLflow accediendo a \code{localhost:5000}.
+Esta configuración de archivos permite levantar los contenedores Docker sin problemas de conexión y facilita la ejecución de \Gls{snapperml} tanto en entornos Docker como locales. Ahora es posible visualizar la interfaz de usuario de MLflow accediendo a \code{localhost:5000}.
 
 \subsection{Dependencias Faltantes}
-Además de los problemas con la configuración de variables de entorno, el análisis inicial reveló la ausencia de varias dependencias críticas en los archivos de configuración del proyecto (\textit{requirements.txt} y \textit{pyproject.toml}). La falta de estas dependencias generaba errores en tiempo de ejecución e impedía que ciertas funcionalidades del sistema se ejecutaran correctamente. A continuación se listan las dependencias faltantes y su propósito dentro de SnapperML:
+Además de los problemas con la configuración de variables de entorno, el análisis inicial reveló la ausencia de varias dependencias críticas en los archivos de configuración del proyecto (\textit{requirements.txt} y \textit{pyproject.toml}). La falta de estas dependencias generaba errores en tiempo de ejecución e impedía que ciertas funcionalidades del sistema se ejecutaran correctamente. A continuación se listan las dependencias faltantes y su propósito dentro de \Gls{snapperml}.
 
 \begin{minted}{python3}
 # requeriments.txt
@@ -201,40 +193,41 @@ install_requires=[ 'pydantic-settings',
                    'psycopg2'
 ]
 \end{minted}
-
+\mycaptionof{listing}{Listado de dependencias faltantes de \Gls{snapperml}}
+Para el correcto funcionamiento de las bases de datos en SnapperML, es necesario asegurarse de que todas las dependencias necesarias estén instaladas dentro de los contenedores Docker que gestionan los servicios de almacenamiento de datos. Durante la configuración del entorno, se identificó la necesidad de instalar dependencias adicionales para que las bases de datos MySQL y PostgreSQL funcionen sin problemas y puedan integrarse adecuadamente con el framework.
 \begin{minted}{dockerfile}
 # Dockerfile
 RUN pip install mlflow pymysql mysqlclient cryptography
 \end{minted}
+\mycaptionof{listing}{Listado de dependencias faltantes para las bases de datos dockerizadas}
 
 \subsubsection{Flask-CORS}
-Flask-CORS permite manejar el Cross-Origin Resource Sharing (CORS) en aplicaciones web desarrolladas con Flask. En SnapperML, esta librería es crucial cuando la interfaz web o API del sistema necesita interactuar con recursos ubicados en diferentes dominios o servidores. CORS es una política de seguridad que restringe las solicitudes HTTP entre dominios distintos; por tanto, Flask-CORS permite habilitar o restringir estas solicitudes de forma controlada. Esto asegura que las aplicaciones externas o clientes distribuidos puedan acceder a los datos de experimentación en SnapperML de manera segura, mejorando la interoperabilidad del sistema en entornos distribuidos.
+Flask-CORS permite manejar el \Gls{cors} en aplicaciones web desarrolladas con Flask. En \Gls{snapperml}, esta librería es crucial cuando la interfaz web o API del sistema necesita interactuar con recursos ubicados en diferentes dominios o servidores. \Gls{cors} es una política de seguridad que restringe las solicitudes HTTP entre dominios distintos; por tanto, Flask-CORS permite habilitar o restringir estas solicitudes de forma controlada. Esto asegura que las aplicaciones externas o clientes distribuidos puedan acceder a los datos de experimentación en \Gls{snapperml} de manera segura, mejorando la interoperabilidad del sistema en entornos distribuidos.
 
-\subsubsection{Pydantic-Settings} Pydantic-Settings es una extensión de la popular librería Pydantic, introducida en la versión 2, que facilita la validación de configuraciones y variables de entorno. En SnapperML, esta librería es fundamental para garantizar que las configuraciones de experimentos, como las de MLflow y Optuna, sean correctas antes de ejecutarse, lo que reduce la probabilidad de errores durante la ejecución. La validación de configuraciones asegura que todos los parámetros estén en el formato esperado y dentro de un rango permitido, lo cual es especialmente útil en entornos de experimentación, donde los parámetros suelen cambiar con frecuencia. La falta de esta dependencia impide que el sistema valide correctamente las configuraciones, generando fallos al iniciar los experimentos.
+\subsubsection{Pydantic-Settings} 
+Pydantic-Settings es una extensión de la popular librería Pydantic, introducida en la versión 2, que facilita la validación de configuraciones y variables de entorno. En \Gls{snapperml}, esta librería es fundamental para garantizar que las configuraciones de experimentos, como las de MLflow y Optuna, sean correctas antes de ejecutarse, lo que reduce la probabilidad de errores durante la ejecución. La validación de configuraciones asegura que todos los parámetros estén en el formato esperado y dentro de un rango permitido, lo cual es especialmente útil en entornos de experimentación, donde los parámetros suelen cambiar con frecuencia. La falta de esta dependencia impide que el sistema valide correctamente las configuraciones, generando fallos al iniciar los experimentos.
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{imagenes/dep_missing-pydantic_settings.png}
     \caption{Falla validando el experimento al faltar \texttt{pydantic-settings}.}
 \end{figure}
 
-\subsubsection{Ruamel.yaml} Ruamel.yaml es un parser avanzado para archivos YAML, que permite una manipulación precisa de configuraciones almacenadas en este formato. SnapperML utiliza Ruamel.yaml para cargar y editar configuraciones de experimentos de machine learning que suelen ser extensas y complejas. A diferencia de otros parsers YAML, Ruamel.yaml permite conservar el orden de las claves y los comentarios en los archivos, lo cual es útil para preservar la legibilidad y facilitar futuras ediciones. Esta librería mejora la experiencia de los usuarios que necesitan ajustar configuraciones con frecuencia, manteniendo la consistencia y estructura del archivo.
+\subsubsection{Ruamel.yaml} Ruamel.yaml es un parser avanzado para archivos \acrshort{yaml}, que permite una manipulación precisa de configuraciones almacenadas en este formato. \Gls{snapperml} utiliza Ruamel.yaml para cargar y editar configuraciones de experimentos de machine learning que suelen ser extensas y complejas. A diferencia de otros parsers \acrshort{yaml}, Ruamel.yaml permite conservar el orden de las claves y los comentarios en los archivos, lo cual es útil para preservar la legibilidad y facilitar futuras ediciones. Esta librería mejora la experiencia de los usuarios que necesitan ajustar configuraciones con frecuencia, manteniendo la consistencia y estructura del archivo.
 
-\subsubsection{Knockknock} Knockknock es una herramienta que permite enviar notificaciones sobre el estado de los experimentos a diferentes plataformas, como el escritorio, Slack o correo electrónico. En SnapperML, esta librería facilita la comunicación entre el sistema y los usuarios al enviar notificaciones en tiempo real cuando un experimento comienza o finaliza. Esto es especialmente útil para experimentos de larga duración, ya que permite a los usuarios estar al tanto del progreso sin necesidad de monitorear constantemente la interfaz. Al recibir notificaciones automáticas, los usuarios pueden enfocarse en otras tareas mientras SnapperML se encarga de la ejecución de los experimentos.
+\subsubsection{Knockknock} Knockknock es una herramienta que permite enviar notificaciones sobre el estado de los experimentos a diferentes plataformas, como el escritorio, Slack o correo electrónico. En \Gls{snapperml}, esta librería facilita la comunicación entre el sistema y los usuarios al enviar notificaciones en tiempo real cuando un experimento comienza o finaliza. Esto es especialmente útil para experimentos de larga duración, ya que permite a los usuarios estar al tanto del progreso sin necesidad de monitorear constantemente la interfaz. Al recibir notificaciones automáticas, los usuarios pueden enfocarse en otras tareas mientras \Gls{snapperml} se encarga de la ejecución de los experimentos.
 
-\subsubsection{psycopg2 y mysqlclient} Las librerías psycopg2 y mysqlclient son necesarias para establecer conexiones con bases de datos PostgreSQL y MySQL, respectivamente. En SnapperML, estas dependencias permiten almacenar y gestionar datos de experimentos en bases de datos relacionales, facilitando la organización y persistencia de resultados en un entorno estructurado y accesible. PostgreSQL y MySQL son populares por su robustez y escalabilidad, lo cual hace que SnapperML pueda manejar grandes volúmenes de datos de experimentación y seguimiento de modelos. La ausencia de estas dependencias genera fallos al intentar crear o acceder a estudios y experimentos en Optuna y MLflow.
+\subsubsection{psycopg2 y mysqlclient} Las librerías psycopg2 y mysqlclient son necesarias para establecer conexiones con bases de datos PostgreSQL y MySQL, respectivamente. En \Gls{snapperml}, estas dependencias permiten almacenar y gestionar datos de experimentos en bases de datos relacionales, facilitando la organización y persistencia de resultados en un entorno estructurado y accesible. PostgreSQL y MySQL son populares por su robustez y escalabilidad, lo cual hace que \Gls{snapperml} pueda manejar grandes volúmenes de datos de experimentación y seguimiento de modelos. La ausencia de estas dependencias genera fallos al intentar crear o acceder a estudios y experimentos en Optuna y MLflow.
 
 \begin{figure}[h] \includegraphics[width=\textwidth]{imagenes/dep_missing-psycopg2.png} \caption{Falla creando el estudio/experimento en Optuna debido a la falta de \texttt{psycopg2}.} \end{figure}
 
-\subsubsection{Termcolor} Termcolor es una pequeña librería que permite añadir color a los mensajes de salida en la consola. En SnapperML, Termcolor se utiliza para colorear mensajes de error y advertencias, lo que facilita la identificación de problemas críticos durante la ejecución de experimentos. Los mensajes de error resaltados con colores permiten a los desarrolladores y usuarios identificar rápidamente qué ha salido mal, sin necesidad de analizar líneas extensas de log. Esto mejora significativamente la experiencia de usuario, especialmente durante la depuración y pruebas.
+\subsubsection{Termcolor} Termcolor es una pequeña librería que permite añadir color a los mensajes de salida en la consola. En \Gls{snapperml}, Termcolor se utiliza para colorear mensajes de error y advertencias, lo que facilita la identificación de problemas críticos durante la ejecución de experimentos. Los mensajes de error resaltados con colores permiten a los desarrolladores y usuarios identificar rápidamente qué ha salido mal, sin necesidad de analizar líneas extensas de log. Esto mejora significativamente la experiencia de usuario, especialmente durante la depuración y pruebas.
 
-\subsubsection{Cryptography} La librería Cryptography es esencial para realizar conexiones seguras y cifradas a bases de datos y otros servicios externos. En SnapperML, Cryptography se utiliza principalmente para la autenticación y cifrado en conexiones a bases de datos como PostgreSQL y MySQL, garantizando la seguridad de los datos y evitando vulnerabilidades. En entornos de machine learning, donde los datos de experimentos pueden contener información confidencial, la autenticación segura es crucial para proteger los datos contra accesos no autorizados. La ausencia de esta dependencia puede generar errores críticos al intentar establecer una conexión segura con la base de datos, como se muestra en la figura siguiente.
+\subsubsection{Cryptography} La librería Cryptography es esencial para realizar conexiones seguras y cifradas a bases de datos y otros servicios externos. En \Gls{snapperml}, Cryptography se utiliza principalmente para la autenticación y cifrado en conexiones a bases de datos como PostgreSQL y MySQL, garantizando la seguridad de los datos y evitando vulnerabilidades. En entornos de machine learning, donde los datos de experimentos pueden contener información confidencial, la autenticación segura es crucial para proteger los datos contra accesos no autorizados. La ausencia de esta dependencia puede generar errores críticos al intentar establecer una conexión segura con la base de datos, como se muestra en la figura siguiente.
 
-\begin{figure}[h] \includegraphics[width=\textwidth]{imagenes/dep_missing-cryptography.png} \caption{Error debido a la falta de \texttt{cryptography} al intentar establecer una conexión segura.} \end{figure}
+\begin{figure}[ht] \includegraphics[width=\textwidth]{imagenes/dep_missing-cryptography.png} \caption{Error debido a la falta de \texttt{cryptography} al intentar establecer una conexión segura.} \end{figure}
 
 \subsection{Dependencias Innecesarias}
-Al revisar el código de SnapperML, se identificó el uso de la librería \code{numpy} en situaciones donde librerías estándar de Python, como \code{random} y \code{float}, podrían cumplir con la misma funcionalidad. Si bien \code{numpy} es una librería muy útil para operaciones matemáticas avanzadas y procesamiento de grandes matrices, en este caso su inclusión resultaba innecesaria, dado que las funcionalidades que se utilizaban podían ser cubiertas por librerías nativas de Python. Al eliminar \code{numpy} en estas secciones del código, se reduce el tamaño de las dependencias y se simplifica el proceso de instalación del proyecto.
-
-A continuación, se muestra un ejemplo de cómo se empleaba numpy en el código original:
+Al revisar el código de \Gls{snapperml}, se identificó el uso de la librería \code{numpy} en situaciones donde librerías estándar de Python, como \code{random} y \code{float}, podrían cumplir con la misma funcionalidad. Si bien \code{numpy} es una librería muy útil para operaciones matemáticas avanzadas, en este caso su inclusión resultaba innecesaria dado que las funcionalidades que se utilizaban podían ser cubiertas por librerías nativas de Python. Al eliminar \code{numpy} en estas secciones del código, se reduce el tamaño de las dependencias y se simplifica el proceso de instalación del proyecto.
 \begin{minted}{python}
 #mlflow.py
 try:
@@ -243,15 +236,14 @@ try:
 except ModuleNotFoundError:
     pass
 \end{minted}
-Y en otra parte del proyecto:
+\captionof{listing}{Uso innecesario de \texttt{numpy} para inicializar semillas en \texttt{mlflow.py}.}
 \begin{minted}{python}
 # experiments.py
 concurrent_workers_by_gpu = available_gpus / gpu if gpu else np.inf
 \end{minted}
+\mycaptionof{listing}{Uso de \texttt{numpy} para definir \texttt{infinito} en \texttt{experiments.py}.}
 
 En ambos casos, la funcionalidad que numpy proporciona puede ser sustituida por librerías estándar de Python, como random y float, que están preinstaladas en cualquier entorno Python y no requieren la instalación de paquetes externos.
-
-La versión optimizada del código sin numpy es la siguiente:
 \begin{minted}{python}
 #mlflow.py
 try:
@@ -259,11 +251,12 @@ try:
 except ModuleNotFoundError:
     pass
 \end{minted}
-Y en la otra parte del proyecto:
+\captionof{listing}{Reemplazo de \texttt{numpy} por la librería estándar \texttt{random} para inicializar semillas.}
 \begin{minted}{python}
 # experiments.py
 concurrent_workers_by_gpu = available_gpus / gpu if gpu else float('inf')
 \end{minted}
+\captionof{listing}{Sustitución de \texttt{np.inf} por \texttt{float('inf')} en \texttt{experiments.py}.}
 
 \subsubsection*{Motivos para Preferir Librerías Estándar sobre Dependencias Externas} Optar por librerías estándar en lugar de dependencias externas como numpy presenta varias ventajas, especialmente en casos donde la funcionalidad que se requiere es básica y puede ser satisfecha sin necesidad de instalaciones adicionales. A continuación, se detallan los motivos principales:
 
@@ -277,29 +270,26 @@ concurrent_workers_by_gpu = available_gpus / gpu if gpu else float('inf')
 
 \end{itemize}
 
-En el caso de SnapperML, la decisión de utilizar random y float en lugar de numpy para operaciones sencillas de generación de números aleatorios y valores de infinito contribuye a un sistema más ligero, portable y fácil de mantener. Este cambio, aunque sencillo, facilita la experiencia de instalación y reduce el peso del proyecto, lo que resulta en una mayor eficiencia y simplicidad para los usuarios y desarrolladores.
+En el caso de \Gls{snapperml}, la decisión de utilizar random y float en lugar de numpy para operaciones sencillas de generación de números aleatorios y valores de infinito contribuye a un sistema más ligero, portable y fácil de mantener. Este cambio, aunque sencillo, facilita la experiencia de instalación y reduce el peso del proyecto, lo que resulta en una mayor eficiencia y simplicidad para los usuarios y desarrolladores.
 
 \subsection{Automatización del Entorno}
-Para facilitar la configuración y gestión del entorno de desarrollo en SnapperML, se implementó un Makefile que automatiza la creación del entorno virtual, la instalación de dependencias, la ejecución de ejemplos, la gestión de contenedores Docker y la limpieza de archivos compilados. Esta automatización permite a los desarrolladores configurar y ejecutar el proyecto de forma rápida y consistente.
+Para facilitar la configuración y gestión del entorno de desarrollo en SnapperML, se implementó un Makefile que automatiza la creación del entorno virtual, la instalación de dependencias, la ejecución de ejemplos, la gestión de contenedores Docker y la limpieza de archivos compilados. Esta automatización permite a los usuarios configurar y ejecutar el proyecto de forma rápida y consistente, reduciendo los errores asociados con la configuración manual y mejorando la eficiencia del flujo de trabajo.
 
-A continuación, se muestra el contenido del Makefile actualizado:
+El uso de un Makefile estandariza las tareas de desarrollo y asegura que todos los usuarios trabajen bajo las mismas condiciones, independientemente del entorno en el que se encuentren. Además, permite una integración sencilla con sistemas de CI/CD, facilitando así el despliegue y pruebas automatizadas. A continuación, se muestra el contenido del Makefile actualizado:
+
 \begin{minted}{make}
 .PHONY: install clean venv help run_example_svm UI docker stop_docker
 
-## Create the python virtual environment
 venv:
 	python3 -m venv $(VENV_DIR)
 
-## Install the package and dependencies
 install: venv
 	$(VENV_BIN)/pip install -e .
 	$(VENV_BIN)/pip install -r requirements.txt
 
-## Execute the train_svm.py file
 run_example_svm: install
     $(VENV_BIN)/snapper-ml --config_file=examples/experiments/svm.yaml
 
-## Start Docker containers
 docker:
     @if ! docker info > /dev/null 2>&1; then \
         echo "Docker is not active. Attempting to start it..."; \
@@ -311,30 +301,28 @@ docker:
         (cd docker && docker compose up); \
     fi
 
-## Stop Docker containers
 stop_docker:
     @(cd docker && docker compose down)
 
-## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 	rm -rf $(VENV_DIR)
 \end{minted}
+\mycaptionof{listing}{Fichero makefile de SnapperML}
+\textbf{venv}: Crea un entorno virtual en la ubicación especificada por \$(VENV\_DIR).
 
-\textbf{venv}: Crea un entorno virtual en la ubicación especificada por \$(VENV\_DIR), aislando las dependencias del proyecto.
+\vspace{4mm}
 
-\vspace{2.5mm}
-
-\textbf{install}: Crea el entorno virtual (si aún no existe) y luego instala las dependencias del proyecto en modo editable, además de las especificadas en `requirements.txt`.
-
-\vspace{2.5mm}
-
-\textbf{run\_example\_svm}: Ejecuta el archivo de configuración `svm.yaml` en SnapperML tras realizar la instalación de dependencias, lo cual facilita la prueba de ejemplos predefinidos.
+\textbf{install}: Crea el entorno virtual y luego instala las dependencias del proyecto en modo editable.
 
 \vspace{2.5mm}
 
-\textbf{docker}: Verifica si Docker está activo; si no, intenta iniciarlo. Posteriormente, levanta los contenedores definidos en el directorio `docker`. La variable `\$(BACKGROUND)` permite ejecutar los contenedores en segundo plano (`-d`).
+\textbf{run\_example\_svm}: Ejecuta el archivo de configuración `svm.\acrshort{yaml}` en \Gls{snapperml} tras realizar la instalación de dependencias.
+
+\vspace{2.5mm}
+
+\textbf{docker}: Verifica si Docker está activo; si no, intenta iniciarlo. Posteriormente, levanta los contenedores definidos en `docker`. `\$(BACKGROUND)` y ejecuta los contenedores en segundo plano.
 
 \vspace{2.5mm}
 
@@ -345,12 +333,12 @@ clean:
 \textbf{clean}: Elimina archivos Python compilados (`*.pyc`, `*.pyo`) y directorios `\_\_pycache\_\_`, además de borrar el entorno virtual, asegurando que el proyecto pueda configurarse desde cero en la siguiente ejecución.
 
 \subsection{Cambios en Dependencias}
-Durante el desarrollo y mantenimiento de SnapperML, varios cambios en las dependencias fueron necesarios para asegurar la compatibilidad y optimizar el rendimiento del proyecto. A continuación, se detallan las modificaciones realizadas en algunas de las dependencias clave.
+Durante el desarrollo y mantenimiento de \Gls{snapperml}, varios cambios en las dependencias fueron necesarios para asegurar la compatibilidad y optimizar el rendimiento del proyecto. A continuación, se detallan las modificaciones realizadas en algunas de las dependencias clave.
 
 \subsubsection{Migración de Pydantic}
-Con la actualización a Pydantic v2, SnapperML experimentó múltiples problemas de compatibilidad debido a cambios significativos en la API de la librería. Pydantic es una herramienta fundamental en SnapperML para la validación de datos y configuraciones, y esta nueva versión introdujo varias mejoras de rendimiento y nuevas funcionalidades, pero también eliminó o modificó ciertas funciones que el proyecto utilizaba.
+Con la actualización a Pydantic v2, \Gls{snapperml} experimentó múltiples problemas de compatibilidad debido a cambios significativos en la API de la librería. Pydantic es una herramienta fundamental en \Gls{snapperml} para la validación de datos y configuraciones, y esta nueva versión introdujo varias mejoras de rendimiento y nuevas funcionalidades, pero también eliminó o modificó ciertas funciones que el proyecto utilizaba.
 
-Para facilitar la transición, se utilizó el script bump-pydantic, diseñado para ayudar en la migración de versiones anteriores de Pydantic a la versión 2. Aunque este script resolvió algunos de los problemas de compatibilidad, ciertos ajustes adicionales tuvieron que realizarse manualmente, especialmente en las validaciones de configuraciones y en el manejo de clases de datos. La migración a Pydantic v2 ha mejorado la eficiencia de las validaciones y optimizado el rendimiento en el procesamiento de configuraciones complejas, lo cual es crucial en un entorno como SnapperML, donde los experimentos suelen requerir configuraciones extensas y detalladas.
+Para facilitar la transición, se utilizó el script bump-pydantic, diseñado para ayudar en la migración de versiones anteriores de Pydantic a la versión 2. Aunque este script resolvió algunos de los problemas de compatibilidad, ciertos ajustes adicionales tuvieron que realizarse manualmente, especialmente en las validaciones de configuraciones y en el manejo de clases de datos. La migración a Pydantic v2 ha mejorado la eficiencia de las validaciones y optimizado el rendimiento en el procesamiento de configuraciones complejas, lo cual es crucial en un entorno como \Gls{snapperml}, donde los experimentos suelen requerir configuraciones extensas y detalladas.
 
 \input{tablas/pydantic.tex}
 
@@ -375,7 +363,7 @@ Además, knockknock ha cambiado la forma en que se importan y usan sus funciones
         \end{minted}
 \mycaptionof{listing}{knockknock - Las funciones de notificación no se importan directamente}
 
-Este cambio es particularmente útil en SnapperML, donde el uso de decoradores simplifica el proceso de notificación para eventos clave, como el inicio y la finalización de experimentos.
+Este cambio es particularmente útil en \Gls{snapperml}, donde el uso de decoradores simplifica el proceso de notificación para eventos clave, como el inicio y la finalización de experimentos.
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightred}{-    show\_desktop\_notification(subject, msg) % obsoleto}|
 |\colorbox{lightgreen}{+    @desktop\_sender(title=subject)}|
@@ -385,22 +373,22 @@ Este cambio es particularmente útil en SnapperML, donde el uso de decoradores s
 Al estructurar las notificaciones de esta forma, se mejora la legibilidad y mantenibilidad del código, alineándolo mejor con las prácticas de desarrollo modernas.
 
 \subsubsection{Ruamel.yaml}
-ruamel.yaml es una librería utilizada en SnapperML para el manejo y parsing de archivos YAML, que suelen emplearse para almacenar configuraciones de experimentos. Con el tiempo, ciertas funciones en ruamel.yaml fueron marcadas como obsoletas, lo que obligó a realizar una actualización para asegurar la compatibilidad del proyecto. Esta actualización incluyó el reemplazo de funciones antiguas y la adaptación a una API simplificada.
+Con el tiempo, ciertas funciones en ruamel.yaml fueron marcadas como obsoletas, lo que obligó a realizar una actualización para asegurar la compatibilidad del proyecto. Esta actualización incluyó el reemplazo de funciones antiguas y la adaptación a una API simplificada.
 
-La función load, que anteriormente se utilizaba con ruamel.yaml, fue reemplazada para alinearse con los cambios en la librería y reducir posibles problemas de compatibilidad en el futuro. Esto asegura que SnapperML pueda manejar archivos de configuración YAML de forma segura y eficiente, manteniendo la estructura y consistencia de los datos. Además, al utilizar la versión actualizada, se mejora el rendimiento en la carga y edición de configuraciones complejas, lo cual es esencial para gestionar experimentos con múltiples parámetros.
+La función load, que anteriormente se utilizaba con ruamel.yaml, fue reemplazada para alinearse con los cambios en la librería y reducir posibles problemas de compatibilidad en el futuro. Esto asegura que \Gls{snapperml} pueda manejar archivos de configuración \acrshort{yaml} de forma segura y eficiente, manteniendo la estructura y consistencia de los datos. Además, al utilizar la versión actualizada, se mejora el rendimiento en la carga y edición de configuraciones complejas, lo cual es esencial para gestionar experimentos con múltiples parámetros.
 \begin{minted}[escapeinside=||]{python}
-|\colorbox{lightred}{- yaml\_doc = ruamel.yaml.load(document, ruamel.yaml.RoundTripLoader)}|
-|\colorbox{lightgreen}{+ yaml\_doc = yaml.load(document, ruamel.yaml.RoundTripLoader)}|
+|\colorbox{lightred}{- \acrshort{yaml}\_doc = ruamel.yaml.load(document, ruamel.yaml.RoundTripLoader)}|
+|\colorbox{lightgreen}{+ \acrshort{yaml}\_doc = \acrshort{yaml}.load(document, ruamel.yaml.RoundTripLoader)}|
     \end{minted}
 
 \subsubsection{Optuna}
-Optuna es una herramienta de optimización de hiperparámetros que SnapperML emplea para mejorar los experimentos de machine learning. Con las actualizaciones recientes en Optuna, varios componentes y funciones de la librería han sido deprecados o modificados. Uno de los cambios más notables fue la eliminación de SkoptSampler, un sampler popular en versiones anteriores. Esto ha requerido una evaluación de los samplers alternativos disponibles para reemplazar su funcionalidad. Optuna ahora proporciona una lista más amplia de samplers modernos, optimizados para un mejor rendimiento y precisión en la optimización de hiperparámetros, lo que permite elegir opciones que se ajusten mejor a los requisitos de SnapperML.
+Optuna es una herramienta de optimización de hiperparámetros que \Gls{snapperml} emplea para mejorar los experimentos de machine learning. Con las actualizaciones recientes en Optuna, varios componentes y funciones de la librería han sido deprecados o modificados. Uno de los cambios más notables fue la eliminación de SkoptSampler, un sampler popular en versiones anteriores. Esto ha requerido una evaluación de los samplers alternativos disponibles para reemplazar su funcionalidad. Optuna ahora proporciona una lista más amplia de samplers modernos, optimizados para un mejor rendimiento y precisión en la optimización de hiperparámetros, lo que permite elegir opciones que se ajusten mejor a los requisitos de \Gls{snapperml}.
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{imagenes/Optuna_samplers.png}
     \caption{Lista de samplers en Optuna}
 \end{figure}
 
-Otro cambio importante en Optuna fue la actualización de la función delete\_study, que ahora requiere argumentos con nombre explícito. Este ajuste, aunque menor, mejora la claridad y la seguridad en el uso de la función, evitando posibles errores al pasar parámetros incorrectos. Adaptar SnapperML a estas nuevas convenciones de Optuna asegura que el sistema se mantenga actualizado y compatible con las versiones futuras de esta librería, aprovechando además las mejoras de rendimiento y funcionalidad que Optuna ha introducido.
+Otro cambio importante en Optuna fue la actualización de la función delete\_study, que ahora requiere argumentos con nombre explícito. Este ajuste, aunque menor, mejora la claridad y la seguridad en el uso de la función, evitando posibles errores al pasar parámetros incorrectos. Adaptar \Gls{snapperml} a estas nuevas convenciones de Optuna asegura que el sistema se mantenga actualizado y compatible con las versiones futuras de esta librería, aprovechando además las mejoras de rendimiento y funcionalidad que Optuna ha introducido.
 
 \begin{minted}[escapeinside=||]{py}
 |\colorbox{lightred}{-    optuna.delete\_study(study\_name, storage)}|
@@ -408,9 +396,9 @@ Otro cambio importante en Optuna fue la actualización de la función delete\_st
 \end{minted}
 
 \subsubsection{Dependencias Abandonadas}
-Finalmente, una de las dependencias identificadas como obsoleta en SnapperML fue tied autoencoder keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos "atados" (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
+Finalmente, una de las dependencias identificadas como obsoleta en \Gls{snapperml} fue tied autoencoder keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos "atados" (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
 
-Para mitigar este problema y evitar la dependencia en una librería desactualizada, se implementó directamente la funcionalidad de codificación/decodificación en el código de SnapperML, eliminando la necesidad de tied-autoencoder-keras. Esta implementación directa permite mayor control sobre el proceso de codificación, asegurando compatibilidad con las versiones actuales de Keras y mejorando la eficiencia de los autoencoders. Al gestionar los pesos directamente en el código, SnapperML mantiene la funcionalidad original de la librería sin depender de un paquete externo que ya no recibe soporte.
+Para mitigar este problema y evitar la dependencia en una librería desactualizada, se implementó directamente la funcionalidad de codificación/decodificación en el código de \Gls{snapperml}, eliminando la necesidad de tied-autoencoder-keras. Esta implementación directa permite mayor control sobre el proceso de codificación, asegurando compatibilidad con las versiones actuales de Keras y mejorando la eficiencia de los autoencoders. Al gestionar los pesos directamente en el código, \Gls{snapperml} mantiene la funcionalidad original de la librería sin depender de un paquete externo que ya no recibe soporte.
 
 \begin{minted}[escapeinside=||]{python}
 inputs = Input(shape=(input_size,))
@@ -436,10 +424,10 @@ inputs = Input(shape=(input_size,))
 \end{minted}
 
 \subsection{Errores y Soluciones}
-Durante el proceso de desarrollo y refactorización de SnapperML, se identificaron varios errores que afectaban la estabilidad y funcionalidad del sistema. A continuación, se describen los principales problemas detectados y las soluciones implementadas para resolverlos.
+Durante el proceso de desarrollo y refactorización de \Gls{snapperml}, se identificaron varios errores que afectaban la estabilidad y funcionalidad del sistema. A continuación, se describen los principales problemas detectados y las soluciones implementadas para resolverlos.
 
 \subsubsection{Conflicto con logging}
-Uno de los problemas iniciales fue un conflicto de nombres entre un archivo del proyecto llamado logging.py y el módulo estándar de Python, logging. Debido a que ambos compartían el mismo nombre, Python interpretaba incorrectamente la referencia al módulo, generando errores de importación y uso. Para resolver este conflicto, se renombró el archivo a loggings.py, eliminando la ambigüedad y permitiendo que las importaciones se resolvieran correctamente. Este ajuste asegura que el sistema utilice sin problemas tanto el módulo logging de Python como las configuraciones específicas de registro en SnapperML.
+Uno de los problemas iniciales fue un conflicto de nombres entre un archivo del proyecto llamado logging.py y el módulo estándar de Python, logging. Debido a que ambos compartían el mismo nombre, Python interpretaba incorrectamente la referencia al módulo, generando errores de importación y uso. Para resolver este conflicto, se renombró el archivo a loggings.py, eliminando la ambigüedad y permitiendo que las importaciones se resolvieran correctamente. Este ajuste asegura que el sistema utilice sin problemas tanto el módulo logging de Python como las configuraciones específicas de registro en \Gls{snapperml}.
 
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightred}{-  from .logging import logger}|
@@ -447,7 +435,7 @@ Uno de los problemas iniciales fue un conflicto de nombres entre un archivo del 
 \end{minted}
 
 \subsubsection{Validación de Config en Pydantic}
-Pydantic v2, se requirieron ajustes en las validaciones de configuraciones. En su versión anterior, Pydantic solo permitía valores de tipo str en ciertos validadores, lo cual limitaba la flexibilidad de SnapperML para aceptar instancias de clase completas. Para mejorar esto, se ajustó el validador de Pydantic en SnapperML para que ahora acepte tanto instancias de la clase como valores de tipo cadena. Este cambio optimiza la validación de configuraciones y permite que el sistema procese instancias completas, facilitando el manejo de configuraciones complejas y asegurando la compatibilidad con la nueva versión de Pydantic.
+Pydantic v2, se requirieron ajustes en las validaciones de configuraciones. En su versión anterior, Pydantic solo permitía valores de tipo str en ciertos validadores, lo cual limitaba la flexibilidad de \Gls{snapperml} para aceptar instancias de clase completas. Para mejorar esto, se ajustó el validador de Pydantic en \Gls{snapperml} para que ahora acepte tanto instancias de la clase como valores de tipo cadena. Este cambio optimiza la validación de configuraciones y permite que el sistema procese instancias completas, facilitando el manejo de configuraciones complejas y asegurando la compatibilidad con la nueva versión de Pydantic.
 \begin{minted}[escapeinside=||]{python}
 @classmethod
 def __get_pydantic_core_schema__(
@@ -460,7 +448,7 @@ def __get_pydantic_core_schema__(
 |\colorbox{lightgreen}{+        return value}|
     \end{minted}
 \subsubsection{Archivo de configuración obligatorio}
-Otro problema recurrente era la falta de un archivo de configuración al ejecutar SnapperML, lo cual generaba errores difíciles de identificar en tiempo de ejecución. Para resolver esto, se implementó una validación que verifica que el archivo de configuración sea proporcionado como argumento al iniciar el sistema. Si el usuario no proporciona un archivo de configuración, el sistema ahora lanza un error claro, indicando que se necesita una ruta de archivo. Esta mejora asegura que SnapperML siempre tenga los datos necesarios para ejecutar un experimento correctamente, reduciendo errores y facilitando el flujo de trabajo de los usuarios.
+Otro problema recurrente era la falta de un archivo de configuración al ejecutar \Gls{snapperml}, lo cual generaba errores difíciles de identificar en tiempo de ejecución. Para resolver esto, se implementó una validación que verifica que el archivo de configuración sea proporcionado como argumento al iniciar el sistema. Si el usuario no proporciona un archivo de configuración, el sistema ahora lanza un error claro, indicando que se necesita una ruta de archivo. Esta mejora asegura que \Gls{snapperml} siempre tenga los datos necesarios para ejecutar un experimento correctamente, reduciendo errores y facilitando el flujo de trabajo de los usuarios.
 \begin{minted}[escapeinside=||]{python}
     def _parse_experiment_arguments() -> JobConfig:
 |\colorbox{lightgreen}{+    if len(sys.argv) < 2:}|
@@ -470,7 +458,7 @@ Otro problema recurrente era la falta de un archivo de configuración al ejecuta
 \end{minted}
 
 \subsubsection{Compatibilidad en el Comando \texttt{run}}
-SnapperML permite la ejecución de comandos de diferentes tipos mediante el comando run, pero anteriormente solo admitía listas. Sin embargo, en algunos casos era necesario admitir también diccionarios como entrada. Para abordar esto, se introdujo una validación adicional que permite a run aceptar tanto listas como diccionarios. Este ajuste proporciona mayor flexibilidad en el uso del comando, permitiendo que SnapperML interprete configuraciones complejas y ejecute comandos personalizados. La adición de esta compatibilidad mejora la adaptabilidad del sistema a diferentes flujos de trabajo y necesidades de configuración.
+\Gls{snapperml} permite la ejecución de comandos de diferentes tipos mediante el comando run, pero anteriormente solo admitía listas. Sin embargo, en algunos casos era necesario admitir también diccionarios como entrada. Para abordar esto, se introdujo una validación adicional que permite a run aceptar tanto listas como diccionarios. Este ajuste proporciona mayor flexibilidad en el uso del comando, permitiendo que \Gls{snapperml} interprete configuraciones complejas y ejecute comandos personalizados. La adición de esta compatibilidad mejora la adaptabilidad del sistema a diferentes flujos de trabajo y necesidades de configuración.
 
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightgreen}{+  elif isinstance(value, dict) and \lq{command}\rq in value:}|
@@ -478,7 +466,7 @@ SnapperML permite la ejecución de comandos de diferentes tipos mediante el coma
 \end{minted}
 
 \subsubsection{Módulo TensorFlow importado dos veces}
-Durante el análisis, se identificó una importación redundante del módulo tensorflow, lo que generaba duplicación innecesaria y aumentaba el consumo de memoria. El sistema importaba tanto mlflow.tensorflow como tensorflow en el mismo contexto, lo cual era redundante. La solución fue consolidar ambas importaciones, eliminando la duplicación y asegurando que el módulo se importe solo una vez bajo el alias tf. Este ajuste optimiza el uso de memoria y asegura que no se produzcan conflictos o duplicaciones en el manejo de TensorFlow en SnapperML.
+Durante el análisis, se identificó una importación redundante del módulo tensorflow, lo que generaba duplicación innecesaria y aumentaba el consumo de memoria. El sistema importaba tanto mlflow.tensorflow como tensorflow en el mismo contexto, lo cual era redundante. La solución fue consolidar ambas importaciones, eliminando la duplicación y asegurando que el módulo se importe solo una vez bajo el alias tf. Este ajuste optimiza el uso de memoria y asegura que no se produzcan conflictos o duplicaciones en el manejo de TensorFlow en \Gls{snapperml}.
 
 \begin{minted}[escapeinside=||]{python}
     if backend == AutologgingBackend.TENSORFLOW:
@@ -488,7 +476,7 @@ Durante el análisis, se identificó una importación redundante del módulo ten
 \end{minted}
 
 \subsection{Refactorizaciones}
-A lo largo del proceso de optimización y mantenimiento de SnapperML, se realizaron varias refactorizaciones para mejorar la calidad del código, reducir el consumo de recursos y facilitar la identificación de problemas. A continuación, se describen las principales refactorizaciones implementadas y su impacto en el sistema.
+A lo largo del proceso de optimización y mantenimiento de SnapperML, se llevaron a cabo varias refactorizaciones estratégicas con el objetivo de mejorar la calidad general del código, optimizar el uso de recursos y facilitar la detección y resolución de problemas. Estas refactorizaciones no solo hicieron que el código fuera más limpio y mantenible, sino que también contribuyeron a un rendimiento más eficiente del sistema. A continuación, se describen en detalle las principales refactorizaciones implementadas y cómo estas modificaciones impactaron de manera positiva en el funcionamiento y la sostenibilidad de SnapperML.
 
 \subsubsection{Migración de \texttt{setup.py} a \texttt{pyproject.toml}}
 Uno de los cambios fundamentales fue la migración de setup.py a pyproject.toml, en línea con las mejores prácticas modernas de empaquetado en Python. pyproject.toml se ha convertido en el estándar para definir la configuración de empaquetado y las dependencias de los proyectos Python, permitiendo una mejor integración con herramientas modernas como poetry y pip. Esta migración simplifica la estructura del proyecto y facilita la gestión de dependencias, permitiendo que el sistema mantenga compatibilidad con el ecosistema Python actual y facilite futuras actualizaciones. Además, pyproject.toml mejora la portabilidad y reproducibilidad del proyecto, ya que unifica las configuraciones en un solo archivo.
@@ -531,11 +519,10 @@ Además, se ajustaron los tipos de excepciones capturadas, sustituyendo capturas
 
 \section{Implementación de la UI}
 
-La implementación de la interfaz de usuario (UI) de SnapperML ha sido cuidadosamente diseñada para ofrecer una experiencia intuitiva y accesible que permita a los usuarios gestionar y ejecutar experimentos de machine learning de manera eficiente. La UI se ha desarrollado utilizando tecnologías modernas, como React, TypeScript y Bootstrap, y está estructurada de manera modular para facilitar la mantenibilidad y la escalabilidad del proyecto. En esta sección, se describe en detalle la estructura del proyecto y las responsabilidades de cada componente.
+La implementación de la interfaz de usuario (UI) de \Gls{snapperml} ha sido cuidadosamente diseñada para ofrecer una experiencia intuitiva y accesible que permita a los usuarios gestionar y ejecutar experimentos de machine learning de manera eficiente. La \acrshort{ui} se ha desarrollado utilizando tecnologías modernas, como React, TypeScript y Bootstrap, y está estructurada de manera modular para facilitar la mantenibilidad y la escalabilidad del proyecto. En esta sección, se describe en detalle la estructura del proyecto y las responsabilidades de cada componente.
 
 \subsection{Estructura del Proyecto}
-
-La estructura del proyecto de la UI se ha organizado de forma lógica para maximizar la eficiencia y la claridad. A continuación, se presenta la estructura principal de archivos y carpetas:
+La estructura del proyecto de la \acrshort{ui} se ha organizado de forma lógica para maximizar la eficiencia, claridad y mantenibilidad del código. Esta organización facilita la navegación por los distintos componentes y permite a los desarrolladores encontrar rápidamente las secciones que necesitan modificar o extender. A continuación, se presenta un desglose de la estructura principal de archivos y carpetas junto con una breve descripción de su propósito:
 
 \input{tree/tree.tex}
 
@@ -551,50 +538,50 @@ La estructura del proyecto está organizada de manera que cada componente de Rea
 
     \item \textbf{public/}: Carpeta que contiene archivos estáticos que se sirven directamente desde el servidor. En esta carpeta se incluyen imágenes como \texttt{MLflow-Logo.svg}, \texttt{snapper-logo.png}, y \texttt{snapper.png}, que se utilizan en la interfaz de usuario. Estos archivos no se procesan ni transforman y se cargan tal cual desde el servidor.
 
-    \item \textbf{src/}: Carpeta principal del código fuente de la aplicación. Aquí es donde se encuentra todo el código de React y TypeScript que compone la UI.
+    \item \textbf{src/}: Carpeta principal del código fuente de la aplicación. Aquí es donde se encuentra todo el código de React y TypeScript que compone la \acrshort{ui}.
           \begin{itemize}
-              \item \textbf{App.tsx}: Componente raíz de la aplicación que define la estructura general de la UI. Sirve como punto de partida para organizar los distintos componentes y gestionar la navegación y el enrutamiento dentro de la aplicación.
+              \item \textbf{App.tsx}: Componente raíz de la aplicación que define la estructura general de la \acrshort{ui}. Sirve como punto de partida para organizar los distintos componentes y gestionar la navegación y el enrutamiento dentro de la aplicación.
               \item \textbf{main.tsx}: Archivo de entrada que monta el componente \texttt{App.tsx} en el DOM. Utiliza Vite para iniciar la aplicación y gestionar el ciclo de vida de React. Este archivo es fundamental para poner en marcha la aplicación en el navegador.
               \item \textbf{vite-env.d.ts}: Archivo de declaración de tipos generado automáticamente por Vite. Proporciona soporte para la integración de TypeScript y ayuda a garantizar que el proyecto se compile correctamente sin errores relacionados con los tipos.
           \end{itemize}
 
-    \item \textbf{styles.css}: Archivo CSS que contiene los estilos globales de la aplicación. Se utiliza para definir la apariencia y el diseño de la UI, asegurando que la aplicación tenga un aspecto cohesivo y profesional. Este archivo puede incluir tanto estilos personalizados como clases de Bootstrap para un diseño más rápido y uniforme.
+    \item \textbf{styles.css}: Archivo CSS que contiene los estilos globales de la aplicación. Se utiliza para definir la apariencia y el diseño de la \acrshort{ui}, asegurando que la aplicación tenga un aspecto cohesivo y profesional. Este archivo puede incluir tanto estilos personalizados como clases de Bootstrap para un diseño más rápido y uniforme.
 
     \item \textbf{tsconfig.json}: Archivos de configuración de TypeScript que definen las reglas de compilación y el comportamiento del compilador.
 
-    \item \textbf{vite.config.ts}: Archivo de configuración de Vite, el bundler utilizado en este proyecto. Define cómo se debe compilar y servir el proyecto, incluyendo configuraciones para plugins y opciones de optimización. Vite proporciona una experiencia de desarrollo rápida y moderna, lo que es esencial para un proyecto como SnapperML.
+    \item \textbf{vite.config.ts}: Archivo de configuración de Vite, el bundler utilizado en este proyecto. Define cómo se debe compilar y servir el proyecto, incluyendo configuraciones para plugins y opciones de optimización. Vite proporciona una experiencia de desarrollo rápida y moderna, lo que es esencial para un proyecto como \Gls{snapperml}.
 
 \end{itemize}
 
 \subsection{Descripción de los Componentes}
-Los componentes de React del proyecto están organizados dentro de \texttt{src/assets/components} y son responsables de diferentes funcionalidades dentro de la UI:
+Los componentes de React del proyecto están organizados dentro de \texttt{src/assets/components} y son responsables de diferentes funcionalidades dentro de la \acrshort{ui}:
 
 \begin{itemize}
     \item \textbf{About.tsx}: Componente que muestra el contenido del subdominio \texttt{/about}. Describe el proyecto, sus objetivos y funcionalidades principales.
     \item \textbf{Contact.tsx}: Componente que muestra el contenido del subdominio \texttt{/contact}. Aquí se presenta información sobre los creadores, colaboradores y tutores del proyecto.
-    \item \textbf{Execute.tsx}: Componente que maneja la lógica de los botones de ejecución de SnapperML. Se encarga de llamar a la API para ejecutar SnapperML y de enviar la salida a \texttt{Terminal.tsx} para su visualización.
-    \item \textbf{FileUpload.tsx}: Componente principal que se muestra en el dominio raíz (\texttt{/}). Permite a los usuarios cargar el archivo de configuración de los experimentos en formato YAML.
-    \item \textbf{NavBar.tsx}: Componente que muestra la barra de navegación en la parte superior de la UI. Utiliza \textit{react-router} para navegar entre los diferentes subdominios, como \texttt{/about} y \texttt{/contact}.
-    \item \textbf{Terminal.tsx}: Componente que implementa una terminal web interactiva. Muestra en tiempo real la salida de SnapperML, gestionando el flujo de datos que proviene de \texttt{Execute.tsx}. \item \textbf{YamlAttributes.tsx}: Componente que analiza automáticamente los campos del archivo de configuración YAML y los muestra de manera dinámica, permitiendo a los usuarios realizar ajustes de forma sencilla.
-    \item \textbf{YamlEditor.tsx}: Componente que proporciona un editor de texto simple en la web, donde los usuarios pueden modificar el archivo de configuración YAML antes de ejecutar SnapperML.
+    \item \textbf{Execute.tsx}: Componente que maneja la lógica de los botones de ejecución de \Gls{snapperml}. Se encarga de llamar a la API para ejecutar \Gls{snapperml} y de enviar la salida a \texttt{Terminal.tsx} para su visualización.
+    \item \textbf{FileUpload.tsx}: Componente principal que se muestra en el dominio raíz (\texttt{/}). Permite a los usuarios cargar el archivo de configuración de los experimentos en formato \acrshort{yaml}.
+    \item \textbf{NavBar.tsx}: Componente que muestra la barra de navegación en la parte superior de la \acrshort{ui}. Utiliza \textit{react-router} para navegar entre los diferentes subdominios, como \texttt{/about} y \texttt{/contact}.
+    \item \textbf{Terminal.tsx}: Componente que implementa una terminal web interactiva. Muestra en tiempo real la salida de \Gls{snapperml}, gestionando el flujo de datos que proviene de \texttt{Execute.tsx}. \item \textbf{YAMLAttributes.tsx}: Componente que analiza automáticamente los campos del archivo de configuración \acrshort{yaml} y los muestra de manera dinámica, permitiendo a los usuarios realizar ajustes de forma sencilla.
+    \item \textbf{YAMLEditor.tsx}: Componente que proporciona un editor de texto simple en la web, donde los usuarios pueden modificar el archivo de configuración \acrshort{yaml} antes de ejecutar \Gls{snapperml}.
 \end{itemize}
 
 \subsection{Problemas Durante la Implementación}
-Durante el desarrollo de la interfaz de usuario para SnapperML, surgieron varios problemas técnicos que requirieron soluciones específicas y la aplicación de buenas prácticas en la programación. A continuación, se describen algunos de los problemas más relevantes, junto con las estrategias empleadas para resolverlos.
+Durante el desarrollo de la interfaz de usuario para \Gls{snapperml}, surgieron varios problemas técnicos que requirieron soluciones específicas y la aplicación de buenas prácticas en la programación. A continuación, se describen algunos de los problemas más relevantes, junto con las estrategias empleadas para resolverlos.
 
-\subsubsection{CORS}
-CORS (Cross-Origin Resource Sharing) es un mecanismo de seguridad implementado en los navegadores que restringe cómo los recursos de una página web pueden ser solicitados desde un dominio diferente al que sirvió la página. En otras palabras, si una aplicación web desea interactuar con una API que se encuentra en un dominio diferente, es necesario gestionar adecuadamente las políticas de CORS para evitar errores de bloqueo.
+\subsubsection{\Gls{corsg}}
+\acrfull{cors} es un mecanismo de seguridad implementado en los navegadores que restringe cómo los recursos de una página web pueden ser solicitados desde un dominio diferente al que sirvió la página. En otras palabras, si una aplicación web desea interactuar con una API que se encuentra en un dominio diferente, es necesario gestionar adecuadamente las políticas de \Gls{corsg} para evitar errores de bloqueo.
 
-Para resolver los problemas de CORS en SnapperML, se consideraron dos soluciones principales:
+Para resolver los problemas de \Gls{corsg} en \Gls{snapperml}, se consideraron dos soluciones principales:
 \begin{enumerate}
     \item Instalar y Configurar \texttt{flask\_cors}: Una solución rápida y efectiva fue utilizar el paquete \texttt{flask\_cors}, que simplifica el manejo de estas políticas en aplicaciones Flask. Se añadió el siguiente fragmento de código para permitir solicitudes desde diferentes orígenes:
           \begin{minted}{python} 
 from flask_cors import CORS
 CORS(app, allow_headers=["Content-Type", "Authorization"], methods=["POST", "OPTIONS"]) 
     \end{minted}
-          Este enfoque es sencillo de implementar y útil para entornos de desarrollo o APIs que requieren flexibilidad en sus políticas de CORS.
+          Este enfoque es sencillo de implementar y útil para entornos de desarrollo o APIs que requieren flexibilidad en sus políticas de \Gls{corsg}.
 
-    \item Configuración con Nginx: Una solución más robusta y adecuada para entornos de producción fue utilizar Nginx como servidor proxy inverso, configurando manualmente las políticas de CORS. Se utilizó el siguiente fragmento de configuración:
+    \item Configuración con Nginx: Una solución más robusta y adecuada para entornos de producción fue utilizar Nginx como servidor proxy inverso, configurando manualmente las políticas de \Gls{corsg}. Se utilizó el siguiente fragmento de configuración:
           \begin{minted}{bash} 
  server { 
     listen 80; 
@@ -619,12 +606,12 @@ CORS(app, allow_headers=["Content-Type", "Authorization"], methods=["POST", "OPT
     }
  }
     \end{minted}
-
+\mycaptionof{listing}{Configuración de Nginx para evitar el CORS}
           Tras realizar esta configuración, fue necesario reiniciar Nginx con el comando \texttt{systemctl restart nginx} para que los cambios surtieran efecto.
 \end{enumerate}
 
 \subsubsection{Buffers y Sincronización}
-Otro desafío surgió al gestionar los procesos de la API que ejecutan comandos en SnapperML. Cuando se inicia un proceso desde la API, este se ejecuta y bloquea la API hasta que finaliza la ejecución. Para manejar la salida de los procesos en tiempo real, se implementó un generador que monitorea tanto la salida estándar (\texttt{stdout}) como los errores (\texttt{stderr}):
+Otro desafío surgió al gestionar los procesos de la API que ejecutan comandos en \Gls{snapperml}. Cuando se inicia un proceso desde la API, este se ejecuta y bloquea la API hasta que finaliza la ejecución. Para manejar la salida de los procesos en tiempo real, se implementó un generador que monitorea tanto la salida estándar (\texttt{stdout}) como los errores (\texttt{stderr}):
 \begin{minted}{python} 
 def generate(): 
     while True: 
@@ -653,12 +640,12 @@ pacman -S expect # En Arch Linux
 apt-get install expect # En Ubuntu 
 \end{minted}
 
-Luego, se utilizó el comando \texttt{unbuffer} para ejecutar SnapperML sin problemas de búfer:
+Luego, se utilizó el comando \texttt{unbuffer} para ejecutar \Gls{snapperml} sin problemas de búfer:
 \begin{minted}{bash} 
 unbuffer snapper-ml --config_file nombre_config 
 \end{minted}
 
-\subsubsection{\texttt{useEffect} y Funciones Asíncronas en React}
+\subsubsection{Funciones Asíncronas en React (\texttt{useEffect})}
 A pesar de que la API ahora enviaba correctamente la salida, se seguían omitiendo partes en la web. Esto se debía al uso de \texttt{useEffect} en \texttt{Execute.tsx}, una función de React diseñada para ejecutar efectos secundarios en respuesta a cambios de estado. Aunque \texttt{useEffect} funciona bien en la mayoría de los casos, es asíncrona por naturaleza, lo que provocaba problemas de sincronización al manejar la salida de la API.
 
 Para resolverlo, se reemplazó \texttt{useEffect} por un enfoque más controlado. Se expuso la función \texttt{writeOutput} (y \texttt{writeCommand}) y se llamó directamente después de la llamada a la API:
@@ -672,13 +659,13 @@ useImperativeHandle(ref, () => ({
   }));
 \end{minted}
 
-Esto permitió actualizar la terminal interactiva en tiempo real, sin perder información, y garantizó que los datos de la API se procesaran correctamente. De esta forma, se solucionaron los problemas de sincronización y se mejoró la experiencia de usuario en la UI.
+Esto permitió actualizar la terminal interactiva en tiempo real, sin perder información, y garantizó que los datos de la API se procesaran correctamente. De esta forma, se solucionaron los problemas de sincronización y se mejoró la experiencia de usuario en la \acrshort{ui}.
 
 \section{Desarrollo de Funcionalidades en la UI}
-El desarrollo de la interfaz de usuario (UI) en SnapperML ha sido un proceso fundamental para proporcionar a los usuarios una experiencia amigable y accesible. A lo largo de esta sección, se describen las principales funcionalidades implementadas y las técnicas empleadas para optimizar tanto la navegación como la gestión de procesos y datos en tiempo real.
+El desarrollo de la interfaz de usuario (\acrshort{ui}) en \Gls{snapperml} ha sido un proceso fundamental para proporcionar a los usuarios una experiencia amigable y accesible. A lo largo de esta sección, se describen las principales funcionalidades implementadas y las técnicas empleadas para optimizar tanto la navegación como la gestión de procesos y datos en tiempo real.
 \subsection{Navegación en React}
 
-React no soporta el enrutamiento de subdominios de forma nativa. Para abordar esta limitación, se utiliza la dependencia \texttt{react-router}, que proporciona una solución completa para la navegación en aplicaciones web. A continuación, se muestra un ejemplo de cómo se implementa la navegación en SnapperML:
+React no soporta el enrutamiento de subdominios de forma nativa. Para abordar esta limitación, se utiliza la dependencia \texttt{react-router}, que proporciona una solución completa para la navegación en aplicaciones web. A continuación, se muestra un ejemplo de cómo se implementa la navegación en \Gls{snapperml}:
 
 \begin{minted}{html}
 <div>
@@ -694,7 +681,7 @@ React no soporta el enrutamiento de subdominios de forma nativa. Para abordar es
 
 \subsection{Detección de Atributos YAML}
 
-Para mostrar de manera visual los atributos del archivo YAML de configuración, se utiliza una función recursiva. Esto permite representar correctamente atributos anidados:
+Para mostrar de manera visual los atributos del archivo \acrshort{yaml} de configuración, se utiliza una función recursiva. Esto permite representar correctamente atributos anidados:
 
 \begin{minted}{jsx} 
 return Object.entries(data).map(([key, value]) => {
@@ -731,7 +718,7 @@ return Object.entries(data).map(([key, value]) => {
     });
 };
 \end{minted}
-\mycaptionof{listing}{Función para detectar y mostrar atributos YAML}
+\mycaptionof{listing}{Función para detectar y mostrar atributos \acrshort{yaml}}
 
 Esta implementación asegura que todos los parámetros, incluidos los atributos anidados, se representen adecuadamente en la interfaz.
 
@@ -761,5 +748,24 @@ with process_lock:
 \mycaptionof{listing}{Eliminar un proceso con mutex}
 
 \subsection{HMR y Estilización}
-Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de Hot Module Reloading (HMR) proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
-Esta característica es particularmente útil para el diseño de la UI, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
+Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
+Esta característica es particularmente útil para el diseño de la \acrshort{ui}, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
+
+\section{Conlusiones}
+El desarrollo e implementación de SnapperML representó un desafío técnico considerable, en el cual se buscó integrar funcionalidades avanzadas de machine learning en un entorno flexible y accesible. A lo largo de este capítulo, se ha descrito los procesos clave que permitieron materializar la arquitectura del sistema, así como las estrategias empleadas para garantizar un rendimiento óptimo y una experiencia de usuario mejorada.
+
+\vspace{2.5mm}
+
+La configuración inicial del entorno de desarrollo fue necesaria para establecer las bases de un flujo de trabajo eficiente. La elección de Visual Studio Code como IDE, junto con la integración de extensiones especializadas y una configuración personalizada, facilitó no solo la escritura de código más limpio y organizado, sino también la depuración de procesos complejos.
+
+\vspace{2.5mm}
+
+Asimismo, se resolvió la deuda técnica acumulada a lo largo del proyecto mediante un enfoque estratégico que incluyó la validación de archivos de configuración, la corrección de dependencias faltantes, y la optimización de las existentes. La automatización del entorno mediante un Makefile personalizado redujo la probabilidad de errores manuales, simplificando el despliegue y la gestión del proyecto.
+
+\vspace{2.5mm}
+
+Por otra parte, la implementación de la interfaz de usuario fue diseñada para maximizar la interactividad y accesibilidad. El uso de React, TypeScript y Bootstrap permitió una construcción modular y escalable de la UI, asegurando que los usuarios puedan gestionar y ejecutar experimentos de machine learning de forma intuitiva y eficiente. 
+
+\vspace{2.5mm}
+
+En resumen, la implementación de SnapperML no solo logró cumplir con los objetivos iniciales de funcionalidad y usabilidad, sino que también sentó las bases para un sistema sostenible y adaptable a futuras expansiones. Este trabajo demuestra la importancia de combinar buenas prácticas de desarrollo, soluciones tecnológicas avanzadas y una estructura de código optimizada para crear una herramienta potente y accesible en el ámbito de la investigación en machine learning. El proyecto queda así preparado para nuevas integraciones y mejoras, con la capacidad de evolucionar conforme avancen las necesidades de los usuarios y las tecnologías del sector.
