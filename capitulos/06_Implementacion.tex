@@ -29,7 +29,7 @@ Para el desarrollo de \Gls{snapperml}, he elegido \acrfull{vsc} como mi \Gls{ide
 
 La configuración del \textit{debugger} en el desarrollo de \Gls{snapperml} presentó varios desafíos debido a la naturaleza del framework. Dado que \Gls{snapperml} se ejecuta principalmente desde la línea de comandos (\Gls{clig}) y no como un módulo de Python estándar, la depuración no era un proceso directo. La depuración de un proyecto ejecutado desde la \Gls{clig} requiere un archivo especial de \textit{entry point} denominado \texttt{run\_experiment.py}. Sin embargo, al intentar lanzar el \textit{debugger} utilizando este archivo, me encontré con que no se ejecutaba correctamente: no se imprimía nada en pantalla ni se lanzaba la ejecución de \Gls{snapperml}.
 
-Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como esta \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque \Gls{snapperml} no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in \acrshort{vsc}?}. El post completo con detalles y contexto se encuentra en el Anexo \ref{Anexo A}.
+Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como esta \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque \Gls{snapperml} no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in \acrshort{vsc}?} El post completo con detalles y contexto se encuentra en el Anexo \ref{Anexo A}.
 
 Aunque aún no había recibido respuestas, logré encontrar una solución preliminar por mi cuenta. Configuré el \textit{debugger} en \acrfull{vsc} usando \texttt{debugpy}, una extensión integrada para la depuración de Python. La primera configuración que utilicé fue la siguiente:
 
@@ -396,7 +396,9 @@ Otro cambio importante en Optuna fue la actualización de la función delete\_st
 \end{minted}
 
 \subsubsection{Dependencias Abandonadas}
-Finalmente, una de las dependencias identificadas como obsoleta en \Gls{snapperml} fue tied autoencoder keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos "atados" (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
+Finalmente, una de las dependencias identificadas como obsoleta en \Gls{snapperml} fue tied autoencoder keras \cite{tiedweights}, un paquete diseñado para trabajar con autoencoders con pesos \say{atados} (tied weights). Esta dependencia no ha recibido actualizaciones en seis años, lo que ha generado problemas de compatibilidad con las versiones modernas de Keras y TensorFlow.
+
+\vspace{4mm}
 
 Para mitigar este problema y evitar la dependencia en una librería desactualizada, se implementó directamente la funcionalidad de codificación/decodificación en el código de \Gls{snapperml}, eliminando la necesidad de tied-autoencoder-keras. Esta implementación directa permite mayor control sobre el proceso de codificación, asegurando compatibilidad con las versiones actuales de Keras y mejorando la eficiencia de los autoencoders. Al gestionar los pesos directamente en el código, \Gls{snapperml} mantiene la funcionalidad original de la librería sin depender de un paquete externo que ya no recibe soporte.
 
@@ -422,6 +424,7 @@ inputs = Input(shape=(input_size,))
         outputs = Dense(input_size, activation='sigmoid')(decoded)
         autoencoder = Model(inputs=inputs, outputs=outputs)
 \end{minted}
+\mycaptionof{listing}{Implementación de la codificación y decodificación de pesos atados.}
 
 \subsection{Errores y Soluciones}
 Durante el proceso de desarrollo y refactorización de \Gls{snapperml}, se identificaron varios errores que afectaban la estabilidad y funcionalidad del sistema. A continuación, se describen los principales problemas detectados y las soluciones implementadas para resolverlos.
@@ -751,7 +754,7 @@ with process_lock:
 Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
 Esta característica es particularmente útil para el diseño de la \acrshort{ui}, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
 
-\section{Conlusiones}
+\section{Conclusiones}
 El desarrollo e implementación de SnapperML representó un desafío técnico considerable, en el cual se buscó integrar funcionalidades avanzadas de machine learning en un entorno flexible y accesible. A lo largo de este capítulo, se ha descrito los procesos clave que permitieron materializar la arquitectura del sistema, así como las estrategias empleadas para garantizar un rendimiento óptimo y una experiencia de usuario mejorada.
 
 \vspace{2.5mm}

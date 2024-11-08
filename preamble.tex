@@ -50,6 +50,7 @@
 \makeatletter
 \addto\shorthandsspanish{\let\esperiod\es@period@code}
 \addto\captionsspanish{\renewcommand{\listingname}{Listado}}
+\renewcommand*{\listlistingname}{Índice de código fuente}
 
 \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-2\baselineskip}}{}{}
 \makeatother
@@ -147,3 +148,5 @@
     \smash{\raisebox{-1ex}{\rule{1pt}{\baselineskip}}}%
     \raisebox{0.5ex}{\rule{1ex}{0pt}}%
 }
+\usepackage{titlesec}
+\titleformat{name=\section,numberless}[block]{\Large\bfseries\filcenter}{}{1em}{}

@@ -30,10 +30,10 @@ El \gls{framework} permite ejecutar experimentos de manera distribuida, utilizan
 \Gls{snapperml} almacena y gestiona modelos entrenados, lo que permite seleccionar aquellos más adecuados para resolver un problema específico sin necesidad de repetir el proceso completo de entrenamiento.
 
 \subsubsection{Configuración de Experimentos Simplificada} 
-Para reducir la "deuda de configuración", \Gls{snapperml} permite definir experimentos y trabajos de optimización a través de archivos \acrshort{yaml} o \acrshort{json}. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
+Para reducir la \say{deuda de configuración}, \Gls{snapperml} permite definir experimentos y trabajos de optimización a través de archivos \acrshort{yaml} o \acrshort{json}. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
 
 \subsubsection{Instrumentalización Mínima} 
-El diseño de \Gls{snapperml} busca minimizar la necesidad de modificar el código existente en proyectos de \acrlong{ml}, evitando el uso excesivo de "código pegamento" y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el \gls{framework}.
+El diseño de \Gls{snapperml} busca minimizar la necesidad de modificar el código existente en proyectos de \acrlong{ml}, evitando el uso excesivo de \say{código pegamento} y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el \gls{framework}.
 
 \Gls{snapperml} se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, MLFlow y Ray, lo que facilita su integración en distintos entornos y mejora la reproducibilidad. Estas tecnologías permiten ejecutar experimentos de manera consistente en cualquier plataforma, desde entornos locales hasta clústeres distribuidos.
 
@@ -46,7 +46,7 @@ El diseño de \Gls{snapperml} busca minimizar la necesidad de modificar el códi
 
 La figura \ref{fig:snapperml_overview} muestra la arquitectura modular inicial de \Gls{snapperml}, destacando la interacción entre sus principales componentes. La \acrfull{cli} actúa como el punto de entrada principal, permitiendo a los usuarios definir y ejecutar experimentos mediante archivos de configuración. Dentro de la arquitectura, módulos como el motor de ejecución de trabajos (\textit{Job Runner}), el motor de \acrlong{hpo}, el motor de seguimiento (\textit{Tracking Engine}), y el motor de empaquetado (\textit{Packaging Engine}) permiten gestionar los distintos aspectos de un experimento de \acrlong{ml}.
 
-La interfaz de almacenamiento conecta la base de datos SQL y el almacenamiento de \gls{artefactos}, proporcionando una ubicación centralizada para métricas, parámetros, registros y \gls{artefactos}, y permitiendo la visualización a través de una interfaz web (Mlflow \acrshort{ui}). Gracias a su integración con herramientas externas, \Gls{snapperml} puede interactuar con herramientas de \acrlong{ml} populares, facilitando la reproducibilidad y el seguimiento de experimentos a gran escala. Para más detalles sobre la arquitectura de \Gls{snapperml}, consultar la thesis de Antonio Molner \cite{snapperml_thesis}.
+La interfaz de almacenamiento conecta la base de datos SQL y el almacenamiento de \gls{artefactos}, proporcionando una ubicación centralizada para métricas, parámetros, registros y \gls{artefactos}, y permitiendo la visualización a través de una interfaz web (Mlflow \acrshort{ui}). Gracias a su integración con herramientas externas, \Gls{snapperml} puede interactuar con herramientas de \acrlong{ml} populares, facilitando la reproducibilidad y el seguimiento de experimentos a gran escala. Para más detalles sobre la arquitectura de \Gls{snapperml}, consultar la tesis de Antonio Molner \cite{snapperml_thesis}.
 
 \section{Ampliación del diseño inicial}
 Como parte de mi trabajo, he implementado una interfaz web para interactuar con \Gls{snapperml} de una manera más sencilla y efectiva. Esta interfaz tiene como objetivo facilitar el uso del \gls{framework}, permitiendo que los usuarios gestionen y monitoreen sus experimentos de \acrlong{ml} de forma más intuitiva, sin necesidad de interactuar directamente con la línea de comandos. La adición de esta interfaz mejora la accesibilidad de \Gls{snapperml}, permitiendo a usuarios con diferentes niveles de experiencia en programación aprovechar sus funcionalidades.
@@ -86,7 +86,7 @@ React es una biblioteca de JavaScript ampliamente utilizada para el desarrollo d
 La elección de React frente a otros \textit{\glspl{framework}} o bibliotecas de \gls{frontend} como Angular y Vue se debe a varias razones específicas:
 
 \begin{itemize}
-    \item \textbf{Flexibilidad y Ecosistema Extenso}: React tiene un ecosistema sólido y bien documentado, con una gran cantidad de librerías y herramientas complementarias. Esto permite a los desarrolladores integrar funcionalidades avanzadas y optimizar la \acrshort{ui} sin necesidad de reinventar la rueda, lo que acelera el desarrollo y mejora la eficiencia.
+    \item \textbf{Flexibilidad y Ecosistema Extenso}: React tiene un ecosistema sólido y bien documentado, con una gran cantidad de librerías y herramientas complementarias. Esto permite a los desarrolladores integrar funcionalidades avanzadas y optimizar la \acrshort{ui} sin necesidad de \say{reinventar la rueda}, lo que acelera el desarrollo y mejora la eficiencia.
 
     \item \textbf{Enfoque en Componentes Reutilizables}: El diseño basado en componentes de React facilita la creación de interfaces modulares. En \Gls{snapperml}, donde diferentes módulos de experimentación y monitoreo deben ser visualizados y gestionados, React permite una construcción estructurada y lógica, donde cada sección de la \acrshort{ui} puede actualizarse de manera independiente.
 
