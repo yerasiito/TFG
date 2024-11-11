@@ -54,8 +54,8 @@
 \end{adjustwidth}
 
 \restoregeometry
-\newgeometry{left=2cm,right=2cm,top=1cm,bottom=2cm} % No margins
-\section*{Anexo B: Publicación en la Dev Community - Top 5 Herramientas MLOps para impulsar tu productividad} \label{Anexo B}
+\newgeometry{left=2cm,right=2cm,top=1cm,bottom=2cm}
+\section*{\namedlabel{stn:Anexo B}{Anexo B}: Publicación en la Dev Community - Top 5 Herramientas MLOps para impulsar tu productividad}
 \addcontentsline{toc}{chapter}{Anexo B: Publicación en la Dev Community - Top 5 Herramientas MLOps para impulsar tu productividad}
 La interacción con la comunidad de desarrolladores es un aspecto clave en la promoción y mejora continua de \Gls{snapperml}. El 25 de octubre, una discusión relevante tuvo lugar en el blog de la Dev Community \cite{devcommunity}, donde Alberto Guillén compartió el enlace del proyecto \Gls{snapperml} en GitHub, alentando a otros miembros a explorar y contribuir al desarrollo del \gls{framework}. Esta interacción es un ejemplo valioso de cómo el proyecto ha comenzado a captar la atención de la comunidad técnica.
 
@@ -80,3 +80,48 @@ Para más detalles sobre la participación en proyectos de MLOps de código abie
 \vspace{4mm}
 
 Este tipo de interacciones y el interés de la comunidad evidencian el potencial de \Gls{snapperml} para evolucionar como una herramienta robusta y bien respaldada por colaboradores de diversas áreas del desarrollo de software.
+
+\clearpage
+\newgeometry{left=0cm,right=0cm,top=1cm,bottom=0cm} % No margins
+\section*{\namedlabel{stn:Anexo C}{Anexo C}: Auditoría de Accesibilidad con Stark}
+\addcontentsline{toc}{chapter}{Anexo C: Auditoría de Accesibilidad con Stark}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics*[width=1\textwidth]{imagenes/Stark_audit_anexo.png}
+    \label{fig:full_stark_audit}
+\end{figure}
+\restoregeometry
+\newgeometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+La auditoría de accesibilidad realizada con Stark es una evaluación integral que examina diversos aspectos de la interfaz web de SnapperML para asegurar su conformidad con las Pautas de Accesibilidad al Contenido en la Web (WCAG). Stark es una herramienta que se integra en entornos de diseño y desarrollo, permitiendo detectar problemas de accesibilidad y sugerir mejoras para optimizar la experiencia de usuario, especialmente para personas con discapacidades.
+
+\subsubsection{Resultados de la Auditoría}
+\begin{enumerate}
+    \item \textbf{Puntuación Global y Análisis General}:
+          \begin{itemize}
+              \item La auditoría muestra que SnapperML obtuvo una puntuación de 90\% en términos de accesibilidad, un valor que refleja un nivel alto de cumplimiento pero aún con áreas de mejora.
+
+              \item Se detectaron 7 violaciones, 23 advertencias potenciales y 345 criterios superados, lo que demuestra un avance significativo, pero también la necesidad de seguir afinando ciertos aspectos.
+          \end{itemize}
+    \item \textbf{Violaciones Detectadas}:
+          \begin{itemize}
+              \item \textbf{Problemas con etiquetas for}: Varias violaciones están relacionadas con elementos de formulario cuyas etiquetas for no apuntan a elementos válidos con los identificadores id correspondientes, afectando la accesibilidad para usuarios que dependen de lectores de pantalla.
+
+              \item \textbf{Contraste insuficiente}: Se identificaron problemas de contraste en los botones “Execute” y “Cancel”, donde el nivel de contraste no cumple con la relación mínima de 7:1 requerida para asegurar una lectura clara y fácil.
+
+              \item \textbf{Uso incorrecto de citas}: Se detectó la necesidad de envolver correctamente las citas con elementos q o blockquote para mantener la semántica adecuada.
+          \end{itemize}
+    \item \textbf{Advertencias Potenciales}:
+          \begin{itemize}
+              \item \textbf{Comprensión sin información sensorial}: Se recomienda verificar que las instrucciones proporcionadas sean comprensibles sin depender de características sensoriales (como colores, formas o ubicaciones).
+
+              \item \textbf{Imágenes con fondos complejos}: Se advierte que algunas imágenes de fondo no pueden ser comprobadas automáticamente y se sugiere un análisis manual para garantizar el contraste adecuado.
+          \end{itemize}
+    \item \textbf{Criterios Superados}:
+          \begin{itemize}
+              \item La auditoría destaca 345 elementos que cumplen con los criterios de accesibilidad, como el uso correcto de atributos alt en imágenes y el cumplimiento de relaciones de información adecuadas en múltiples elementos de la interfaz.
+          \end{itemize}
+\end{enumerate}
+
+\subsubsection{Conclusiones}
+La auditoría de Stark ha sido fundamental para identificar y resolver problemas críticos de accesibilidad en SnapperML. Si bien se ha logrado un alto nivel de cumplimiento, con una puntuación del 90\%, los hallazgos resaltan la importancia de seguir mejorando, especialmente en áreas como el contraste de texto y la correcta asociación de etiquetas de formulario. Estos esfuerzos aseguran que SnapperML sea cada vez más inclusivo y accesible para todos los usuarios.

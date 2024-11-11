@@ -750,6 +750,60 @@ with process_lock:
 \end{minted}
 \mycaptionof{listing}{Eliminar un proceso con mutex.}
 
+\subsection{Accesibilidad}
+
+El objetivo de SnapperML es garantizar que todas las personas, sin importar si tienen alguna discapacidad, su edad o el tipo de tecnología que utilizan para acceder a la web, puedan navegar y utilizar el sitio sin dificultades, promoviendo así la accesibilidad.
+
+\vspace{4mm}
+
+Para lograrlo, el desarrollo de la interfaz de SnapperML se ha basado en las Pautas de Accesibilidad al Contenido en la Web 2.0 establecidas por el W3C (Consorcio de la World Wide Web) y el Observatorio de la Accesibilidad Web en España \cite{accesibilidad_espania}.
+
+\begin{itemize}
+    \item \textbf{Tamaños de fuente flexibles:} Las fuentes se han definido con unidades relativas, permitiendo a los usuarios ampliar o reducir el tamaño desde las opciones de su navegador.
+    \item \textbf{Modo oscuro:} Los usuarios pueden seleccionar el modo oscuro para mejorar el contraste y la legibilidad, proporcionando una experiencia más cómoda en entornos con poca luz.
+    \item \textbf{Estructura clara y navegable:} Las páginas tienen una estructura bien definida que facilita la navegación, tanto para quienes pueden ver todo el contenido como para quienes utilizan lectores de pantalla.
+    \item \textbf{Encabezados de sección accesibles:} Los apartados están marcados adecuadamente como encabezados de sección, permitiendo a los usuarios de lectores de pantalla desplazarse fácilmente entre secciones con la tecla \say{H}.
+\end{itemize}
+
+Además, la accesibilidad de la plataforma ha sido auditada con la herramienta Stark \cite{stark}, obteniéndose resultados y mejoras significativas durante el proceso de optimización. Stark es una herramienta utilizada para evaluar y mejorar la accesibilidad en el desarrollo de interfaces web y aplicaciones. Integrada en entornos de diseño y desarrollo. Stark permite a los desarrolladores y diseñadores verificar el contraste de colores, revisar la estructura de elementos y realizar auditorías de accesibilidad en tiempo real. Con su capacidad para identificar violaciones y advertencias de accesibilidad, Stark facilita la creación de experiencias más inclusivas al señalar áreas problemáticas y sugerir mejoras basadas en las Pautas de Accesibilidad al Contenido en la Web (WCAG).
+
+\vspace{4mm}
+
+Durante la auditoría inicial con Stark, SnapperML obtuvo una puntuación de accesibilidad del 65\%, con 13 violaciones, 4 advertencias potenciales y 52 criterios superados (ver Figura \ref{fig:accesibilidad_inicial}). Posteriormente, se llevaron a cabo diversas mejoras, como el ajuste de colores para un mejor contraste, la asociación adecuada de etiquetas con elementos de formulario, y la optimización de la estructura semántica del contenido.
+
+\vspace{4mm}
+
+Como resultado, la puntuación de accesibilidad aumentó al 84\%, con 0 violaciones, 5 advertencias potenciales y 83 criterios superados, reflejando un avance significativo en la accesibilidad del sitio (ver Figura \ref{fig:accesibilidad_mejorada}).
+
+\begin{figure*}[ht]
+    \centering
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imagenes/audit_init_score.png}
+        \caption{Puntuación inicial}
+        \label{fig:accesibilidad_inicial}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imagenes/audit_improve_score.png}
+        \caption{Puntuación tras arreglar problemas de accesibilidad}
+        \label{fig:accesibilidad_mejorada}
+    \end{subfigure}
+    \caption{Auditoría de accesibilidad usando Stark \cite{stark}.}
+\end{figure*}
+
+La página que obtuvo la mayor puntuación fue la sección \texttt{/about}, con un 92\%, 0 violaciones, 1 advertencia potencial y 179 criterios superados (ver Figura \ref{fig:accesibilidad_maxima}).
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{imagenes/audit_max_score.png}
+    \caption{Máxima puntuación de accesibilidad en Stark}
+    \label{fig:accesibilidad_maxima}
+\end{figure}
+
+Estas mejoras no solo han incrementado significativamente la puntuación de accesibilidad de SnapperML, sino que también aseguran que la plataforma sea más inclusiva y fácil de usar para todos los usuarios, independientemente de sus capacidades. Al final, se incluye un reporte detallado de la auditoría realizada con Stark en el \ref{stn:Anexo C}, que documenta todas las pruebas superadas.
+
+
 \subsection{HMR y Estilización}
 Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
 Esta característica es particularmente útil para el diseño de la \acrshort{ui}, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
