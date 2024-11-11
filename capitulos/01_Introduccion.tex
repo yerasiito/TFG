@@ -10,20 +10,54 @@ Según el informe DORA \cite{DORA}, el uso de \acrshort{ia} no solo incrementa l
 
 Uno de los conceptos clave en la gestión del ciclo de vida del software es la \Gls{deuda}, un término introducido por Ward Cunningham para describir los compromisos técnicos que se asumen al implementar soluciones rápidas y no óptimas para cumplir con plazos o demandas del mercado. Cunningham compara la \gls{deuda} con un préstamo financiero: \say{Un poco de deuda acelera el desarrollo siempre que se pague pronto con refactorización} \cite{cunningham}. Sin embargo, si no se gestiona adecuadamente, esta deuda genera intereses que disminuyen la productividad y pueden eventualmente paralizar equipos de ingeniería bajo la carga de una implementación no refactorizada \cite{introtodebt}.
 
-\section{Objetivo}
+\section{Objetivos}
 
 En el desarrollo del proyecto \Gls{snapperml}, mi trabajo ha consistido en abordar la \gls{deuda} existente para mejorar la mantenibilidad y escalabilidad del \gls{framework}. Esto ha implicado identificar y resolver problemas acumulados que afectaban tanto al rendimiento como a la calidad del código, siguiendo los principios de refactorización para eliminar dicha deuda. Además, como parte del proceso de evolución del proyecto, he integrado una interfaz web que facilita la interacción de los usuarios con el \gls{framework}, mejorando la usabilidad y la accesibilidad de las funcionalidades del sistema.
 
 Este proyecto no solo busca optimizar los flujos de trabajo mediante MLOps, sino también garantizar que el código sea más sostenible a largo plazo, eliminando barreras técnicas que podrían afectar la capacidad de continuar desarrollando nuevas funcionalidades en el futuro. \Gls{snapperml} proporciona una solución de código abierto que permite a usuarios y organizaciones reproducir experimentos de IA de manera efectiva, ahora con una interfaz web más accesible y un código más limpio, gracias a la resolución de la \gls{deuda} existente.
 
+\subsubsection{Objetivos Generales}
+\begin{itemize}
+    \item \textbf{\namedlabel{itm:OG1}{OG1}}: Mejorar la mantenibilidad y escalabilidad del \gls{framework} mediante la resolución de la \gls{deuda} técnica existente.
+    \item \textbf{\namedlabel{itm:OG2}{OG2}}: Facilitar la interacción con \Gls{snapperml} mediante la creación de una interfaz web intuitiva y accesible.
+    \item \textbf{\namedlabel{itm:OG3}{OG3}}: Asegurar que el \gls{framework} sea más sostenible y preparado para futuras extensiones y mejoras.
+    \item \textbf{\namedlabel{itm:OG4}{OG4}}: Optimizar los flujos de trabajo en aprendizaje automático aplicando principios de MLOps para mejorar la eficiencia y reproducibilidad.
+\end{itemize}
+
+\subsubsection{Objetivos Específicos}
+\begin{itemize}
+    \item \textbf{\namedlabel{itm:OE1}{OE1}}: Identificar y refactorizar las áreas del código con alta complejidad o problemas de rendimiento.
+    \item \textbf{\namedlabel{itm:OE2}{OE2}}: Implementar pruebas automatizadas para garantizar la estabilidad del sistema después de las refactorizaciones.
+    \item \textbf{\namedlabel{itm:OE3}{OE3}}: Diseñar y desarrollar una interfaz web usando tecnologías modernas como React, TypeScript y Bootstrap.
+    \item \textbf{\namedlabel{itm:OE4}{OE4}}: Integrar la \Gls{apig} en Flask para gestionar las solicitudes del \gls{frontend} y ejecutar procesos en el \gls{backend}.
+    \item \textbf{\namedlabel{itm:OE5}{OE5}}: Validar la accesibilidad de la interfaz web, asegurando su funcionalidad en diferentes dispositivos y para usuarios con diversas necesidades.
+    \item \textbf{\namedlabel{itm:OE6}{OE6}}: Documentar las mejoras realizadas y las funcionalidades añadidas, proporcionando una guía completa para futuros desarrolladores y usuarios.
+\end{itemize}
+
 \section{Funcionalidad}
-La funcionalidad del \gls{framework} se puede dividir en 4 partes:
+
+La funcionalidad del \gls{framework} se estructura en dos bloques: las funcionalidades originales y las funcionalidades añadidas como parte de este proyecto.
+
+\subsubsection{Funcionalidad Original}
+
+Inicialmente, \Gls{snapperml} contaba con dos elementos fundamentales:
+
 \begin{enumerate}
-    \item \textbf{\Gls{snapperml} \Gls{clig}}: el \gls{framework} de \Gls{snapperml} empaquetado en un comando de terminal. Todo el proceso de ejecución se muestra mediante \glspl{log} a la consola y en ficheros de \glspl{log}.
-    \item \textbf{\Gls{apig} en Flask}: recibe las peticiones del servidor web y lanza el proceso de ejecución de \Gls{snapperml} con el fichero de configuración dado.
-    \item \textbf{Servidor web (Vite)}: Una interfaz de usuario que permite la subida de archivos de configuración en formato .yaml/.yml y llamar a la \Gls{apig} para ejecutar la \Gls{clig} de \Gls{snapperml} con el archivo subido al servidor.
-    \item \textbf{Bases de datos (dockerizadas)}: el almacenamiento predeterminado para los resultados generados por los experimentos. MLflow almacena los artefactos y Optuna los parámetros de cada ejecución del experimento.
+    \item \textbf{\Gls{snapperml} \Gls{clig}}: un \gls{framework} empaquetado como un comando de terminal. Aunque su desarrollo estaba avanzado, debido a la \Gls{deuda} acumulada la ejecución era inestable y requería ajustes para funcionar correctamente. Los procesos de ejecución se reflejan mediante \glspl{log} tanto en consola como en archivos de \glspl{log}.
+    \item \textbf{Bases de datos (dockerizadas)}: el sistema incluía bases de datos \textit{contenedorizadas} para almacenar los resultados de los experimentos, con MLflow para los artefactos y Optuna para los parámetros de ejecución. Sin embargo, carecía de archivos de configuración completos para asegurar su correcta inicialización y funcionalidad. \end{enumerate}
+
+\subsubsection{Funcionalidad Añadida}
+
+Como parte de este proyecto, se han desarrollado e integrado nuevas funcionalidades que amplían y optimizan las capacidades de \Gls{snapperml}:
+
+\begin{enumerate}
+    \item \textbf{\Gls{apig} en Flask}: una API que recibe solicitudes del servidor web, permitiendo iniciar la ejecución de \Gls{snapperml} con un archivo de configuración dado. Esta API facilita la comunicación entre el frontend y el backend, brindando un control centralizado sobre la ejecución de experimentos.
+
+    \item \textbf{Servidor web (Vite)}: una interfaz de usuario moderna que permite la subida de archivos de configuración en formato .yaml/.yml, los cuales pueden ser utilizados para iniciar la ejecución de experimentos mediante la \Gls{apig}. Este servidor web proporciona un entorno accesible y fácil de usar para gestionar las configuraciones y lanzamientos de experimentos de aprendizaje automático.
+    \item \textbf{Resolución de deuda técnica y optimizaciones}: se ha abordado y resuelto la deuda técnica pendiente en \Gls{snapperml} \Gls{clig} y las bases de datos dockerizadas, mejorando la estabilidad y operatividad del sistema. Además, se han realizado optimizaciones, añadido nuevas funcionalidades, y mejorado la generación de artefactos para una mejor gestión y reproducibilidad de los experimentos.
 \end{enumerate}
+
+Estas nuevas funcionalidades, junto con las mejoras realizadas en la \Gls{clig} y las bases de datos, presentan un sistema completo y adaptable que facilita la gestión de flujos de trabajo en \acrlong{ml}.
 
 \section{Estructura del proyecto}
 El proyecto está organizado en varios capítulos que cubren todos los aspectos del desarrollo en \Gls{snapperml}. A continuación, se describe brevemente el contenido de cada capítulo:
@@ -39,4 +73,5 @@ El proyecto está organizado en varios capítulos que cubren todos los aspectos 
 \end{itemize}
 
 \section{Publicación del proyecto}
-Todo el proyecto ha sido desarrollado usando control de versiones y publicado en GitHub. Se puede encontrar el código fuente en \href{https://github.com/SnapperML/SnapperML/tree/master}{SnapperML} \cite{snapperml}.
+Todo el proyecto ha sido desarrollado usando control de versiones y publicado en GitHub. Se puede encontrar el código fuente en \href{https://github.com/SnapperML/SnapperML/tree/master}{SnapperML}  \cite{snapperml}
+\url{https://github.com/SnapperML/SnapperML/tree/master}.

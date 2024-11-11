@@ -2,8 +2,8 @@
 \clearpage
 \newgeometry{left=0cm,right=0cm,top=1cm,bottom=0cm} % No margins
 
-\section*{Anexo: Stackoverflow - Cómo depurar un paquete CLI de python en VSC} \label{Anexo A}
-\addcontentsline{toc}{chapter}{Anexo: Stackoverflow - Como depurar un paquete CLI de python en VSC}
+\section*{\namedlabel{stn:Anexo A}{Anexo A}: Stackoverflow - Cómo depurar un paquete CLI de python en VSC}
+\addcontentsline{toc}{chapter}{Anexo A: Stackoverflow - Como depurar un paquete CLI de python en VSC}
 \begin{figure}[H]
     \includegraphics*[width=1\textwidth]{imagenes/stackoverflow_my_post_1.png}
     \label{fig:stackoverflow_full_post}
@@ -20,4 +20,63 @@
     \includegraphics*[width=\textwidth]{imagenes/stackoverflow_my_post_3.png}
     \caption{Stackoverflow - How to debug a Python CLI package in Visual Studio Code?}
 \end{figure}
+
+\begin{adjustwidth}{2cm}{2cm}
+    La imagen adjunta corresponde a una publicación realizada en Stack Overflow, donde se describe un problema relacionado con la depuración de un paquete Python que se ejecuta en la \acrfull{cli} usando \acrfull{vsc}. A continuación, se detalla la estructura del contenido:
+    \vspace{2mm}
+    \begin{enumerate}
+        \item \textbf{Descripción Inicial del Problema}: Se explica que el proyecto es un paquete Python ejecutable en la \acrlong{cli} con un comando específico. Recientemente, se actualizaron algunas dependencias que requieren depuración debido a funciones deprecadas o eliminadas.
+              \vspace{2mm}
+
+        \item \textbf{Contexto de Configuración}: Se especifica que se utiliza \acrshort{vsc} y ha configurado launch.json para depuración. Sin embargo, la configuración solo permite ejecutar un archivo Python específico, y el proyecto no tiene un main.py, lo cual dificulta la ejecución del punto de entrada adecuado.
+              \vspace{2mm}
+
+        \item \textbf{Árbol del Proyecto}: Se presenta una vista del árbol del proyecto, destacando el archivo run\_experiment.py en el directorio scripts como punto de entrada definido en setup.py.
+              \vspace{2mm}
+
+        \item \textbf{Intentos y Errores}:
+              \begin{itemize}
+                  \item     Se proporciona un ejemplo de configuración de launch.json, que no produce el resultado esperado.
+                        Se muestra un error de ejecución indicando que no se encuentra el módulo \_\_main\_\_ correspondiente.
+
+                  \item Proceso de Desarrollo: Se detalla el procedimiento de instalación del paquete localmente usando un entorno virtual (venv) y los comandos de instalación en modo editable.
+              \end{itemize}
+
+              \vspace{2mm}
+        \item \textbf{Configuración Actual de launch.json}: La publicación incluye la configuración actual de launch.json, que especifica el archivo de ejemplo que se intenta depurar con argumentos adicionales.
+              \vspace{2mm}
+
+        \item \textbf{Notas Adicionales y Edición}: Se menciona un enlace a una solución publicada en otra pregunta de Stack Overflow relacionada con la depuración de aplicaciones \acrshort{cli} en Python.
+    \end{enumerate}
+    \vspace{2mm}
+
+    Esta descripción forma parte del anexo, proporcionando una explicación clara del problema técnico y las soluciones intentadas, lo cual es relevante para la documentación del trabajo final de grado.
+\end{adjustwidth}
+
 \restoregeometry
+\newgeometry{left=2cm,right=2cm,top=1cm,bottom=2cm} % No margins
+\section*{Anexo B: Publicación en la Dev Community - Top 5 Herramientas MLOps para impulsar tu productividad} \label{Anexo B}
+\addcontentsline{toc}{chapter}{Anexo B: Publicación en la Dev Community - Top 5 Herramientas MLOps para impulsar tu productividad}
+La interacción con la comunidad de desarrolladores es un aspecto clave en la promoción y mejora continua de \Gls{snapperml}. El 25 de octubre, una discusión relevante tuvo lugar en el blog de la Dev Community \cite{devcommunity}, donde Alberto Guillén compartió el enlace del proyecto \Gls{snapperml} en GitHub, alentando a otros miembros a explorar y contribuir al desarrollo del \gls{framework}. Esta interacción es un ejemplo valioso de cómo el proyecto ha comenzado a captar la atención de la comunidad técnica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics*[width=0.7\textwidth]{imagenes/dev_community.png}
+    \caption{Discusión en la comunidad de desarrolladores sobre SnapperML el 25 de octubre \cite{devcommunity}. }
+    \label{fig:devcommunity}
+
+\end{figure}
+
+En la discusión ilustrada en la figura \ref{fig:devcommunity}, Rohan Sharma, autor del artículo, destacó el uso de MLflow en \Gls{snapperml} y ofreció sugerencias para aumentar la visibilidad y participación en el proyecto. Entre sus recomendaciones, mencionó la apertura de nuevos problemas (issues) en el repositorio de GitHub, lo que permitiría a colaboradores potenciales contribuir de manera más organizada y efectiva. Además, propuso participar en eventos de código abierto, como Hacktoberfest, para atraer desarrolladores y mejorar el proyecto a través de contribuciones comunitarias.
+
+\vspace{4mm}
+
+Rohan también sugirió compartir cualquier canal de comunicación relacionado, como un servidor de Discord, para facilitar la colaboración entre desarrolladores y crear un entorno comunitario activo alrededor de \Gls{snapperml}. Estas observaciones subrayan la importancia de involucrar a la comunidad de código abierto para impulsar el desarrollo y sostenibilidad de proyectos tecnológicos.
+
+\vspace{4mm}
+
+Para más detalles sobre la participación en proyectos de MLOps de código abierto y recomendaciones adicionales, se puede consultar la referencia proporcionada por Rohan Sharma en su artículo sobre herramientas de MLOps en el siguiente enlace: \url{https://dev.to/rohan_sharma/top-5-open-source-mlops-tool-to-boost-your-production-4j0a}.
+
+\vspace{4mm}
+
+Este tipo de interacciones y el interés de la comunidad evidencian el potencial de \Gls{snapperml} para evolucionar como una herramienta robusta y bien respaldada por colaboradores de diversas áreas del desarrollo de software.

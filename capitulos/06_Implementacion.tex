@@ -1,5 +1,5 @@
 \chapter{Implementación}
-Este capítulo describe en detalle el proceso de implementación llevado a cabo en \Gls{snapperml}, con énfasis en las soluciones técnicas adoptadas para abordar la \gls{deuda} y el diseño de la interfaz web. La sección se organiza en dos partes principales: la configuración inicial del entorno de desarrollo y las estrategias utilizadas para resolver los desafíos técnicos. Además, se detalla el desarrollo de la interfaz de usuario, explicando la estructura del proyecto y los componentes clave que permiten la interacción eficiente con \Gls{snapperml}.
+Este capítulo describe en detalle el proceso de implementación llevado a cabo en \Gls{snapperml}, con énfasis en las soluciones técnicas adoptadas para abordar la \gls{deuda} y la implementación de la interfaz web. La sección se organiza en dos partes principales: la configuración inicial del entorno de desarrollo y las estrategias utilizadas para resolver los desafíos técnicos. Además, se detalla el desarrollo de la interfaz de usuario, explicando la estructura del proyecto y los componentes clave que permiten la interacción eficiente con \Gls{snapperml}.
 
 \section{Configuración inicial}
 La configuración inicial es el paso previo para garantizar un entorno de desarrollo estable y eficiente en SnapperML. Este proceso incluye la preparación del entorno, la selección de herramientas adecuadas y la configuración específica del sistema, elementos esenciales para optimizar el flujo de trabajo y asegurar una ejecución fluida de las distintas funcionalidades del proyecto.
@@ -29,7 +29,7 @@ Para el desarrollo de \Gls{snapperml}, he elegido \acrfull{vsc} como mi \Gls{ide
 
 La configuración del \textit{debugger} en el desarrollo de \Gls{snapperml} presentó varios desafíos debido a la naturaleza del framework. Dado que \Gls{snapperml} se ejecuta principalmente desde la línea de comandos (\Gls{clig}) y no como un módulo de Python estándar, la depuración no era un proceso directo. La depuración de un proyecto ejecutado desde la \Gls{clig} requiere un archivo especial de \textit{entry point} denominado \texttt{run\_experiment.py}. Sin embargo, al intentar lanzar el \textit{debugger} utilizando este archivo, me encontré con que no se ejecutaba correctamente: no se imprimía nada en pantalla ni se lanzaba la ejecución de \Gls{snapperml}.
 
-Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como esta \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque \Gls{snapperml} no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in \acrshort{vsc}?} El post completo con detalles y contexto se encuentra en el Anexo \ref{Anexo A}.
+Para resolver este problema, comencé una búsqueda intensiva en Stack Overflow, donde revisé publicaciones similares como esta \cite{stackoverflow_modules}. Sin embargo, las soluciones propuestas no se aplicaban directamente a mi caso porque \Gls{snapperml} no está estructurado como un módulo de Python tradicional. Dado que estas respuestas no eran adecuadas, publiqué mi propia pregunta en Stack Overflow titulada: \textbf{How to debug CLI Python package in \acrshort{vsc}?} El post completo con detalles y contexto se encuentra en el \ref{stn:Anexo A}.
 
 Aunque aún no había recibido respuestas, logré encontrar una solución preliminar por mi cuenta. Configuré el \textit{debugger} en \acrfull{vsc} usando \texttt{debugpy}, una extensión integrada para la depuración de Python. La primera configuración que utilicé fue la siguiente:
 
@@ -52,7 +52,7 @@ Aunque aún no había recibido respuestas, logré encontrar una solución prelim
     ]
 }
 \end{minted}
-\mycaptionof{listing}{Primera configuración para depurar \Gls{snapperml} con \texttt{debugpy}}
+\mycaptionof{listing}{Primera configuración para depurar \Gls{snapperml} con \texttt{debugpy}.}
 
 Esta configuración permitió que \acrshort{vsc} lanzara \Gls{snapperml} desde la \Gls{clig}, especificando el archivo de configuración de experimentos \texttt{svm.\acrshort{yaml}}. Sin embargo, la solución aún presentaba ciertos problemas, ya que los errores de ejecución diferían al depurar, lo que complicaba la identificación y solución de problemas. Después de una exhaustiva búsqueda de soluciones y varias pruebas sin éxito, un comentario en mi publicación de Stack Overflow me redirigió a un post relacionado \cite{stackoverflow_first_solution}.
 
@@ -63,7 +63,7 @@ Resultó que para que el \textit{entry point} se ejecutara correctamente, era ne
 if __name__ == '__main__':
     app() 
 \end{minted}
-\mycaptionof{listing}{Modificación del entry point para depurar}
+\mycaptionof{listing}{Modificación del entry point para depurar.}
 \begin{minted}{json}
 {
     "configurations": [
@@ -80,9 +80,9 @@ if __name__ == '__main__':
     ]
 }
 \end{minted}
-\mycaptionof{listing}{Segunda configuración para depurar \Gls{snapperml}}
+\mycaptionof{listing}{Segunda configuración para depurar \Gls{snapperml}.}
 
-Esta modificación aseguraba que \texttt{run\_experiment.py} actuara correctamente como \textit{entry point}. Después de ajustarlo, marqué mi pregunta en Stack Overflow como duplicada y publiqué una respuesta detallada en la pregunta original \cite{stackoverflow_first_solution}. En esa respuesta, describí cómo resolví el problema, incluyendo el código y las instrucciones para configurar el \textit{debugger}. Finalmente añadí una última configuración para ejecutar ficheros directamente ya que me permitía arreglar otro tipo de errores:
+Esta modificación aseguraba que \texttt{run\_experiment.py} actuara correctamente como \textit{entry point}. Después del ajuste, marqué mi pregunta en Stack Overflow como duplicada y publiqué una respuesta detallada en la pregunta original \cite{stackoverflow_first_solution} (disponible en \ref{stn:Anexo A}). En esa respuesta, describí cómo resolví el problema, incluyendo el código y las instrucciones para configurar el \textit{debugger}. Finalmente añadí una última configuración que ejecuta ficheros directamente para arreglar otro tipo de errores:
 
 \begin{minted}{json}
 {
@@ -100,7 +100,7 @@ Esta modificación aseguraba que \texttt{run\_experiment.py} actuara correctamen
     ]
 }
 \end{minted}
-\mycaptionof{listing}{Tercera configuración para depurar \Gls{snapperml}}
+\mycaptionof{listing}{Tercera configuración para depurar \Gls{snapperml}.}
 
 Gracias a estas configuraciones, pude depurar \Gls{snapperml} de manera eficiente, ya sea ejecutando directamente desde la \Gls{clig}, utilizando el \textit{entry point} o directamente un fichero con todas las validaciones necesarias.
 
@@ -134,7 +134,7 @@ La configuración personalizada de \acrlong{vsc} mejoró significativamente el f
     "docker.attachShellCommand.linux": "/bin/bash" 
 } 
 \end{minted}
-\mycaptionof{listing}{Configuración personalizada de usuario en \acrlong{vsc}}
+\mycaptionof{listing}{Configuración personalizada de usuario en \acrlong{vsc}.}
 
 Estas configuraciones aseguran un entorno de desarrollo más eficiente y organizado, permitiendo trabajar de manera fluida con \Gls{snapperml}, desde la depuración hasta la gestión de contenedores.
 
@@ -174,7 +174,7 @@ MLFLOW_ARTIFACT_ROOT=/mnt/mlruns
 OPTUNA_STORAGE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@optuna_st
 orage:${POSTGRES_PORT}/${POSTGRES_DB}
 \end{minted}
-\mycaptionof{listing}{Archivo de variables de entorno \texttt{.envdocker}}
+\mycaptionof{listing}{Archivo de variables de entorno \texttt{.envdocker}.}
 
 Esta configuración de archivos permite levantar los contenedores Docker sin problemas de conexión y facilita la ejecución de \Gls{snapperml} tanto en entornos Docker como locales. Ahora es posible visualizar la interfaz de usuario de MLflow accediendo a \code{localhost:5000}.
 
@@ -193,18 +193,18 @@ install_requires=[ 'pydantic-settings',
                    'psycopg2'
 ]
 \end{minted}
-\mycaptionof{listing}{Listado de dependencias faltantes de \Gls{snapperml}}
+\mycaptionof{listing}{Listado de dependencias faltantes de \Gls{snapperml}.}
 Para el correcto funcionamiento de las bases de datos en SnapperML, es necesario asegurarse de que todas las dependencias necesarias estén instaladas dentro de los contenedores Docker que gestionan los servicios de almacenamiento de datos. Durante la configuración del entorno, se identificó la necesidad de instalar dependencias adicionales para que las bases de datos MySQL y PostgreSQL funcionen sin problemas y puedan integrarse adecuadamente con el framework.
 \begin{minted}{dockerfile}
 # Dockerfile
 RUN pip install mlflow pymysql mysqlclient cryptography
 \end{minted}
-\mycaptionof{listing}{Listado de dependencias faltantes para las bases de datos dockerizadas}
+\mycaptionof{listing}{Listado de dependencias faltantes para las bases de datos dockerizadas.}
 
 \subsubsection{Flask-CORS}
 Flask-CORS permite manejar el \Gls{cors} en aplicaciones web desarrolladas con Flask. En \Gls{snapperml}, esta librería es crucial cuando la interfaz web o API del sistema necesita interactuar con recursos ubicados en diferentes dominios o servidores. \Gls{cors} es una política de seguridad que restringe las solicitudes HTTP entre dominios distintos; por tanto, Flask-CORS permite habilitar o restringir estas solicitudes de forma controlada. Esto asegura que las aplicaciones externas o clientes distribuidos puedan acceder a los datos de experimentación en \Gls{snapperml} de manera segura, mejorando la interoperabilidad del sistema en entornos distribuidos.
 
-\subsubsection{Pydantic-Settings} 
+\subsubsection{Pydantic-Settings}
 Pydantic-Settings es una extensión de la popular librería Pydantic, introducida en la versión 2, que facilita la validación de configuraciones y variables de entorno. En \Gls{snapperml}, esta librería es fundamental para garantizar que las configuraciones de experimentos, como las de MLflow y Optuna, sean correctas antes de ejecutarse, lo que reduce la probabilidad de errores durante la ejecución. La validación de configuraciones asegura que todos los parámetros estén en el formato esperado y dentro de un rango permitido, lo cual es especialmente útil en entornos de experimentación, donde los parámetros suelen cambiar con frecuencia. La falta de esta dependencia impide que el sistema valide correctamente las configuraciones, generando fallos al iniciar los experimentos.
 
 \begin{figure}[h]
@@ -309,7 +309,7 @@ clean:
 	find . -type d -name "__pycache__" -delete
 	rm -rf $(VENV_DIR)
 \end{minted}
-\mycaptionof{listing}{Fichero makefile de SnapperML}
+\mycaptionof{listing}{Fichero makefile de \Gls{snapperml}.}
 \textbf{venv}: Crea un entorno virtual en la ubicación especificada por \$(VENV\_DIR).
 
 \vspace{4mm}
@@ -361,14 +361,14 @@ Además, knockknock ha cambiado la forma en que se importan y usan sus funciones
     |\colorbox{lightred}{-    from knockknock.desktop\_sender import show\_desktop\_notification}|
     |\colorbox{lightgreen}{+    from knockknock import desktop\_sender, slack\_sender, email\_sender}|
         \end{minted}
-\mycaptionof{listing}{knockknock - Las funciones de notificación no se importan directamente}
+\mycaptionof{listing}{knockknock - Las funciones de notificación no se importan directamente.}
 
 Este cambio es particularmente útil en \Gls{snapperml}, donde el uso de decoradores simplifica el proceso de notificación para eventos clave, como el inicio y la finalización de experimentos.
 \begin{minted}[escapeinside=||]{python}
 |\colorbox{lightred}{-    show\_desktop\_notification(subject, msg) % obsoleto}|
 |\colorbox{lightgreen}{+    @desktop\_sender(title=subject)}|
 \end{minted}
-\mycaptionof{listing}{knockknock - Ahora se usan decoradores}
+\mycaptionof{listing}{knockknock - Ahora se usan decoradores.}
 
 Al estructurar las notificaciones de esta forma, se mejora la legibilidad y mantenibilidad del código, alineándolo mejor con las prácticas de desarrollo modernas.
 
@@ -385,7 +385,7 @@ La función load, que anteriormente se utilizaba con ruamel.yaml, fue reemplazad
 Optuna es una herramienta de optimización de hiperparámetros que \Gls{snapperml} emplea para mejorar los experimentos de machine learning. Con las actualizaciones recientes en Optuna, varios componentes y funciones de la librería han sido deprecados o modificados. Uno de los cambios más notables fue la eliminación de SkoptSampler, un sampler popular en versiones anteriores. Esto ha requerido una evaluación de los samplers alternativos disponibles para reemplazar su funcionalidad. Optuna ahora proporciona una lista más amplia de samplers modernos, optimizados para un mejor rendimiento y precisión en la optimización de hiperparámetros, lo que permite elegir opciones que se ajusten mejor a los requisitos de \Gls{snapperml}.
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{imagenes/Optuna_samplers.png}
-    \caption{Lista de samplers en Optuna}
+    \caption{Lista de samplers en Optuna.}
 \end{figure}
 
 Otro cambio importante en Optuna fue la actualización de la función delete\_study, que ahora requiere argumentos con nombre explícito. Este ajuste, aunque menor, mejora la claridad y la seguridad en el uso de la función, evitando posibles errores al pasar parámetros incorrectos. Adaptar \Gls{snapperml} a estas nuevas convenciones de Optuna asegura que el sistema se mantenga actualizado y compatible con las versiones futuras de esta librería, aprovechando además las mejoras de rendimiento y funcionalidad que Optuna ha introducido.
@@ -609,7 +609,7 @@ CORS(app, allow_headers=["Content-Type", "Authorization"], methods=["POST", "OPT
     }
  }
     \end{minted}
-\mycaptionof{listing}{Configuración de Nginx para evitar el CORS}
+          \mycaptionof{listing}{Configuración de Nginx para evitar el \acrshort{cors}.}
           Tras realizar esta configuración, fue necesario reiniciar Nginx con el comando \texttt{systemctl restart nginx} para que los cambios surtieran efecto.
 \end{enumerate}
 
@@ -680,7 +680,7 @@ React no soporta el enrutamiento de subdominios de forma nativa. Para abordar es
   </Routes>
 </div>
 \end{minted}
-\mycaptionof{listing}{Ejemplo de configuración de rutas en React usando React-Router}
+\mycaptionof{listing}{Ejemplo de configuración de rutas en React usando React-Router.}
 
 \subsection{Detección de Atributos YAML}
 
@@ -721,7 +721,7 @@ return Object.entries(data).map(([key, value]) => {
     });
 };
 \end{minted}
-\mycaptionof{listing}{Función para detectar y mostrar atributos \acrshort{yaml}}
+\mycaptionof{listing}{Función para detectar y mostrar atributos \acrshort{yaml}.}
 
 Esta implementación asegura que todos los parámetros, incluidos los atributos anidados, se representen adecuadamente en la interfaz.
 
@@ -734,7 +734,7 @@ processes = {}
 ## Mutex para prevenir condiciones de carrera
 process_lock = threading.Lock()
 \end{minted}
-\mycaptionof{listing}{Gestión de procesos con mutex en Python}
+\mycaptionof{listing}{Gestión de procesos con mutex en Python.}
 
 Se utiliza el \texttt{mutex} tanto para añadir nuevos procesos al diccionario:
 \begin{minted}{python}
@@ -742,13 +742,13 @@ process_id = request.remote_addr
 with process_lock:
 	processes[process_id] = process
 \end{minted}
-\mycaptionof{listing}{Añadir un proceso con mutex}
+\mycaptionof{listing}{Añadir un proceso con mutex.}
 Para eliminarlos de forma segura:
 \begin{minted}{python}
 with process_lock:
     processes.pop(process_id, None) # Eliminar el proceso del diccionario global
 \end{minted}
-\mycaptionof{listing}{Eliminar un proceso con mutex}
+\mycaptionof{listing}{Eliminar un proceso con mutex.}
 
 \subsection{HMR y Estilización}
 Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
@@ -767,7 +767,7 @@ Asimismo, se resolvió la deuda técnica acumulada a lo largo del proyecto media
 
 \vspace{2.5mm}
 
-Por otra parte, la implementación de la interfaz de usuario fue diseñada para maximizar la interactividad y accesibilidad. El uso de React, TypeScript y Bootstrap permitió una construcción modular y escalable de la UI, asegurando que los usuarios puedan gestionar y ejecutar experimentos de machine learning de forma intuitiva y eficiente. 
+Por otra parte, la implementación de la interfaz de usuario fue diseñada para maximizar la interactividad y accesibilidad. El uso de React, TypeScript y Bootstrap permitió una construcción modular y escalable de la UI, asegurando que los usuarios puedan gestionar y ejecutar experimentos de machine learning de forma intuitiva y eficiente.
 
 \vspace{2.5mm}
 

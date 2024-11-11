@@ -2,29 +2,114 @@
     \centering
     \resizebox{\textwidth}{!}{%
         \begin{tabular}{|
-                >{\columncolor[HTML]{EFEFEF}}l |c|c|c|c|c|c|c|}
+                >{\columncolor[HTML]{EFEFEF}}c |c|c|c|c|c|c|c|}
             \hline
-            \multicolumn{1}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}MLOPS\\ vs\\ Características\end{tabular}}} &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Registro de \\ detalles de \\ hardware\end{tabular}}             &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Control \\ estocástico \\ automático\end{tabular}}               &
-            \cellcolor[HTML]{EFEFEF}\textbf{HPO}                                                                                        &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Empaquetado \\ de proyectos\end{tabular}}                        &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Ejecución \\ en \\ la nube o \\ en clusters\end{tabular}}        &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Interfaz \\ web\end{tabular}}                                    &
-            \cellcolor[HTML]{EFEFEF}\textbf{\begin{tabular}[c]{@{}c@{}}Código \\ abierto\end{tabular}}                                                                                         \\ \hline
-            \cellcolor[HTML]{EFEFEF}\textbf{Snapper-ML}                                                                                 & Sí      & Sí & Sí & Sí      & Sí & Sí      & Sí      \\ \hline
-            \cellcolor[HTML]{EFEFEF}\textbf{MLflow}                                                                                     & No      & a  & No & Sí      & Sí & Parcial & Sí      \\ \hline
-            \textbf{Weights \& Biases}                                                                                                  & Sí      & No & Sí & No      & Sí & Sí      & No      \\ \hline
-            \textbf{CometML}                                                                                                            & No      & No & Sí & Parcial & No & Sí      & No      \\ \hline
-            \textbf{Polyaxon}                                                                                                           & No      & No & Sí & Sí      & Sí & Sí      & Híbrido \\ \hline
-            \cellcolor[HTML]{EFEFEF}\textbf{Kubeflow}                                                                                   & No      & No & Sí & Sí      & Sí & Sí      & Sí      \\ \hline
-            \textbf{\begin{tabular}[c]{@{}l@{}}Amazon \\ SageMaker\end{tabular}}                                                        & Parcial & No & Sí & Parcial & Sí & Sí      & No      \\ \hline
-            \textbf{Google Vertex AI}                                                                                                   & Parcial & No & Sí & Sí      & Sí & Sí      & No      \\ \hline
-            \textbf{\begin{tabular}[c]{@{}l@{}}Azure Machine \\ Learning\end{tabular}}                                                  & Parcial & No & Sí & Sí      & Sí & Sí      & No      \\ \hline
-            {\color[HTML]{212529} \textbf{Neptune.ai}}                                                                                  & Sí      & No & Sí & No      & Sí & Sí      & Sí      \\ \hline
-            {\color[HTML]{212529} \textbf{\begin{tabular}[c]{@{}l@{}}Data Version \\ Control (DVC)\end{tabular}}}                       & No      & No & No & Sí      & No & No      & Sí      \\ \hline
+            {\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}MLOPS \\ vs \\ Características\end{tabular}}}                                      &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Registro de \\ detalles de \\ hardware\end{tabular}}}      &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Control \\ estocástico \\ automático\end{tabular}}}        &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{HPO}}                                                                                 &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Empaquetado \\ de proyectos\end{tabular}}}                 &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Ejecución \\ en la nube \\ o en \\ clusters\end{tabular}}} &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Interfaz \\ web\end{tabular}}}                             &
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Código \\ abierto\end{tabular}}}                             \\ \hline
+            \textbf{\begin{tabular}[c]{@{}c@{}}Snapper-ML \\ (new, 2024)\end{tabular}}                                                                  &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                          &
+            Sí                                                                                                                                            \\ \hline
+            \cellcolor[HTML]{EFEFEF}{\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Snapper-ML \\ (old, 2020)\end{tabular}}}                   &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} Si}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{MLflow}}                                                                                                      &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} Sí}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{W\&B}}                                                                                                        &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{CometML}}                                                                                                     &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{Polyaxon}}                                                                                                    &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Híbrido}                                                                                                                \\ \hline
+            {\color[HTML]{000000} \textbf{Kubeflow}}                                                                                                    &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Amazon \\ SageMaker\end{tabular}}}                                                 &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{\begin{tabular}[c]{@{}c@{}}Google \\ Vertex AI\end{tabular}}}                                                 &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{Azure ML}}                                                                                                    &
+            {\color[HTML]{000000} Parcial}                                                                                                              &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{Neptune.ai}}                                                                                                  &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                     \\ \hline
+            {\color[HTML]{000000} \textbf{DVC}}                                                                                                         &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} No}                                                                                                                   &
+            {\color[HTML]{000000} Sí}                                                                                                                     \\ \hline
         \end{tabular}%
     }
-    \caption{Comparación de herramientas MLOps destacadas}
+    \caption{Comparación de herramientas \acrshort{mlops} destacadas.}
     \label{mlops}
 \end{table}

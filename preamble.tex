@@ -50,7 +50,10 @@
 \makeatletter
 \addto\shorthandsspanish{\let\esperiod\es@period@code}
 \addto\captionsspanish{\renewcommand{\listingname}{Listado}}
-\renewcommand*{\listlistingname}{Índice de código fuente}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+\addto\captionsspanish{\renewcommand{\listtablename}{Índice de tablas}}
+\addto\captionsspanish{\renewcommand{\listtablename}{Índice de tablas}}
+\addto\captionsspanish{\renewcommand{\listlistingname}{Índice de código fuente}}
 
 \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-2\baselineskip}}{}{}
 \makeatother
@@ -148,5 +151,14 @@
     \smash{\raisebox{-1ex}{\rule{1pt}{\baselineskip}}}%
     \raisebox{0.5ex}{\rule{1ex}{0pt}}%
 }
+\usepackage{changepage}
 \usepackage{titlesec}
 \titleformat{name=\section,numberless}[block]{\Large\bfseries\filcenter}{}{1em}{}
+
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother

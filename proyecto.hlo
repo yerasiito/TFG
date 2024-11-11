@@ -2,5 +2,7 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{D}\relax \glsresetentrylist %
 \glossentry{deudaCapital}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glslocationcstoencap{glsnumberformat}{es@scroman}{iii}}}%
+		\setentrycounter[]{page}\glslocationcstoencap{glsnumberformat}{es@scroman}{iii}\delimN 
+		\setentrycounter[]{page}\glslocationcstoencap{glsnumberformat}{es@scroman}{vi}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \end{theglossary}\glossarypostamble

@@ -1,4 +1,4 @@
-\chapter{Analisis}
+\chapter{Análisis}
 En el presente capítulo se aborda un análisis exhaustivo de los principales problemas que afectan la calidad y sostenibilidad del software en proyectos de \Gls{mlopsg}, con un enfoque particular en \Gls{snapperml}. Para entender las dificultades y desafíos técnicos que enfrenta un sistema como \Gls{snapperml}, es fundamental examinar tanto el estado del arte de las herramientas de \Gls{mlopsg} y desarrollo web, como el concepto de \gls{deuda} y sus implicación en el desarrollo.
 
 \section{Fundamentos y estado del arte}
@@ -8,32 +8,36 @@ A lo largo de esta sección, se analizan las herramientas más utilizadas y sus 
 
 \subsection{Herramientas para MLOps}
 \begin{itemize}
-    \item \textbf{MLflow}: MLflow es una plataforma de código abierto que gestiona el ciclo de vida completo de un proyecto de machine learning, incluyendo la experimentación, la reproducibilidad, y el despliegue. MLflow consta de cuatro componentes principales:
+    \item \textbf{MLflow} \cite{mlflow} : MLflow es una plataforma de código abierto que gestiona el ciclo de vida completo de un proyecto de machine learning, incluyendo la experimentación, la reproducibilidad, y el despliegue. MLflow consta de cuatro componentes principales:
           \begin{itemize}
               \item \textbf{Tracking}: Una API y una interfaz de usuario que permiten registrar experimentos, parámetros, métricas, artefactos, y otros metadatos de forma estructurada.
               \item \textbf{Projects}: Facilita el empaquetado y la distribución de proyectos ML en un formato estándar, como YAML, especificando las dependencias, el entorno, los parámetros y el punto de entrada del proyecto.
               \item \textbf{Models}: Permite empaquetar modelos de frameworks populares (TensorFlow, PyTorch, Scikit-Learn, etc.) en un formato unificado y almacenarlos en un registro de modelos. Además, proporciona soporte para el despliegue en múltiples entornos, como REST APIs.
               \item \textbf{Model Registry}: Un componente para gestionar el ciclo de vida de los modelos, incluyendo etapas de desarrollo, pruebas, y producción, con funciones de registro y control de versiones.
           \end{itemize}
-    \item \textbf{Weights \& Biases}: Weights \& Biases (W\&B) es una herramienta popular para la experimentación y el seguimiento de modelos de machine learning. Ofrece funcionalidades avanzadas como la gestión de experimentos, la \gls{hpog}, y la visualización de métricas. W\&B se integra fácilmente con frameworks de ML y ofrece soporte para la colaboración en equipo, lo que permite a los usuarios compartir resultados y análisis.
+    \item \textbf{Weights \& Biases} \cite{weightsandbiases}: Weights \& Biases (W\&B) es una herramienta popular para la experimentación y el seguimiento de modelos de machine learning. Ofrece funcionalidades avanzadas como la gestión de experimentos, la \gls{hpog}, y la visualización de métricas. W\&B se integra fácilmente con frameworks de ML y ofrece soporte para la colaboración en equipo, lo que permite a los usuarios compartir resultados y análisis.
 
-    \item \textbf{Comet}: Comet proporciona una plataforma basada en la nube (con opciones de despliegue on-premise) para el seguimiento y la gestión de experimentos. Permite registrar y rastrear parámetros, métricas, artefactos, y resultados de manera estructurada. Entre sus características se incluyen soporte para cuadernos Jupyter, \gls{hpog}, y un sistema robusto de visualización. También permite monitorear métricas del sistema, como el uso de CPU y memoria, y se integra con múltiples lenguajes y frameworks.
+    \item \textbf{Comet} \cite{cometml}: Comet proporciona una plataforma basada en la nube (con opciones de despliegue on-premise) para el seguimiento y la gestión de experimentos. Permite registrar y rastrear parámetros, métricas, artefactos, y resultados de manera estructurada. Entre sus características se incluyen soporte para cuadernos Jupyter, \gls{hpog}, y un sistema robusto de visualización. También permite monitorear métricas del sistema, como el uso de CPU y memoria, y se integra con múltiples lenguajes y frameworks.
 
-    \item \textbf{Polyaxon}: Polyaxon es una plataforma de \Gls{mlopsg} enfocada en la gestión completa del ciclo de vida de los proyectos de ML. Utiliza Kubernetes para asegurar que los experimentos sean reproducibles, escalables y portables. Polyaxon permite definir y ejecutar experimentos complejos, optimizar hiperparámetros, gestionar métricas y parámetros, y desplegar modelos a producción. Además, cuenta con un sistema avanzado de manejo de usuarios y roles, lo que lo hace adecuado para grandes organizaciones.
+    \item \textbf{Polyaxon} \cite{polyaxon}: Polyaxon es una plataforma de \Gls{mlopsg} enfocada en la gestión completa del ciclo de vida de los proyectos de ML. Utiliza Kubernetes para asegurar que los experimentos sean reproducibles, escalables y portables. Polyaxon permite definir y ejecutar experimentos complejos, optimizar hiperparámetros, gestionar métricas y parámetros, y desplegar modelos a producción. Además, cuenta con un sistema avanzado de manejo de usuarios y roles, lo que lo hace adecuado para grandes organizaciones.
 
-    \item \textbf{Kubeflow}: Kubeflow es una plataforma de \Gls{mlopsg} que se enfoca principalmente en el despliegue de flujos de trabajo de ML en Kubernetes. Su objetivo es hacer que los proyectos de ML sean portables y escalables. Incluye Kubeflow Pipelines, que facilita la creación y ejecución de flujos de trabajo complejos de ML, y herramientas para gestionar modelos y datos. Kubeflow es altamente integrable con otras soluciones de \Gls{mlopsg}, haciendo que sea una opción poderosa para equipos que ya utilizan Kubernetes.
+    \item \textbf{Kubeflow} \cite{kubeflow}: Kubeflow es una plataforma de \Gls{mlopsg} que se enfoca principalmente en el despliegue de flujos de trabajo de ML en Kubernetes. Su objetivo es hacer que los proyectos de ML sean portables y escalables. Incluye Kubeflow Pipelines, que facilita la creación y ejecución de flujos de trabajo complejos de ML, y herramientas para gestionar modelos y datos. Kubeflow es altamente integrable con otras soluciones de \Gls{mlopsg}, haciendo que sea una opción poderosa para equipos que ya utilizan Kubernetes.
 
-    \item \textbf{Amazon SageMaker}: Amazon SageMaker es la plataforma de ML de AWS que ofrece un conjunto de herramientas para cubrir todo el ciclo de vida del desarrollo de modelos. Incluye capacidades como gestión de datos, cuadernos Jupyter en la nube, registro y seguimiento de experimentos, \gls{hpog}, y despliegue de modelos con monitorización. Amazon SageMaker Studio proporciona un entorno de desarrollo integral para gestionar todos los aspectos de un proyecto de ML, y herramientas como SageMaker Debugger y SageMaker Autopilot automatizan y mejoran el desarrollo y la optimización de modelos.
+    \item \textbf{Amazon SageMaker} \cite{sagemaker}: Amazon SageMaker es la plataforma de ML de AWS que ofrece un conjunto de herramientas para cubrir todo el ciclo de vida del desarrollo de modelos. Incluye capacidades como gestión de datos, cuadernos Jupyter en la nube, registro y seguimiento de experimentos, \gls{hpog}, y despliegue de modelos con monitorización. Amazon SageMaker Studio proporciona un entorno de desarrollo integral para gestionar todos los aspectos de un proyecto de ML, y herramientas como SageMaker Debugger y SageMaker Autopilot automatizan y mejoran el desarrollo y la optimización de modelos.
 
-    \item \textbf{Google Vertex AI}: Vertex AI es la suite de herramientas de Google Cloud Platform para ML, que integra servicios como AutoML, la gestión de modelos, y el despliegue escalable. Vertex AI ofrece una interfaz unificada para gestionar experimentos, optimizar modelos, y realizar entrenamientos a gran escala. La plataforma se integra estrechamente con otros servicios de GCP, como BigQuery y Dataflow, para facilitar el manejo de datos a gran escala y el entrenamiento distribuido.
+    \item \textbf{Google Vertex AI} \cite{vertexai}: Vertex AI es la suite de herramientas de Google Cloud Platform para ML, que integra servicios como AutoML, la gestión de modelos, y el despliegue escalable. Vertex AI ofrece una interfaz unificada para gestionar experimentos, optimizar modelos, y realizar entrenamientos a gran escala. La plataforma se integra estrechamente con otros servicios de GCP, como BigQuery y Dataflow, para facilitar el manejo de datos a gran escala y el entrenamiento distribuido.
 
-    \item \textbf{Azure Machine Learning}: Azure ML es la plataforma de \Gls{mlopsg} de Microsoft que ofrece soporte para todas las etapas del ciclo de vida del ML, desde el entrenamiento y la experimentación hasta el despliegue y la monitorización. Incluye funcionalidades avanzadas como pipelines reproducibles, integración con servicios de datos de Azure, y soporte para el formato ONNX para la inferencia en múltiples entornos. Azure ML también ofrece soporte para la \gls{hpog} y un completo entorno de desarrollo colaborativo.
+    \item \textbf{Azure Machine Learning} \cite{azure}: Azure ML es la plataforma de \Gls{mlopsg} de Microsoft que ofrece soporte para todas las etapas del ciclo de vida del ML, desde el entrenamiento y la experimentación hasta el despliegue y la monitorización. Incluye funcionalidades avanzadas como pipelines reproducibles, integración con servicios de datos de Azure, y soporte para el formato ONNX para la inferencia en múltiples entornos. Azure ML también ofrece soporte para la \gls{hpog} y un completo entorno de desarrollo colaborativo.
 
-    \item \textbf{Neptune.ai}: Neptune.ai es una herramienta ligera pero poderosa para la gestión de experimentos de ML. Ofrece una interfaz intuitiva y una API en Python para registrar y rastrear experimentos, facilitando la comparación y el análisis de resultados. Neptune es compatible con diversos frameworks y permite una colaboración eficaz mediante la gestión de proyectos y el control de acceso basado en roles.
+    \item \textbf{Neptune.ai} \cite{neptune}: Neptune.ai es una herramienta ligera pero poderosa para la gestión de experimentos de ML. Ofrece una interfaz intuitiva y una API en Python para registrar y rastrear experimentos, facilitando la comparación y el análisis de resultados. Neptune es compatible con diversos frameworks y permite una colaboración eficaz mediante la gestión de proyectos y el control de acceso basado en roles.
 
-    \item \textbf{Data Version Control (DVC)}: DVC es una herramienta de gestión de versiones para datos y modelos en proyectos de ML. Permite rastrear y reproducir experimentos de manera similar a Git, pero optimizada para grandes volúmenes de datos. DVC es útil para proyectos que necesitan un control estricto sobre versiones de datos y modelos, facilitando la reproducibilidad y la colaboración en equipos de data science.
+    \item \textbf{Data Version Control (DVC)} \cite{dvc}: DVC es una herramienta de gestión de versiones para datos y modelos en proyectos de ML. Permite rastrear y reproducir experimentos de manera similar a Git, pero optimizada para grandes volúmenes de datos. DVC es útil para proyectos que necesitan un control estricto sobre versiones de datos y modelos, facilitando la reproducibilidad y la colaboración en equipos de data science.
 \end{itemize}
+Las herramientas mencionadas ofrecen un conjunto diverso de funcionalidades que abordan las necesidades de los proyectos de \Gls{mlopsg}, desde la gestión y el seguimiento de experimentos hasta el control de versiones y el despliegue escalable de modelos.
+
 \input{tablas/mlops.tex}
+
+La tabla \ref{mlops} proporciona una comparación detallada de estas herramientas, resaltando características clave como el seguimiento de experimentos, la optimización de hiperparámetros y el soporte para la ejecución en entornos distribuidos. A continuación se describe las capacidades esenciales que estas herramientas pueden proporcionar, permitiendo a los equipos de data science seleccionar las opciones más adecuadas para sus flujos de trabajo específicos.
 \begin{itemize}
     \item \textbf{Seguimiento de experimentos}: Capacidad para registrar y rastrear detalles de los experimentos, como parámetros, métricas y resultados.
     \item \textbf{Registro de detalles de hardware}: Funcionalidad para registrar información del hardware, como el uso de CPU y memoria, durante la ejecución de los experimentos.
@@ -48,25 +52,25 @@ A lo largo de esta sección, se analizan las herramientas más utilizadas y sus 
 
 \subsection{Herramientas web}
 \subsubsection{Frontend}
-El desarrollo frontend continúa evolucionando con un enfoque en mejorar la experiencia del usuario, la eficiencia del desarrollo, y la modularidad. En la encuesta de Stack Overflow de 2024, se destacan tecnologías clave que siguen definiendo el entorno del desarrollo frontend.
+El desarrollo frontend continúa evolucionando con un enfoque en mejorar la experiencia del usuario, la eficiencia del desarrollo y la modularidad del código. En la encuesta de Stack Overflow de 2024, se destacan tecnologías clave que siguen definiendo el entorno del desarrollo frontend, con un énfasis creciente en frameworks modernos, herramientas de construcción optimizadas y estrategias avanzadas para la gestión de estado y la integración con backend.
 \begin{itemize}
     \item \textbf{Frameworks y bibliotecas}: React.js lidera el panorama como una de las bibliotecas más populares para construir interfaces de usuario interactivas y componentes reutilizables, ideal para aplicaciones de una sola página (SPAs). Angular también sigue siendo una opción sólida, proporcionando una solución completa para aplicaciones web empresariales con su arquitectura basada en componentes y TypeScript. Vue.js continúa ganando adeptos gracias a su simplicidad y flexibilidad, permitiendo a los desarrolladores integrar progresivamente funcionalidades en sus proyectos.
     \item \textbf{Herramientas y optimización}: Tecnologías como Webpack y Vite mejoran la experiencia de desarrollo mediante la optimización del empaquetado de módulos y la recarga en caliente. Además, los desarrolladores recurren a Sass y Tailwind CSS para un control mejorado sobre los estilos y una gestión más eficiente de las hojas de estilo.
-    \begin{figure*}[h]
-        \centering
-        \begin{subfigure}[t]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{imagenes/survey_web_frameworks.png}
-            \caption{Sobre frameworks web}
-        \end{subfigure}%
-        ~
-        \begin{subfigure}[t]{0.5\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{imagenes/survey_other_tools.png}
-            \caption{Sobre otras herramientas}
-        \end{subfigure}
-        \caption{Resultados de la encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey}}
-    \end{figure*}
+          \begin{figure*}[ht]
+              \centering
+              \begin{subfigure}[t]{0.45\textwidth}
+                  \centering
+                  \includegraphics[width=\textwidth]{imagenes/survey_web_frameworks.png}
+                  \caption{Sobre frameworks web.}
+              \end{subfigure}%
+              ~
+              \begin{subfigure}[t]{0.5\textwidth}
+                  \centering
+                  \includegraphics[width=\textwidth]{imagenes/survey_other_tools.png}
+                  \caption{Sobre otras herramientas.}
+              \end{subfigure}
+              \caption{Resultados de la encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey}.}
+          \end{figure*}
 
 \end{itemize}
 
@@ -75,13 +79,13 @@ El desarrollo backend sigue siendo un componente crucial para las aplicaciones w
 \begin{itemize}
     \item \textbf{Frameworks y entornos}: Express.js, un framework minimalista para Node.js, sigue siendo el favorito para crear aplicaciones de backend rápidas y escalables. También es frecuente el uso de NestJS, que se basa en TypeScript y aprovecha patrones de programación orientada a objetos y funcionales. Django y ASP.NET Core permanecen como opciones destacadas para aplicaciones más estructuradas, especialmente en proyectos que requieren características de seguridad y escalabilidad.
     \item \textbf{Bases de datos y gestión}: Las bases de datos relacionales como PostgreSQL y MySQL se combinan cada vez más con bases de datos NoSQL como MongoDB, lo que permite a los desarrolladores elegir modelos de datos que optimicen el rendimiento y la flexibilidad. Además, las arquitecturas basadas en microservicios están facilitando el uso de diferentes tecnologías de almacenamiento según las necesidades de la aplicación.
-    \item \textbf{Infraestructura y despliegue}: Herramientas como Docker y Kubernetes son ahora fundamentales para la contenedorización y orquestación de aplicaciones web, haciendo que el backend sea más fácil de escalar y desplegar en múltiples entornos. Las plataformas sin servidor, como AWS Lambda, están permitiendo una escalabilidad automática sin gestionar servidores físicos.
+    \item \textbf{Infraestructura y despliegue}: Herramientas como Docker y Kubernetes son ahora fundamentales para la \textit{contenedorización} y orquestación de aplicaciones web, haciendo que el backend sea más fácil de escalar y desplegar en múltiples entornos. Las plataformas sin servidor, como AWS Lambda, están permitiendo una escalabilidad automática sin gestionar servidores físicos.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{imagenes/survey_database.png}
-    \caption{Encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey} sobre bases de datos. }
+    \caption{Encuesta a desarrolladores de stackoverflow 2024 \cite{stackoverflow_survey} sobre bases de datos.}
 \end{figure}
 
 \section{Análisis de la Deuda Técnica}
@@ -90,7 +94,7 @@ La \Gls{deuda} es un concepto central en el desarrollo de software moderno, y en
 \subsection{¿Qué es la Deuda Técnica?}
 El concepto de \gls{deuda} fue introducido en la década de 1990 por Ward Cunningham, uno de los autores del Manifiesto Ágil, para describir los compromisos técnicos que se adquieren cuando un equipo prioriza la entrega rápida de una funcionalidad o producto sobre una implementación ideal. En lugar de abordar las tareas necesarias para un código limpio y sostenible, como la refactorización y la optimización, los equipos pueden optar por soluciones rápidas que simplifiquen la entrega a corto plazo. Este tipo de decisiones, aunque a menudo inevitables, acumulan una \say{deuda} en el sistema que deberá \say{pagarse} en algún momento mediante el esfuerzo de corregir o mejorar el código.
 
-Cunningham explicó la \gls{deuda} utilizando una analogía financiera, argumentando que las soluciones rápidas son como un préstamo que el equipo toma contra la calidad del código. Al igual que los intereses de un préstamo, las consecuencias de estos atajos se acumulan con el tiempo, haciendo que el código sea más difícil de mantener y aumentar su complejidad. Su célebre frase ilustra bien esta idea: \say{Si no hacemos que nuestro programa se alinee con lo que entendemos que es la manera adecuada de pensar sobre nuestros objetos financieros, seguiremos tropezando con esa inconsistencia, lo que es como pagar intereses en un préstamo}\cite{introtodebt}.
+Cunningham explicó la \gls{deuda} utilizando una analogía financiera, argumentando que las soluciones rápidas son como un préstamo que el equipo toma contra la calidad del código. Al igual que los intereses de un préstamo, las consecuencias de estos atajos se acumulan con el tiempo, haciendo que el código sea más difícil de mantener y aumentar su complejidad. Su célebre frase ilustra bien esta idea: \say{\textit{Si no hacemos que nuestro programa se alinee con lo que entendemos que es la manera adecuada de pensar sobre nuestros objetos financieros, seguiremos tropezando con esa inconsistencia, lo que es como pagar intereses en un préstamo}}\cite{introtodebt}.
 
 Desde entonces, el término se ha popularizado y ampliado en la industria, evolucionando para abarcar una amplia variedad de situaciones en las que la calidad del software se ve comprometida en favor de la velocidad. En un sistema de software, la \gls{deuda} puede manifestarse en diversas áreas: código duplicado, arquitectura deficiente, falta de pruebas, documentación insuficiente, entre otros. Todos estos son \say{costos} que el equipo deberá enfrentar eventualmente si desea mantener una base de código estable y escalable.
 
@@ -157,7 +161,7 @@ Martin Fowler propuso otra forma de clasificar la \gls{deuda} mediante el \say{C
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{imagenes/techDebtQuadrant.png}
-    \caption{Technical Debt Quadrant by Martin Fowler}
+    \caption{Technical Debt Quadrant by Martin Fowler.}
 \end{figure}
 
 Este modelo permite a los equipos de desarrollo comprender mejor la naturaleza de la \gls{deuda} y el enfoque adecuado para gestionarla. Las cuatro categorías de \gls{deuda} en este modelo son:
@@ -210,13 +214,13 @@ La resolución de la \gls{deuda} requiere un esfuerzo consciente y constante. Al
 Evitar la \gls{deuda} a futuro es tan importante como resolver la ya existente. Algunas estrategias útiles incluyen:
 
 \begin{itemize}
-    \item \textbf{Adoptar prácticas de desarrollo ágil}: al trabajar de manera iterativa, se reducen los riesgos de \gls{deuda} mediante la mejora continua del código. 
+    \item \textbf{Adoptar prácticas de desarrollo ágil}: al trabajar de manera iterativa, se reducen los riesgos de \gls{deuda} mediante la mejora continua del código.
     \item \textbf{Mantener una cobertura de pruebas adecuada}: un sistema con buena cobertura de pruebas es más resistente a la acumulación de \gls{deuda}, ya que los errores se detectan y corrigen rápidamente.
     \item \textbf{Realizar revisiones de código}: la revisión de código por parte de la comunidad de GitHub permite que el proyecto se mantenga alineado con buenas prácticas y estándares de calidad.
     \item \textbf{Documentación clara y accesible}: la documentación, tanto del código como de los procesos, asegura que cualquier desarrollador pueda entender el sistema y realizar cambios sin introducir \gls{deuda}.
 \end{itemize}
 
-\subsection{Herramientas para deuda tecnica}
+\subsection{Herramientas para Deuda Técnica}
 El análisis de \gls{deuda} es fundamental para mantener y mejorar la calidad del código a lo largo del ciclo de vida de un proyecto. Aquí se describen algunas de las herramientas más relevantes utilizadas en la industria para evaluar, rastrear y gestionar la \gls{deuda}.
 \begin{itemize}
     \item \textbf{SonarQube}: Una de las herramientas más conocidas para el análisis de código estático. SonarQube proporciona un análisis exhaustivo, detectando code smells, errores, y vulnerabilidades de seguridad. También ofrece métricas de complejidad y permite integrar los resultados en pipelines de CI/CD. Gracias a su interfaz visual, es fácil interpretar los resultados y priorizar las acciones de refactorización. Soporta múltiples lenguajes de programación y es una herramienta de código abierto, con versiones comerciales para grandes empresas.
@@ -244,7 +248,7 @@ El análisis de \gls{deuda} es fundamental para mantener y mejorar la calidad de
 \section{Análisis de la Deuda Técnica en SnapperML}
 En esta sección se realiza un análisis exhaustivo de los problemas de \gls{deuda} identificados en \Gls{snapperml}. El objetivo es presentar cada aspecto de la \gls{deuda} detectada, comprender las razones detrás de estos problemas y detallar las soluciones y mejoras implementadas para optimizar el funcionamiento y la sostenibilidad del sistema a largo plazo.
 
-\subsection{Identificación de la Deuda Técnica en SnapperML} 
+\subsection{Identificación de la Deuda Técnica en SnapperML}
 En el análisis inicial de \Gls{snapperml}, se detectaron varios problemas relacionados con la \gls{deuda}, que afectan la mantenibilidad, la eficiencia y la escalabilidad del proyecto. Estos problemas dificultan la comprensión del código por parte de nuevos desarrolladores, así como la integración de nuevas funcionalidades. A continuación, se presenta un análisis detallado de cada problema identificado:
 
 \begin{itemize}
@@ -265,4 +269,6 @@ Se han detallado varias causas de \gls{deuda}, como las dependencias desactualiz
 
 Sin embargo, este análisis también proporciona una base sólida para tomar decisiones informadas sobre cómo abordar estos problemas de \gls{deuda} técnica. Al implementar prácticas de mantenimiento continuo, como la actualización regular de dependencias, la refactorización del código obsoleto, y la mejora de la documentación, \Gls{snapperml} puede transformarse en un sistema más robusto y sostenible.
 
-El siguiente capítulo, \textit{Diseño}, se centrará en la arquitectura y estructura de \Gls{snapperml}. A partir del análisis de la \gls{deuda} técnica realizado, se justificarán las decisiones de diseño implementadas para diseñar la nueva interfaz gráfica y asegurar la sostenibilidad del framework. Se explorarán en detalle las funcionalidades clave del sistema, como el registro y seguimiento de experimentos, la \gls{hpog}, y la ejecución distribuida, destacando cómo estas características se integran para proporcionar una experiencia eficiente y reproducible en proyectos de machine learning. Además, se explicará la relación entre los diferentes módulos y las tecnologías subyacentes que sustentan el funcionamiento de \Gls{snapperml}, garantizando un desarrollo robusto y adaptable a las necesidades de los usuarios.
+El siguiente capítulo, \textit{Planificación \ref{planificacion}}, se enfocará en la estrategia y organización del desarrollo del proyecto \Gls{snapperml}. Se describirá cómo el método Kanban se ha empleado para asignar y gestionar tareas de manera eficiente, con el apoyo de la herramienta Wakatime para el seguimiento y análisis del tiempo invertido en cada actividad. Esta planificación detallada ha sido fundamental para asegurar un avance constante hacia los objetivos semanales dentro de un marco temporal de seis semanas, equilibrando el Trabajo de Fin de Grado con las prácticas en la empresa.
+
+Se presentará un desglose semanal que abarca la revisión del estado del proyecto, la resolución de \gls{deuda} técnica, el diseño de la interfaz de usuario, la redacción de la memoria, y la implementación de las funcionalidades finales. Asimismo, se destacará el uso del tablero Kanban para priorizar tareas y se documentará el esfuerzo dedicado, sustentado por informes detallados de Wakatime. Además, se explicará la asignación de recursos y el presupuesto estimado, garantizando que el proyecto se mantenga alineado con los objetivos académicos y profesionales establecidos.

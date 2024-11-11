@@ -10,37 +10,36 @@ Para proporcionar una visión clara de su arquitectura, se analizará la relaci�
 
 \section{Diseño inicial de SnapperML}
 
-\Gls{snapperml} está diseñado como un \gls{framework} abierto orientado a la reproducibilidad en proyectos de \acrlong{ml}, alineándose con los principios fundamentales de \Gls{mlopsg}. A diferencia de otras herramientas disponibles en el mercado, tanto propietarias (como Amazon Sagemaker y Google AI Platform) como de código abierto (MLFlow, Kubeflow), \Gls{snapperml} busca ofrecer un enfoque completo y accesible para la ejecución, seguimiento y optimización de experimentos de \acrlong{ml}.
+\Gls{snapperml} está diseñado como un \gls{framework} abierto orientado a la reproducibilidad en proyectos de \acrlong{ml}, alineándose con los principios fundamentales de \Gls{mlopsg}. A diferencia de otras herramientas disponibles en el mercado, tanto propietarias (como Amazon Sagemaker y Google AI Platform) como de código abierto (MLFlow, Kubeflow), \Gls{snapperml} busca un enfoque completo y accesible para la ejecución, seguimiento y optimización de experimentos de \acrlong{ml}.
 
 El \gls{framework} se centra en ofrecer características clave que abarcan desde el registro detallado de experimentos hasta la optimización automatizada de hiperparámetros. Entre sus principales funcionalidades destacan las siguientes.
 
-\subsubsection{Registro y Seguimiento de Experimentos} 
-\Gls{snapperml} permite almacenar parámetros, métricas, \gls{artefactos} y otros metadatos en una base de datos centralizada, lo que facilita la gestión y comparación de experimentos. Esto es esencial para asegurar la reproducibilidad, ya que toda la información relevante se conserva para futuras referencias.
+\subsubsection{Registro y Seguimiento de Experimentos}
+\Gls{snapperml} permite almacenar parámetros, métricas, \gls{artefactos} y otros metadatos en bases de datos, lo que facilita la gestión y comparación de experimentos. Esto es esencial para asegurar la reproducibilidad, ya que toda la información relevante se conserva para futuras referencias.
 
-\subsubsection{Control de \Gls{estocasticidad}} 
-El \gls{framework} captura automáticamente las semillas utilizadas en generadores de números aleatorios, garantizando la capacidad de replicar resultados en experimentos posteriores. Esto es particularmente importante en proyectos de \acrlong{ml}, donde la variabilidad en los resultados puede ser un problema.
+\subsubsection{Control de \Gls{estocasticidad}}
+El \gls{framework} captura automáticamente las semillas utilizadas en generadores de números aleatorios, lo que garantiza la capacidad de replicar los resultados en experimentos posteriores. Esto es fundamental en proyectos de \acrlong{ml}, donde la variabilidad en los resultados puede ser un problema significativo. Al asegurar que las condiciones iniciales se mantengan constantes, los investigadores y desarrolladores pueden analizar con precisión el impacto de los cambios en los modelos y parámetros, incrementando la fiabilidad de las conclusiones obtenidas.
 
-\subsubsection{\acrlong{hpo}} 
-\Gls{snapperml} soporta la ejecución de múltiples experimentos en paralelo, utilizando técnicas avanzadas de \acrshort{hpo}, como la optimización Bayesiana. Esto permite a los usuarios encontrar configuraciones óptimas de modelos de manera eficiente, maximizando la efectividad de los experimentos.
+\subsubsection{\acrlong{hpo}}
+\Gls{snapperml} soporta la ejecución de múltiples experimentos en paralelo, utilizando técnicas avanzadas de \acrshort{hpo}, como la optimización Bayesiana. Esto permite a los usuarios explorar de manera eficiente un espacio extenso de hiperparámetros y encontrar configuraciones óptimas para sus modelos. Este enfoque es especialmente útil para proyectos complejos que requieren un ajuste fino de los parámetros para alcanzar un rendimiento óptimo.
 
-\subsubsection{Ejecución Distribuida} 
-El \gls{framework} permite ejecutar experimentos de manera distribuida, utilizando recursos tanto locales como en clústeres remotos. Esto se logra a través de la integración con Ray, un \gls{framework} de computación distribuida, que facilita la gestión de grandes volúmenes de datos y el entrenamiento intensivo de modelos.
+\subsubsection{Ejecución Distribuida}
+El \gls{framework} admite la ejecución de experimentos de manera distribuida, aprovechando tanto recursos locales como clústeres remotos. Esto se logra a través de la integración con Ray, un potente \gls{framework} de computación distribuida. Ray facilita la gestión de grandes volúmenes de datos y el entrenamiento intensivo de modelos, lo que es esencial para proyectos que requieren un procesamiento computacional significativo. La ejecución distribuida permite escalar experimentos de manera eficiente, optimizando el uso de la infraestructura disponible y reduciendo los tiempos de ejecución.
 
-\subsubsection{Gestión de Modelos} 
-\Gls{snapperml} almacena y gestiona modelos entrenados, lo que permite seleccionar aquellos más adecuados para resolver un problema específico sin necesidad de repetir el proceso completo de entrenamiento.
+\subsubsection{Gestión de Modelos}
+\Gls{snapperml} incluye un sistema completo de almacenamiento y gestión de modelos entrenados. Los modelos se guardan con sus configuraciones y metadatos asociados, permitiendo a los usuarios seleccionar y reutilizar aquellos que se hayan desempeñado mejor en experimentos previos. Esto evita la necesidad de repetir el proceso completo de entrenamiento, ahorrando tiempo y recursos. Además, el sistema facilita la comparación entre diferentes versiones de modelos, ayudando a determinar cuál es el más adecuado para un problema específico y asegurando un flujo de trabajo eficiente.
 
-\subsubsection{Configuración de Experimentos Simplificada} 
-Para reducir la \say{deuda de configuración}, \Gls{snapperml} permite definir experimentos y trabajos de optimización a través de archivos \acrshort{yaml} o \acrshort{json}. Esto proporciona una manera intuitiva de configurar y reproducir experimentos, reduciendo la complejidad en la gestión de parámetros.
+\subsubsection{Configuración de Experimentos Simplificada} Para reducir la \say{deuda de configuración}, \Gls{snapperml} ofrece la posibilidad de definir experimentos y trabajos de optimización mediante archivos \acrshort{yaml}. Esta forma de configuración proporciona una manera intuitiva y estructurada de gestionar los parámetros experimentales, facilitando la reproducibilidad y el mantenimiento de los experimentos. Los usuarios pueden ajustar y ejecutar experimentos con facilidad, minimizando los errores de configuración y asegurando que los proyectos se mantengan organizados y fácilmente replicables en diferentes entornos de desarrollo.
 
-\subsubsection{Instrumentalización Mínima} 
-El diseño de \Gls{snapperml} busca minimizar la necesidad de modificar el código existente en proyectos de \acrlong{ml}, evitando el uso excesivo de \say{código pegamento} y reduciendo la deuda técnica. La implementación se realiza mediante decoradores y herramientas minimalistas que permiten a los usuarios integrar fácilmente sus proyectos existentes en el \gls{framework}.
+\subsubsection{Instrumentalización Mínima}
+El diseño de \Gls{snapperml} busca minimizar la necesidad de modificar el código existente en proyectos de \acrlong{ml}, evitando el uso excesivo de \say{código pegamento} y reduciendo la deuda técnica.
 
-\Gls{snapperml} se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, MLFlow y Ray, lo que facilita su integración en distintos entornos y mejora la reproducibilidad. Estas tecnologías permiten ejecutar experimentos de manera consistente en cualquier plataforma, desde entornos locales hasta clústeres distribuidos.
+\Gls{snapperml} se apoya en un conjunto de tecnologías abiertas como Docker, Optuna, MLFlow y Ray, lo que facilita su integración en distintos entornos y mejora la reproducibilidad.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{imagenes/snapperml_overview.png}
-    \caption{Arquitectura inicial de \Gls{snapperml}}
+    \caption{Arquitectura inicial de \Gls{snapperml}.}
     \label{fig:snapperml_overview}
 \end{figure}
 
@@ -144,25 +143,25 @@ Con las herramientas seleccionadas, el diseño de la interfaz web de \Gls{snappe
     \item \textbf{Configuración de Nuevos Experimentos}: La interfaz de \Gls{snapperml} proporciona un formulario intuitivo que permite a los usuarios configurar y lanzar nuevos experimentos de manera sencilla. Los usuarios pueden especificar parámetros como el modelo a utilizar, la configuración de hiperparámetros y el tipo de optimización deseado. El diseño del formulario guía al usuario paso a paso, minimizando la probabilidad de errores y facilitando la personalización de experimentos complejos. Además, la interfaz ofrece validaciones automáticas para asegurar que los parámetros configurados sean correctos y compatibles con los requisitos del \gls{framework}.
           \begin{figure}[H]
               \includegraphics[width=0.94\textwidth, right]{imagenes/UI_main_page.png}
-              \caption{Página principal de \Gls{snapperml} \acrshort{ui}}
+              \caption{Página principal de \Gls{snapperml} \acrshort{ui}.}
           \end{figure}
 
     \item \textbf{Terminal Web Interactiva}: \Gls{snapperml} integra una terminal web que permite a los usuarios ejecutar comandos básicos y ver la ejecución de Snapper en tiempo real. Esta terminal proporciona acceso directo a las funcionalidades de línea de comandos, permitiendo a los usuarios una interacción más directa con el sistema sin necesidad de salir del entorno web. La salida de la ejecución se muestra de manera dinámica, lo que facilita el monitoreo y la depuración de los experimentos en curso. Esta funcionalidad es especialmente útil para usuarios avanzados que desean mantener el control total sobre los procesos de ejecución.
           \begin{figure}[H]
               \includegraphics[width=0.94\textwidth, right]{imagenes/UI_terminal.png}
-              \caption{Terminal interactiva ejecutando \Gls{snapperml} \Gls{clig}}
+              \caption{Terminal interactiva ejecutando \Gls{snapperml} \Gls{clig}.}
           \end{figure}
 
     \item \textbf{Dashboard y Historial de Experimentos}: La \acrlong{ui} centraliza la gestión de los experimentos en un único \textit{dashboard} mediante Mlflow \acrshort{ui}, donde los usuarios pueden visualizar una lista completa de todos los experimentos registrados. Este \textit{dashboard} proporciona información relevante, como el nombre del experimento, su estado actual, la métrica principal alcanzada y la fecha de creación. Con solo un click, los usuarios pueden acceder a detalles más específicos, incluyendo el progreso en tiempo real y una comparación de métricas. Además, los usuarios tienen acceso a un historial detallado de ejecuciones, donde pueden analizar las métricas registradas y comparar diferentes experimentos para identificar configuraciones óptimas. Esta integración facilita un análisis profundo y una gestión eficiente de los resultados experimentales.
           \begin{figure}[H]
               \includegraphics[width=0.94\textwidth, right]{imagenes/UI_mlflow_dashboard.png}
-              \caption{Dashboard de experimentos de MLflow}
+              \caption{Dashboard de experimentos de MLflow.}
           \end{figure}
 
     \item \textbf{Generación Automática de \Gls{artefactos}}: Cada vez que se ejecuta un experimento, \Gls{snapperml} guarda automáticamente \gls{artefactos} importantes de manera local. Estos \gls{artefactos} incluyen el archivo de configuración de experimento utilizado, los registros completos (\gls{log}), un listado detallado de las dependencias con sus versiones correspondientes, y cualquier \textit{traceback} relevante en caso de errores. Esta funcionalidad asegura que toda la información necesaria para reproducir o depurar un experimento esté disponible y organizada, mejorando así la reproducibilidad y el análisis posterior de los experimentos.
           \begin{figure}[H]
               \includegraphics[width=0.94\textwidth, right]{imagenes/UI_artifacts.png}
-              \caption{Lista de \gls{artefactos} generados por \Gls{snapperml}}
+              \caption{Lista de \gls{artefactos} generados por \Gls{snapperml}.}
           \end{figure}
 \end{itemize}
 
@@ -186,8 +185,9 @@ El \gls{frontend} de \Gls{snapperml} se basa en una arquitectura moderna y efici
 
 React es el núcleo de la arquitectura \gls{frontend}, encargado de la creación de componentes modulares y reutilizables. Esta biblioteca de JavaScript permite construir interfaces de usuario complejas mediante un enfoque basado en componentes, lo que facilita el mantenimiento y la extensión del sistema. En \Gls{snapperml}, React se utiliza para desarrollar elementos clave como el formulario de configuración de experimentos, la terminal web interactiva y el \textit{dashboard} de experimentos. Cada componente es altamente modular, lo que permite realizar cambios en partes específicas de la \acrshort{ui} sin afectar al resto del sistema. Esta modularidad no solo mejora la eficiencia del desarrollo, sino que también asegura que el sistema sea fácilmente escalable.
 
-El \gls{frontend} de \Gls{snapperml} incorpora funcionalidades específicas que mejoran la interacción y usabilidad del sistema:
+El \gls{frontend} de \Gls{snapperml} incorpora funcionalidades específicas que mejoran la interacción y usabilidad del sistema, como la validación de formularios en tiempo real, actualizaciones dinámicas de la interfaz y accesibilidad optimizada, permitiendo que tanto desarrolladores como científicos de datos trabajen de manera eficiente y sin interrupciones.
 
+A continuación, se describen los elementos principales que conforman esta arquitectura:
 \begin{itemize}
     \item \textbf{Components}: Los componentes de React permiten modularizar los diferentes elementos de la web, garantizando que cada funcionalidad esté encapsulada y sea fácilmente gestionable. Por ejemplo, componentes como \textit{YamlEditor.tsx} y \textit{Terminal.tsx} se integran dentro del componente \textit{FileUpload.tsx} para ofrecer una experiencia de carga y edición de archivos intuitiva.
 
@@ -199,21 +199,24 @@ El \gls{frontend} de \Gls{snapperml} incorpora funcionalidades específicas que 
 \end{itemize}
 
 \subsection{Comunicación con la API}
+El \gls{frontend} de \Gls{snapperml} interactúa con el \gls{backend} a través de una \Gls{apig} RESTful desarrollada con Flask. Esta \Gls{apig} funciona como intermediario, gestionando de manera eficiente las solicitudes provenientes de la interfaz de usuario y ejecutando las operaciones necesarias en el sistema. Esta estructura de comunicación asegura que las acciones realizadas por los usuarios en la \acrshort{ui} se reflejen de forma precisa y rápida en el \gls{backend}, lo que es crucial para una experiencia fluida y coherente.
 
-El \gls{frontend} interactúa con \Gls{snapperml} a través de una \Gls{apig} RESTful desarrollada con Flask. Esta \Gls{apig} actúa como intermediario, gestionando las solicitudes del \gls{frontend} y ejecutando las operaciones necesarias en el \gls{backend}. Las principales rutas de la \Gls{apig} incluyen:
+La \Gls{apig} implementa una serie de rutas para gestionar funcionalidades del sistema. Estas rutas son:
 \begin{itemize}
-    \item \textbf{/save\_experiment\_file}: Permite a los usuarios subir y guardar archivos de configuración de experimentos en la carpeta de artifacts. Se llama automaticamente al ejecutar \Gls{snapperml} en la \acrshort{ui}.
-    \item \textbf{/execute}: Lanza la ejecución de un experimento basado en el archivo de configuración proporcionado. También permite la ejecución de cualquier comando en la terminal web interactiva.
-    \item \textbf{/cancel}: Permite cancelar la ejecución de un experimento en curso.
+    \item \textbf{/save\_experiment\_file}: permite a los usuarios subir y guardar archivos de configuración de experimentos en la carpeta de \textit{artifacts}. Cada vez que un usuario ejecuta \Gls{snapperml} desde la \acrshort{ui}, esta ruta es llamada automáticamente para almacenar el archivo de configuración y prepararlo para su uso. Además, se implementan validaciones de formato y contenido para garantizar que los archivos sean compatibles con las necesidades del sistema.
+
+    \item \textbf{/execute}: se encarga de lanzar la ejecución de un experimento basado en el archivo de configuración proporcionado. Esta funcionalidad es esencial para el flujo de trabajo en \Gls{snapperml}, ya que permite iniciar experimentos de manera rápida. También ofrece la capacidad de ejecutar comandos directamente en la terminal web interactiva, proporcionando una herramienta poderosa para usuarios avanzados que deseen un control más granular sobre el sistema.
+
+    \item \textbf{/cancel}: permite a los usuarios cancelar la ejecución de un experimento en curso. La capacidad de detener procesos es crucial en contextos donde las configuraciones o condiciones del experimento necesitan ser ajustadas.
+
 \end{itemize}
-La \Gls{apig} también se encarga de validar las solicitudes y devolver respuestas estructuradas, asegurando que la interacción entre la \acrshort{ui} y el \gls{backend} sea segura y rápida.
 
 \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm} % No margins
 \thispagestyle{empty} % No header or footer
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\textwidth]{imagenes/ml_experiment_overview_expansion.png}
-    \caption{Diagrama de flujo de la integración de la \acrshort{ui} en \Gls{snapperml}}
+    \caption{Diagrama de flujo de la integración de la \acrshort{ui} en \Gls{snapperml}.}
     \label{fig:snapperml_new_overview}
 \end{figure}
 \newpage
@@ -244,7 +247,7 @@ El almacenamiento y gestión de artefactos en \Gls{snapperml} es un componente c
           \begin{itemize}
               \item \textbf{PostgreSQL para Optuna}: Optuna, el motor de \acrlong{hpo}, utiliza PostgreSQL como base de datos subyacente. En esta base de datos, se almacenan los detalles de cada prueba de optimización, incluyendo los valores de los hiperparámetros probados y las métricas asociadas.
               \item \textbf{MySQL para MLflow}: MLflow, que se encarga del seguimiento de los experimentos, utiliza MySQL para almacenar las métricas de rendimiento, parámetros y registros completos de las ejecuciones. Esta base de datos centralizada permite a los usuarios consultar y comparar diferentes experimentos de manera sencilla, asegurando que toda la información relevante esté disponible para futuras referencias.
-          \end{itemize} Ambas bases de datos, junto con la interfaz web de MLflow, están desplegadas en contenedores utilizando Docker. Esta configuración no solo simplifica la gestión y el despliegue de las bases de datos, sino que también proporciona portabilidad y facilita la creación de entornos reproducibles. La contenedorización asegura que el entorno de almacenamiento sea consistente y escalable, adaptándose a las necesidades de los usuarios.
+          \end{itemize} Ambas bases de datos, junto con la interfaz web de MLflow, están desplegadas en contenedores utilizando Docker. Esta configuración no solo simplifica la gestión y el despliegue de las bases de datos, sino que también proporciona portabilidad y facilita la creación de entornos reproducibles. La \textit{contenedorización} asegura que el entorno de almacenamiento sea consistente y escalable, adaptándose a las necesidades de los usuarios.
     \item \textbf{Almacenamiento de Artefactos}: Además de los datos estructurados, \Gls{snapperml} debe gestionar y almacenar una amplia variedad de \gls{artefactos} generados durante los experimentos. Estos \gls{artefactos} incluyen:
           \begin{itemize}
               \item \textbf{Archivos de Configuración de experimento}: Archivos \acrshort{yaml} o \acrshort{json} utilizados para definir los parámetros de los experimentos. Estos archivos se almacenan para garantizar que los experimentos puedan ser reproducidos exactamente en el futuro.
@@ -258,22 +261,26 @@ La integración con MLflow y Ray juega un papel esencial en la gestión eficient
 
 \section{Flujo de Interacción}
 
-El flujo de interacción general entre el \gls{frontend} y el \gls{backend} de \Gls{snapperml} es el siguiente:
+El flujo de interacción general entre el \gls{frontend} y el \gls{backend} de \Gls{snapperml} sigue un proceso bien definido que permite una gestión eficiente y transparente de los experimentos de \acrlong{ml}. A continuación, se detalla cada etapa del flujo de trabajo, desde la configuración inicial hasta la generación y almacenamiento de los \gls{artefactos} finales:
 
 \begin{itemize}
-    \item \textbf{Configuración del Experimento}: El usuario configura un nuevo experimento desde la \acrshort{ui}, especificando parámetros y cargando un archivo de configuración. Esta información se envía a la \Gls{apig} de Flask, que guarda el archivo y prepara la ejecución.
-    \item \textbf{Ejecución del Experimento}: El usuario inicia el experimento desde la \acrshort{ui}. La \Gls{apig} de Flask llama a la \textit{\Gls{clig} Interface}, que ejecuta el experimento utilizando los módulos de \Gls{snapperml}. La terminal web muestra la salida en tiempo real, lo que permite al usuario monitorear el progreso.
-    \item \textbf{Seguimiento y Almacenamiento}: Las métricas y \gls{artefactos} generados se almacenan en la base de datos y en el sistema de almacenamiento de \gls{artefactos}. El usuario puede visualizar los resultados en el \textit{dashboard} de MLflow y comparar diferentes ejecuciones.
-    \item \textbf{Generación de \Gls{artefactos}}: Al finalizar el experimento, \Gls{snapperml} guarda automáticamente todos los \gls{artefactos} relevantes, como el archivo de configuración, registros y dependencias, asegurando que la información necesaria para reproducir el experimento esté completa y organizada.
+    \item \textbf{Configuración del Experimento}: El flujo comienza cuando el usuario configura un nuevo experimento desde la \acrshort{ui} de SnapperML. La interfaz permite al usuario cargar un archivo de configuración de experimento en formato \acrshort{yaml}, que se valida automáticamente. El archivo de configuración se envía a la \Gls{apig} de Flask, que guarda los datos en la carpeta de \textit{artifacts} y prepara el sistema para ejecutar el experimento.
+
+    \item \textbf{Ejecución del Experimento}: Una vez que el usuario inicia el experimento desde la \acrshort{ui}, la \Gls{apig} de Flask toma el control y llama a la \textit{\Gls{clig} Interface}. La interfaz de línea de comandos de \Gls{snapperml} se encarga de ejecutar el experimento utilizando los módulos correspondientes, como el preprocesamiento de datos, el entrenamiento del modelo y la evaluación. Durante la ejecución, la terminal web interactiva muestra la salida en tiempo real, proporcionando información detallada sobre el progreso del experimento, incluyendo logs y mensajes de estado.
+
+    \item \textbf{Seguimiento y Almacenamiento}: A medida que el experimento se desarrolla, las métricas y \gls{artefactos} generados (como modelos entrenados, gráficos de rendimiento y resúmenes de evaluación) se almacenan de forma estructurada. Las bases de datos \textit{contenedorizadas} gestionan las métricas y resultados, mientras que el sistema de almacenamiento de \gls{artefactos} organiza los elementos generados. El \textit{dashboard} de MLflow se integra en este flujo, permitiendo al usuario visualizar y analizar los resultados de manera intuitiva.
+
+    \item \textbf{Generación de \Gls{artefactos}}: Al finalizar el experimento, \Gls{snapperml} se encarga de guardar automáticamente todos los \gls{artefactos} relevantes. Esto incluye el archivo de configuración utilizado, el dataset utilizado, los registros generados durante la ejecución, y las dependencias del entorno. Esta etapa es crucial para garantizar la reproducibilidad de los experimentos, ya que toda la información necesaria para replicar o analizar el experimento en el futuro queda almacenada de manera organizada y accesible.
 \end{itemize}
-El flujo al completo se detalla en el siguiente diagrama:
+
+Este flujo asegura una interacción fluida y estructurada entre la \acrshort{ui} y el \gls{backend}, proporcionando a los usuarios una herramienta poderosa para gestionar y ejecutar experimentos de aprendizaje automático de manera eficiente. El proceso completo se ilustra en el siguiente diagrama, que muestra la secuencia de comunicación y las interacciones entre los diferentes componentes del sistema.
 
 \newgeometry{left=1cm,right=1cm,top=1cm,bottom=1cm} % No margins
 \thispagestyle{empty} % No header or footer
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{imagenes/flujo_vertical.png}
-    \caption{Diagrama de flujo extendido de \Gls{snapperml}}
+    \caption{Diagrama de flujo extendido de \Gls{snapperml} al ejecutar un experimento desde la \acrshort{ui}}
 \end{figure}
 \restoregeometry
 
@@ -306,7 +313,7 @@ Cuando un usuario interactúa con la interfaz web de \Gls{snapperml} para ejecut
           MLflow recupera los resultados almacenados por Optuna en PostgreSQL. Estos resultados incluyen información detallada de los \textit{trials}, como las métricas obtenidas y los parámetros utilizados. Esta integración asegura que los datos de optimización estén disponibles para su visualización y análisis en la \acrlong{ui} de MLflow.
 
     \item \textbf{Almacenamiento de Métricas y Modelos en MySQL}:
-          MLflow almacena todas las métricas, modelos y \gls{artefactos} relevantes en la base de datos MySQL. Esta información se estructura y guarda de manera que los usuarios puedan consultarla fácilmente a través de la \acrshort{ui} de MLflow. La contenedorización con Docker asegura que tanto las bases de datos como la interfaz de MLflow se desplieguen de forma consistente y eficiente.
+          MLflow almacena todas las métricas, modelos y \gls{artefactos} relevantes en la base de datos MySQL. Esta información se estructura y guarda de manera que los usuarios puedan consultarla fácilmente a través de la \acrshort{ui} de MLflow. La \textit{contenedorización} con Docker asegura que tanto las bases de datos como la interfaz de MLflow se desplieguen de forma consistente y eficiente.
 
     \item \textbf{Recepción de Logs por la \Gls{apig}}:
           Durante todo el proceso de ejecución, la \Gls{apig} de Flask recibe continuamente los \textit{logs}, \textit{tracebacks} y otros mensajes de estado generados por los \textit{jobs} de Ray. Esta información se procesa y se utiliza para proporcionar actualizaciones en tiempo real al usuario, facilitando el monitoreo y la depuración del experimento.
