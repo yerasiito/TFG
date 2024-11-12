@@ -520,6 +520,109 @@ Para facilitar la depuración y proporcionar mayor contexto durante el manejo de
 \end{minted}
 Además, se ajustaron los tipos de excepciones capturadas, sustituyendo capturas genéricas de Exception por excepciones más específicas, como ValueError, lo cual mejora la precisión en el manejo de errores. Este cambio permite que los errores se identifiquen de forma más precisa y que los mensajes de error sean informativos, ayudando a los desarrolladores a corregir problemas en menos tiempo y a reducir la cantidad de errores no controlados.
 
+\subsection{Nuevos Parámetros de Configuración}
+
+Una de las mejoras más importantes realizadas en el \gls{framework} ha sido la implementación de nuevos parámetros de configuración esenciales. Estos parámetros han sido diseñados para proporcionar una mayor flexibilidad y control sobre cómo se ejecutan los experimentos y cómo se gestionan los datos y artefactos generados. Las siguientes subsecciones describen en detalle estos parámetros y las modificaciones realizadas para integrarlos de manera eficiente en \Gls{snapperml}.
+
+\subsubsection{root\_path}
+El parámetro \textbf{root\_path} es una adición fundamental al \gls{framework}. Almacena la ruta absoluta del proyecto, convirtiéndose en el directorio principal desde el cual \Gls{snapperml} realiza todas sus operaciones. Esto incluye la ejecución de experimentos, el almacenamiento de artefactos generados, y la gestión de datasets. En otras palabras, \textbf{root\_path} establece un punto centralizado que unifica todos los recursos necesarios para la ejecución eficiente de experimentos.
+
+La implementación de este parámetro requirió cambios significativos en la SnapperML CLI. Originalmente, la funcionalidad estaba limitada ya el \gls{framework} dependía de ejecutar scripts desde el mismo directorio donde \Gls{snapperml} había sido instalado, lo que generaba errores y restricciones. Para superar este problema, se modificó la estructura de la CLI para permitir la ejecución desde cualquier directorio. Ahora, \Gls{snapperml} puede funcionar sin restricciones de ubicación, asegurando que todos los archivos generados y utilizados se almacenen y gestionen correctamente con respecto a \textbf{root\_path}.
+
+\vspace{4mm}
+
+Esta mejora no solo aumentó la flexibilidad del \gls{framework}, sino que también fue crucial para empaquetar el proyecto en PyPI. Gracias a esta modificación, los usuarios pueden instalar y ejecutar \Gls{snapperml} desde cualquier directorio de su sistema, manteniendo la organización y almacenamiento de artefactos de manera adecuada. Esta capacidad es esencial para garantizar una experiencia de usuario fluida y para soportar la escalabilidad del proyecto.
+
+\subsubsection{data} El parámetro \textbf{data} es un objeto de configuración que gestiona la ruta y los archivos de datasets que se utilizarán en los experimentos. Esta funcionalidad es crucial, ya que no solo permite especificar y almacenar el script ejecutado (\textit{run}), sino también los datos que se han utilizado, mejorando la trazabilidad y reproducibilidad de los experimentos.
+
+El objeto \textbf{data} soporta actualmente dos parámetros específicos:
+
+\begin{itemize}
+    \item \textbf{folder}: Este parámetro establece la ruta donde se almacenan los datos del experimento. La ruta proporcionada se concatena con \textbf{root\_path}, lo que permite el uso de rutas relativas. De esta manera, los usuarios pueden organizar sus datasets de forma más eficiente y asegurarse de que los datos estén correctamente ubicados en relación con el directorio principal del proyecto.
+    \item \textbf{files}: Este parámetro es una lista que especifica los archivos de datos que se desean utilizar en el experimento. Una característica destacada es el soporte para el uso de \textit{wildcards} (*), lo que facilita la selección de múltiples archivos con nombres similares sin tener que enumerarlos individualmente. Por ejemplo, en experimentos como el realizado con los datos proporcionados por el tutor, se puede usar la notación \texttt{*QGSJet.txt} en lugar de especificar cada nombre de archivo completo. Esto simplifica la gestión de archivos y proporciona mayor flexibilidad al configurar los experimentos.
+\end{itemize}
+
+La incorporación de estos nuevos parámetros ha fortalecido la estructura de \Gls{snapperml}, mejorando la organización de los datos y la capacidad de replicar experimentos con precisión. Además, estas mejoras aseguran que el \gls{framework} pueda adaptarse fácilmente a diferentes entornos de desarrollo y conjuntos de datos, facilitando su uso tanto para principiantes como para usuarios avanzados.
+
+
+\subsection{Empaquetado y publicación en Pypi}
+Para facilitar el uso y distribución de \Gls{snapperml}, el \gls{framework} ha sido empaquetado y publicado en la plataforma PyPI (Python Package Index), lo que permite a cualquier usuario instalarlo de forma sencilla como cualquier otro paquete de Python mediante el siguiente comando:
+\begin{minted}{bash}
+pip install snapper-ml
+\end{minted}
+\mycaptionof{listing}{Instalación de SnapperML desde PyPi.}
+
+Este paso ha sido fundamental para hacer que \Gls{snapperml} sea más accesible a la comunidad de desarrollo, facilitando su adopción y uso en proyectos de aprendizaje automático. La implementación de este empaquetado requirió una serie de cambios estructurales en el proyecto para cumplir con los estándares de distribución de PyPI. A continuación, se describen las modificaciones más importantes realizadas.
+
+\subsubsection{Reestructuración de Archivos}
+Para asegurar que todas las funcionalidades de \Gls{snapperml} estén disponibles en la versión empaquetada, algunos archivos clave fueron reubicados en la estructura del proyecto:
+
+\begin{itemize}
+    \item \textbf{data.py}: Este archivo es responsable de crear los datos de entrenamiento y prueba a partir de los datasets proporcionados. Originalmente, \textbf{data.py} se encontraba en el directorio \texttt{ejemplos} como parte de las funcionalidades de ejemplo de \Gls{snapperml}. Sin embargo, para que la funcionalidad estuviera disponible en la versión empaquetada, se trasladó a la carpeta principal del proyecto, \texttt{snapper\_ml}. Este cambio permite que \Gls{snapperml} gestione los datos de manera centralizada y más eficiente.
+    \item \textbf{api.py}: La API desarrollada con Flask originalmente residía en el directorio principal del repositorio. Sin embargo, para que pudiera ser utilizada junto con la interfaz de usuario (UI) en la versión empaquetada, \textbf{api.py} fue movida dentro de \texttt{snapper\_ml}. Esto asegura que la API esté correctamente integrada y pueda gestionar las solicitudes desde la UI, incluso en el entorno empaquetado.
+\end{itemize}
+
+\subsubsection{Configuración del Proyecto}
+Para empaquetar y publicar el proyecto en PyPI, se realizaron modificaciones en el archivo \texttt{pyproject.toml}, que es crucial para definir cómo se construye y distribuye el paquete. La configuración incluye lo siguiente:
+\begin{minted}{toml}
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["snapper_ml", "snapper_ml.*"]
+exclude = [
+    "logs",
+    "docker",
+    "thesis",
+    "mlruns",
+    "artifacts",
+    "snapper_ml.UI.node_modules.*",
+]
+
+[tool.setuptools.package-data]
+"snapper_ml" = [
+    "../docs/assets/*",
+    "../Makefile",
+    "../docker/*",
+    "../.env",
+    "../docker/.envdocker",
+    "UI/**",
+]
+
+[tool.setuptools.exclude-package-data]
+"snapper_ml" = ["UI/node_modules/**"]
+\end{minted}
+\mycaptionof{listing}{Archivo de configuración de projecto de python modificado para incluir la UI y Docker}
+
+En esta configuración:
+\begin{itemize}
+    \item Se especifica el sistema de construcción requerido y se establece \texttt{setuptools} como el backend de construcción.
+    \item Se definen los paquetes que deben incluirse en el empaquetado, asegurando que \texttt{snapper\_ml} y todos sus submódulos sean reconocidos, mientras se excluyen carpetas no necesarias como \texttt{logs} y \texttt{artifacts}.
+    \item Se incluyen archivos importantes para la UI y configuraciones de Docker, asegurando que la interfaz de usuario funcione correctamente en la versión empaquetada.
+    \item Se excluyen archivos innecesarios, como el directorio \texttt{node\_modules} de la UI, para optimizar el tamaño del paquete.
+\end{itemize}
+
+\subsubsection{Proceso de Empaquetado y Publicación}
+Con la estructura del proyecto configurada correctamente, el proceso de empaquetado se realiza utilizando el siguiente comando:
+
+\begin{minted}{bash}
+python -m build
+\end{minted}
+
+Este comando genera los archivos necesarios en el directorio \texttt{dist/}, listos para ser subidos a PyPI. A continuación, se utiliza \texttt{twine} para subir el paquete:
+
+\begin{minted}{bash}
+twine upload dist/*
+\end{minted}
+
+Tras la publicación, el paquete de \Gls{snapperml} está disponible en \url{https://pypi.org/project/snapper-ml/}, donde los usuarios pueden instalarlo y empezar a usarlo en sus proyectos de manera sencilla.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{imagenes/pypi.png}
+    \caption{SnapperML publicado en la plataforma Pypi}
+\end{figure}
+
 \section{Implementación de la UI}
 
 La implementación de la interfaz de usuario (UI) de \Gls{snapperml} ha sido cuidadosamente diseñada para ofrecer una experiencia intuitiva y accesible que permita a los usuarios gestionar y ejecutar experimentos de machine learning de manera eficiente. La \acrshort{ui} se ha desarrollado utilizando tecnologías modernas, como React, TypeScript y Bootstrap, y está estructurada de manera modular para facilitar la mantenibilidad y la escalabilidad del proyecto. En esta sección, se describe en detalle la estructura del proyecto y las responsabilidades de cada componente.
@@ -803,10 +906,37 @@ La página que obtuvo la mayor puntuación fue la sección \texttt{/about}, con 
 
 Estas mejoras no solo han incrementado significativamente la puntuación de accesibilidad de SnapperML, sino que también aseguran que la plataforma sea más inclusiva y fácil de usar para todos los usuarios, independientemente de sus capacidades. Al final, se incluye un reporte detallado de la auditoría realizada con Stark en el \ref{stn:Anexo C}, que documenta todas las pruebas superadas.
 
-
 \subsection{HMR y Estilización}
-Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye el archivo \texttt{styles.css} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
+Para facilitar el desarrollo y la estilización en tiempo real, se utiliza la funcionalidad de \acrfull{hmr} proporcionada por Vite. Se incluye la carpeta \texttt{styles} en \texttt{App.tsx}, lo que permite que los cambios en los estilos se reflejen de inmediato sin necesidad de recargar la página manualmente.
 Esta característica es particularmente útil para el diseño de la \acrshort{ui}, ya que permite realizar ajustes rápidos y ver los resultados al instante, mejorando la productividad y facilitando la creación de una interfaz atractiva y funcional.
+
+\subsection{Modo oscuro}
+Como parte de la accesibilidad se ha implementado un modo oscuro. Para cambiar entre modo claro y oscuro basta con pulsar la luna (o el sol) en la esquina superior derecha de la web.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.76\textwidth]{imagenes/UI_main_page_dark.png}
+    \caption{Modo escuro de snapperML}
+\end{figure}
+
+\subsection{Mejoras en la API: Nuevos Artefactos}
+
+Se han introducido mejoras importantes en la API de \Gls{snapperml}, enfocadas en la gestión y generación de nuevos artefactos relacionados con los datasets utilizados en los experimentos. Estas mejoras tienen como objetivo optimizar el almacenamiento y facilitar el acceso a los datos, lo que es crucial para garantizar una experiencia de usuario más eficiente y flexible.
+
+\vspace{4mm}
+
+La API ahora genera y almacena varios artefactos adicionales que aportan valor al proceso de experimentación y reproducibilidad. En primer lugar, se guarda la ruta completa a los datasets utilizados tanto para el entrenamiento como para las pruebas de los modelos. Esto asegura que la información sobre los datos empleados en los experimentos se mantenga de manera estructurada y organizada, lo que facilita la trazabilidad de los resultados obtenidos.
+
+\vspace{4mm}
+
+Además, se ha implementado la creación de enlaces simbólicos para cada dataset utilizado. Estos enlaces simbólicos proporcionan un acceso eficiente a los datos sin necesidad de duplicar archivos ni consumir recursos de almacenamiento adicionales. En esencia, el uso de enlaces simbólicos permite a los usuarios trabajar con datasets de gran tamaño de forma más ágil, minimizando el uso de espacio en disco y mejorando el rendimiento general del sistema.
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{imagenes/artefactos_nuevos.png}
+    \caption{Nuevos artefactos almacenados al ejecutar SnapperML en la UI.}
+\end{figure}
+
+Esta nueva funcionalidad contribuye a un manejo más eficiente de los datos y asegura que los experimentos sean reproducibles y accesibles sin comprometer los recursos del sistema. La mejora en la gestión de artefactos fortalece la capacidad de \Gls{snapperml} para integrarse en flujos de trabajo de aprendizaje automático a gran escala, donde la optimización del almacenamiento y el acceso rápido a los datos son factores determinantes para el éxito de los proyectos.
 
 \section{Conclusiones}
 El desarrollo e implementación de SnapperML representó un desafío técnico considerable, en el cual se buscó integrar funcionalidades avanzadas de machine learning en un entorno flexible y accesible. A lo largo de este capítulo, se ha descrito los procesos clave que permitieron materializar la arquitectura del sistema, así como las estrategias empleadas para garantizar un rendimiento óptimo y una experiencia de usuario mejorada.
